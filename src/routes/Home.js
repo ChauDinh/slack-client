@@ -16,12 +16,12 @@ const Home = () => (
   <>
     <h1>Home</h1>
     <Query query={allUsersQuery}>
-      {({ loading, error, data }) => {
+      {({ loading, error, data = [] }) => {
         if (loading) return <h4>loading...</h4>;
         if (error) {
           console.error(error);
         }
-        return <h1>test</h1>;
+        return data.allUsers.map(u => <h1 key={u.id}>{u.username}</h1>);
       }}
     </Query>
   </>
