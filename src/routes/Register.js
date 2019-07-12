@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Container, Header, Input, Button } from "semantic-ui-react";
+import { Container, Header, Input, Button, Message } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 
 export class Register extends Component {
   state = {
     username: "",
+    usernameError: "",
     email: "",
-    password: ""
+    emailError: "",
+    password: "",
+    passwordError: ""
   };
 
   handleChange = e => {
@@ -16,14 +19,41 @@ export class Register extends Component {
   };
 
   render() {
-    const { username, email, password } = this.state;
+    const {
+      username,
+      usernameError,
+      email,
+      emailError,
+      password,
+      passwordError
+    } = this.state;
+
+    // Listing error messages
+    let errorList = [];
+    if (usernameError) {
+      errorList.push(usernameError);
+    }
+    if (emailError) {
+      errorList.push(emailError);
+    }
+    if (passwordError) {
+      errorList.push(passwordError);
+    }
 
     return (
       <Mutation mutation={registerMutation}>
         {mutate => (
           <Container text>
             <Header as="h2">Register</Header>
+            {usernameError || emailError || passwordError ? (
+              <Message
+                error
+                header="There was some errors with your submission"
+                list={errorList}
+              />
+            ) : null}
             <Input
+              error={!!usernameError}
               name="username"
               onChange={this.handleChange}
               value={username}
@@ -31,6 +61,7 @@ export class Register extends Component {
               fluid
             />
             <Input
+              error={!!emailError}
               name="email"
               onChange={this.handleChange}
               value={email}
@@ -38,6 +69,7 @@ export class Register extends Component {
               fluid
             />
             <Input
+              error={!!passwordError}
               name="password"
               onChange={this.handleChange}
               value={password}
@@ -47,9 +79,29 @@ export class Register extends Component {
             />
             <Button
               onClick={async () => {
-                const response = await mutate({ variables: this.state });
+                this.setState({
+                  usernameError: "",
+                  emailError: "",
+                  passwordError: ""
+                });
+                const { username, email, password } = this.state;
+                const response = await mutate({
+                  variables: { username, email, password }
+                });
                 console.log(response);
-                this.props.history.push("/");
+
+                const { ok, errors } = response.data.register;
+
+                if (ok) {
+                  this.props.history.push("/");
+                } else {
+                  const err = {};
+                  errors.forEach(({ path, message }) => {
+                    err[`${path}Error`] = message;
+                  });
+                  console.log(err);
+                  this.setState(err);
+                }
               }}
             >
               Register
