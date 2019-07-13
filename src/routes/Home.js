@@ -21,7 +21,7 @@ const Home = () => (
         if (error) {
           console.error(error);
         }
-        return data.allUsers.map(u => <h3 key={u.id}>{u.username}</h3>);
+        return data.allUsers.map(u => <li key={u.id}>{u.username}</li>);
       }}
     </Query>
   </>
