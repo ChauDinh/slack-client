@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { extendObservable } from "mobx";
 import { Input, Button, Container, Header } from "semantic-ui-react";
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
 export default observer(
   class Login extends Component {
@@ -21,35 +23,63 @@ export default observer(
       this[name] = value;
     };
 
-    handleSubmit = () => {
-      const { email, password } = this;
-      console.log("email: ", email);
-      console.log("password: ", password);
-    };
-
     render() {
       const { email, password } = this;
       return (
-        <Container text>
-          <Header as="h2">Login</Header>
-          <Input
-            name="email"
-            onChange={this.handleChange}
-            value={email}
-            placeholder="email"
-            fluid
-          />
-          <Input
-            name="password"
-            onChange={this.handleChange}
-            value={password}
-            placeholder="password"
-            type="password"
-            fluid
-          />
-          <Button onClick={this.handleSubmit}>Login</Button>
-        </Container>
+        <Mutation mutation={loginMutation}>
+          {mutate => (
+            <Container text>
+              <Header as="h2">Login</Header>
+              <Input
+                name="email"
+                onChange={this.handleChange}
+                value={email}
+                placeholder="email"
+                fluid
+              />
+              <Input
+                name="password"
+                onChange={this.handleChange}
+                value={password}
+                placeholder="password"
+                type="password"
+                fluid
+              />
+              <Button
+                onClick={async () => {
+                  const { email, password } = this;
+                  const response = await mutate({
+                    variables: { email, password }
+                  });
+
+                  const { ok, token, refreshToken } = response.data.login;
+                  if (ok) {
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("refreshToken", refreshToken);
+                    this.props.history.push("/");
+                  }
+                }}
+              >
+                Login
+              </Button>
+            </Container>
+          )}
+        </Mutation>
       );
     }
   }
 );
+
+const loginMutation = gql`
+  mutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      ok
+      token
+      refreshToken
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
