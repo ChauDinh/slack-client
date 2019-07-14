@@ -51,6 +51,7 @@ export default observer(
                   const response = await mutate({
                     variables: { email, password }
                   });
+                  console.log(response);
 
                   const { ok, token, refreshToken } = response.data.login;
                   if (ok) {
