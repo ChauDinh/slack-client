@@ -53,7 +53,7 @@ export class Register extends Component {
         {mutate => (
           <Container text>
             <Header as="h2">Register</Header>
-            {usernameError || emailError || passwordError ? (
+            {errorList.length ? (
               <Message
                 error
                 header="There was some errors with your submission"
@@ -61,10 +61,9 @@ export class Register extends Component {
               />
             ) : null}
             <Form>
-              <FormField>
+              <FormField error={!!usernameError}>
                 <label>Username</label>
                 <Input
-                  error={!!usernameError}
                   name="username"
                   onChange={this.handleChange}
                   value={username}
@@ -72,10 +71,9 @@ export class Register extends Component {
                   fluid
                 />
               </FormField>
-              <FormField>
+              <FormField error={!!emailError}>
                 <label>Email</label>
                 <Input
-                  error={!!emailError}
                   name="email"
                   onChange={this.handleChange}
                   value={email}
@@ -83,10 +81,9 @@ export class Register extends Component {
                   fluid
                 />
               </FormField>
-              <FormField>
+              <FormField error={!!passwordError}>
                 <label>Password</label>
                 <Input
-                  error={!!passwordError}
                   name="password"
                   onChange={this.handleChange}
                   value={password}

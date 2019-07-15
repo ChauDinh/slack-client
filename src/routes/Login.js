@@ -7,7 +7,8 @@ import {
   Container,
   Header,
   Form,
-  FormField
+  FormField,
+  Message
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
@@ -21,7 +22,8 @@ export default observer(
         // passing the state we want to use
         // we use email and password for the login action
         email: "",
-        password: ""
+        password: "",
+        errors: {}
       });
     }
 
@@ -31,14 +33,35 @@ export default observer(
     };
 
     render() {
-      const { email, password } = this;
+      const {
+        email,
+        password,
+        errors: { emailError, passwordError }
+      } = this;
+
+      let errorList = [];
+
+      if (emailError) {
+        errorList.push(emailError);
+      }
+      if (passwordError) {
+        errorList.push(passwordError);
+      }
+
       return (
         <Mutation mutation={loginMutation}>
           {mutate => (
             <Container text>
               <Header as="h2">Login</Header>
+              {errorList.length ? (
+                <Message
+                  error
+                  header="There was some errors with your submission"
+                  list={errorList}
+                />
+              ) : null}
               <Form>
-                <FormField>
+                <FormField error={!!emailError}>
                   <label>Email</label>
                   <Input
                     name="email"
@@ -48,7 +71,7 @@ export default observer(
                     fluid
                   />
                 </FormField>
-                <FormField>
+                <FormField error={!!passwordError}>
                   <label>Password</label>
                   <Input
                     name="password"
@@ -67,11 +90,23 @@ export default observer(
                     });
                     console.log(response);
 
-                    const { ok, token, refreshToken } = response.data.login;
+                    const {
+                      ok,
+                      token,
+                      refreshToken,
+                      errors
+                    } = response.data.login;
                     if (ok) {
                       localStorage.setItem("token", token);
                       localStorage.setItem("refreshToken", refreshToken);
                       this.props.history.push("/");
+                    } else {
+                      const err = {};
+                      errors.forEach(({ path, message }) => {
+                        err[`${path}Error`] = message;
+                      });
+
+                      this.errors = err;
                     }
                   }}
                 >
