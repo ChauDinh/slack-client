@@ -8,26 +8,67 @@ const Wrapper = styled.div`
   color: #958993;
 `;
 
-const channel = ({ id, name }) => <li key={`channel-${id}`}>{`#${name}`}</li>;
-const user = ({ id, name }) => <li key={`user-${id}`}>{name}</li>;
+const Header = styled.h1`
+  color: #f5f5f5;
+  font-size: 20px;
+`;
+
+const List = styled.ul`
+  width: 100%;
+  list-style: none;
+  padding-left: 0;
+`;
+
+const paddingLeft = "padding-left: 10px";
+
+const ListItem = styled.li`
+  padding: 2px;
+  ${paddingLeft};
+  &:hover {
+    background: #3e313c;
+  }
+`;
+
+const ListHeader = styled.h4`
+  ${paddingLeft}
+`;
+
+const PushLeft = styled.div`
+  ${paddingLeft}
+`;
+
+const Green = styled.span`
+  color: #38978d;
+`;
+
+const Circle = ({ on = true }) => (on ? <Green>❤︎</Green> : "❤");
+
+const channel = ({ id, name }) => (
+  <ListItem key={`channel-${id}`}>{`#${name}`}</ListItem>
+);
+const user = ({ id, name }) => (
+  <ListItem key={`user-${id}`}>
+    <Circle /> {name}
+  </ListItem>
+);
 
 export default ({ teamName, userName, channels, users }) => (
   <Wrapper>
-    <div>
-      {teamName}
+    <PushLeft>
+      <Header>{teamName}</Header>
       {userName}
-    </div>
+    </PushLeft>
     <div>
-      <ul>
-        <h4>Channels</h4>
+      <List>
+        <ListHeader>Channels</ListHeader>
         {channels.map(channel)}
-      </ul>
+      </List>
     </div>
     <div>
-      <ul>
-        <h4>Direct Messages</h4>
+      <List>
+        <ListHeader>Direct Messages</ListHeader>
         {users.map(user)}
-      </ul>
+      </List>
     </div>
   </Wrapper>
 );

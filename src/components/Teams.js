@@ -8,11 +8,36 @@ const Wrapper = styled.div`
   color: #958993;
 `;
 
-const team = ({ id, name }) => <li key={`team-${id}`}>{name}</li>;
+const List = styled.ul`
+  width: 100%;
+  padding-left: 0;
+  list-style: none;
+`;
+
+const ListItem = styled.li`
+  height: 50px;
+  width: 50px;
+  background-color: #676066;
+  color: #fff;
+  margin: auto;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 11px;
+  &:hover {
+    border-style: solid;
+    border-width: thick;
+    border-color: #767676;
+    cursor: pointer;
+  }
+`;
+
+const team = ({ id, name }) => <ListItem key={`team-${id}`}>{name}</ListItem>;
 
 export default ({ teams }) => (
   <Wrapper>
-    <h4>Teams</h4>
-    <ul>{teams.map(team)}</ul>
+    <List>{teams.map(team)}</List>
   </Wrapper>
 );
