@@ -1,6 +1,6 @@
 import React from "react";
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
+import { graphql } from "react-apollo";
 
 const allUsersQuery = gql`
   {
@@ -12,19 +12,7 @@ const allUsersQuery = gql`
   }
 `;
 
-const Home = () => (
-  <>
-    <h1>Home</h1>
-    <Query query={allUsersQuery}>
-      {({ loading, error, data }) => {
-        if (loading) return <h4>loading...</h4>;
-        if (error) {
-          console.error(error);
-        }
-        return data.allUsers.map(u => <li key={u.id}>{u.username}</li>);
-      }}
-    </Query>
-  </>
-);
+const Home = ({ data: { allUsers = [] } }) =>
+  allUsers.map(user => <h1 key={user.id}>{user.username}</h1>);
 
-export default Home;
+export default graphql(allUsersQuery)(Home);
