@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #362234;
-  color: #958993;
+  background-color: #2f0b2f;
+  color: #d9cfd9;
 `;
 
 const List = styled.ul`

@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
-  background-color: #4e3a4c;
-  color: #958993;
+  background-color: #3e103f;
+  color: #d9cfd9;
 `;
 
 const Header = styled.h1`
@@ -29,7 +29,7 @@ const ListItem = styled.li`
   }
 `;
 
-const ListHeader = styled.h4`
+const ListHeader = styled.li`
   ${paddingLeft}
 `;
 
