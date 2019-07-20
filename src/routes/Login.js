@@ -12,7 +12,6 @@ import {
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import { Mutation } from "react-apollo";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -70,44 +69,40 @@ class Login extends Component {
     }
 
     return (
-      <Mutation mutation={loginMutation}>
-        {mutate => (
-          <Container text>
-            <Header as="h2">Login</Header>
-            {errorList.length ? (
-              <Message
-                error
-                header="There was some errors with your submission"
-                list={errorList}
-              />
-            ) : null}
-            <Form>
-              <FormField error={!!emailError}>
-                <label>Email</label>
-                <Input
-                  name="email"
-                  onChange={this.handleChange}
-                  value={email}
-                  placeholder="email"
-                  fluid
-                />
-              </FormField>
-              <FormField error={!!passwordError}>
-                <label>Password</label>
-                <Input
-                  name="password"
-                  onChange={this.handleChange}
-                  value={password}
-                  placeholder="password"
-                  type="password"
-                  fluid
-                />
-              </FormField>
-              <Button onClick={this.handleSubmit}>Login</Button>
-            </Form>
-          </Container>
-        )}
-      </Mutation>
+      <Container text>
+        <Header as="h2">Login</Header>
+        {errorList.length ? (
+          <Message
+            error
+            header="There was some errors with your submission"
+            list={errorList}
+          />
+        ) : null}
+        <Form>
+          <FormField error={!!emailError}>
+            <label>Email</label>
+            <Input
+              name="email"
+              onChange={this.handleChange}
+              value={email}
+              placeholder="email"
+              fluid
+            />
+          </FormField>
+          <FormField error={!!passwordError}>
+            <label>Password</label>
+            <Input
+              name="password"
+              onChange={this.handleChange}
+              value={password}
+              placeholder="password"
+              type="password"
+              fluid
+            />
+          </FormField>
+          <Button onClick={this.handleSubmit}>Login</Button>
+        </Form>
+      </Container>
     );
   }
 }
