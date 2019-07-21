@@ -7,13 +7,10 @@ import Sidebar from "../container/Sidebar";
 
 export default () => (
   <Layout className="app-layout">
-    <Sidebar currentTeamId={6} data={{ loading: false }} />
+    <Sidebar currentTeamId={1} data={{ loading: false }} />
     <Header channelName="general" />
     <Messages>
-      <ul className="message-list">
-        <li />
-        <li />
-      </ul>
+      <ul className="message-list" />
     </Messages>
     <SendMessage channelName="general" />
   </Layout>

@@ -34,7 +34,9 @@ const ListItem = styled.li`
   }
 `;
 
-const team = ({ id, name }) => <ListItem key={`team-${id}`}>{name}</ListItem>;
+const team = ({ id, letter }) => (
+  <ListItem key={`team-${id}`}>{letter}</ListItem>
+);
 
 export default ({ teams }) => (
   <Wrapper>
