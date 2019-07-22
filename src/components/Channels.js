@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Icon } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   grid-column: 2;
@@ -52,7 +53,7 @@ const user = ({ id, name }) => (
   </ListItem>
 );
 
-export default ({ teamName, userName, channels, users }) => (
+export default ({ teamName, userName, channels, users, onAddChannelClick }) => (
   <Wrapper>
     <PushLeft>
       <Header>{teamName}</Header>
@@ -60,7 +61,9 @@ export default ({ teamName, userName, channels, users }) => (
     </PushLeft>
     <div>
       <List>
-        <ListHeader>Channels</ListHeader>
+        <ListHeader>
+          Channels <Icon onClick={onAddChannelClick} name="add circle" />{" "}
+        </ListHeader>
         {channels ? channels.map(channel) : null}
       </List>
     </div>
