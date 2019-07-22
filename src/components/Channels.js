@@ -61,7 +61,7 @@ export default ({ teamName, userName, channels, users }) => (
     <div>
       <List>
         <ListHeader>Channels</ListHeader>
-        {channels.map(channel)}
+        {channels ? channels.map(channel) : null}
       </List>
     </div>
     <div>

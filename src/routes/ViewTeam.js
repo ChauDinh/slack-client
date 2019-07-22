@@ -5,9 +5,9 @@ import Layout from "../components/Layout";
 import SendMessage from "../components/SendMessage";
 import Sidebar from "../container/Sidebar";
 
-export default () => (
+const ViewTeam = ({ match: { params } }) => (
   <Layout className="app-layout">
-    <Sidebar currentTeamId={1} data={{ loading: false }} />
+    <Sidebar currentTeamId={params.teamId} data={{ loading: false }} />
     <Header channelName="general" />
     <Messages>
       <ul className="message-list" />
@@ -15,3 +15,5 @@ export default () => (
     <SendMessage channelName="general" />
   </Layout>
 );
+
+export default ViewTeam;
