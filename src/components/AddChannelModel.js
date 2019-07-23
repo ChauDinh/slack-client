@@ -3,6 +3,9 @@ import { Form, Input, Button, Modal } from "semantic-ui-react";
 import { withFormik } from "formik";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
+import findIndex from "lodash/findIndex";
+
+import { allTeamQuery } from "../graphql/team";
 
 const AddChannelModal = ({
   open,
@@ -48,7 +51,13 @@ const AddChannelModal = ({
 
 const createChannelMutation = gql`
   mutation($teamId: Int!, $name: String!) {
-    createChannel(teamId: $teamId, name: $name)
+    createChannel(teamId: $teamId, name: $name) {
+      ok
+      channel {
+        id
+        name
+      }
+    }
   }
 `;
 
@@ -60,8 +69,32 @@ export default compose(
       values,
       { props: { onClose, teamId, mutate }, setSubmitting }
     ) => {
-      const response = await mutate({
-        variables: { teamId, name: values.name }
+      await mutate({
+        variables: { teamId, name: values.name },
+        optimisticResponse: {
+          createChannel: {
+            __typename: "Mutation",
+            ok: true,
+            channel: {
+              __typename: "Channel",
+              id: -1,
+              name: values.name
+            }
+          }
+        },
+        update: (proxy, { data: { createChannel } }) => {
+          const { ok, channel } = createChannel;
+          if (!ok) {
+            return;
+          }
+          const data = proxy.readQuery({ query: allTeamQuery });
+          const teamIndex = findIndex(data.allTeams, ["id", teamId]);
+          data.allTeams[teamIndex].channels.push(channel);
+          proxy.writeQuery({
+            query: allTeamQuery,
+            data
+          });
+        }
       });
       onClose();
       setSubmitting(false);

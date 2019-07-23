@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import findIndex from "lodash/findIndex";
 import decode from "jwt-decode";
@@ -7,6 +6,7 @@ import decode from "jwt-decode";
 import Channels from "../components/Channels";
 import Teams from "../components/Teams";
 import AddChannelModel from "../components/AddChannelModel";
+import { allTeamQuery } from "../graphql/team";
 
 class Sidebar extends React.Component {
   state = {
@@ -29,7 +29,6 @@ class Sidebar extends React.Component {
     if (loading) {
       return null;
     }
-    console.log(allTeams);
 
     const teamIndex = currentTeamId
       ? findIndex(allTeams, ["id", parseInt(currentTeamId, 10)])
@@ -70,18 +69,5 @@ class Sidebar extends React.Component {
     ];
   }
 }
-
-const allTeamQuery = gql`
-  {
-    allTeams {
-      id
-      name
-      channels {
-        id
-        name
-      }
-    }
-  }
-`;
 
 export default graphql(allTeamQuery)(Sidebar);
