@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   grid-column: 2;
@@ -44,8 +45,10 @@ const Green = styled.span`
 
 const Circle = ({ on = true }) => (on ? <Green>❤︎</Green> : "❤");
 
-const channel = ({ id, name }) => (
-  <ListItem key={`channel-${id}`}>{`#${name}`}</ListItem>
+const channel = ({ id, name }, teamId) => (
+  <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
+    <ListItem>{`#${name}`}</ListItem>
+  </Link>
 );
 const user = ({ id, name }) => (
   <ListItem key={`user-${id}`}>
@@ -53,7 +56,14 @@ const user = ({ id, name }) => (
   </ListItem>
 );
 
-export default ({ teamName, userName, channels, users, onAddChannelClick }) => (
+export default ({
+  teamName,
+  userName,
+  channels,
+  users,
+  onAddChannelClick,
+  teamId
+}) => (
   <Wrapper>
     <PushLeft>
       <Header>{teamName}</Header>
@@ -64,7 +74,7 @@ export default ({ teamName, userName, channels, users, onAddChannelClick }) => (
         <ListHeader>
           Channels <Icon onClick={onAddChannelClick} name="add circle" />{" "}
         </ListHeader>
-        {channels ? channels.map(channel) : null}
+        {channels ? channels.map(c => channel(c, teamId)) : null}
       </List>
     </div>
     <div>

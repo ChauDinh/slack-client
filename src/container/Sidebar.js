@@ -56,6 +56,7 @@ class Sidebar extends React.Component {
         key="channel-sidebar"
         teamName={team ? team.name : ""}
         userName={username}
+        teamId={team.id}
         channels={team ? team.channels : ""}
         users={[{ id: 1, name: "slackbot" }, { id: 2, name: "user1" }]}
         onAddChannelClick={this.handleAddChannelClick}
