@@ -11,7 +11,7 @@ import findIndex from "lodash/findIndex";
 const ViewTeam = ({
   data: { loading, allTeams },
   match: {
-    params: { teamId }
+    params: { teamId, channelId }
   }
 }) => {
   if (loading) {
@@ -22,6 +22,10 @@ const ViewTeam = ({
     ? findIndex(allTeams, ["id", parseInt(teamId, 10)])
     : 0;
   const team = allTeams[teamIndex];
+  const channelIndex = channelId
+    ? findIndex(team.channels, ["id", parseInt(channelId, 10)])
+    : 0;
+  const channel = team.channels[channelIndex];
 
   return (
     <Layout className="app-layout">
@@ -32,11 +36,11 @@ const ViewTeam = ({
         }))}
         team={team}
       />
-      <Header channelName="general" />
-      <Messages>
+      <Header channelName={channel.name} />
+      <Messages channelId={channel.id}>
         <ul className="message-list" />
       </Messages>
-      <SendMessage channelName="general" />
+      <SendMessage channelName={channel.name} />
     </Layout>
   );
 };
