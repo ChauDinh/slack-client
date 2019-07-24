@@ -1,14 +1,11 @@
 import React from "react";
-import { graphql } from "react-apollo";
-import findIndex from "lodash/findIndex";
 import decode from "jwt-decode";
 
 import Channels from "../components/Channels";
 import Teams from "../components/Teams";
 import AddChannelModel from "../components/AddChannelModel";
-import { allTeamQuery } from "../graphql/team";
 
-class Sidebar extends React.Component {
+export default class Sidebar extends React.Component {
   state = {
     openAddChannelModel: false
   };
@@ -22,18 +19,8 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const {
-      data: { loading, allTeams },
-      currentTeamId
-    } = this.props;
-    if (loading) {
-      return null;
-    }
+    const { teams, team } = this.props;
 
-    const teamIndex = currentTeamId
-      ? findIndex(allTeams, ["id", parseInt(currentTeamId, 10)])
-      : 0;
-    const team = allTeams[teamIndex];
     let username = "";
 
     try {
@@ -45,13 +32,7 @@ class Sidebar extends React.Component {
     }
 
     return [
-      <Teams
-        key="team-sidebar"
-        teams={allTeams.map(team => ({
-          id: team.id,
-          letter: team.name.charAt(0).toUpperCase()
-        }))}
-      />,
+      <Teams key="team-sidebar" teams={teams} />,
       <Channels
         key="channel-sidebar"
         teamName={team ? team.name : ""}
@@ -70,5 +51,3 @@ class Sidebar extends React.Component {
     ];
   }
 }
-
-export default graphql(allTeamQuery)(Sidebar);
