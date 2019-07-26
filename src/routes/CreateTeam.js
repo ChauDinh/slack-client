@@ -43,9 +43,13 @@ class CreateTeam extends Component {
 
     console.log(response);
 
-    const { ok, errors, team } = response.data.createTeam;
+    const {
+      ok,
+      errors,
+      team: { id }
+    } = response.data.createTeam;
     if (ok) {
-      this.props.history.push(`/view-team`); // we will go to a different page latter
+      this.props.history.push(`/view-team/${id}`); // we will go to a different page latter
     } else {
       const err = {};
       errors.forEach(({ path, message }) => {
