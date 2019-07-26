@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Messages from "../components/Messages";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
@@ -16,6 +17,10 @@ const ViewTeam = ({
 }) => {
   if (loading) {
     return null;
+  }
+
+  if (!allTeams.length) {
+    return <Redirect to="/create-team" />;
   }
 
   const teamIndex = teamId
