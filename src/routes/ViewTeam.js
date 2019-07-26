@@ -23,10 +23,13 @@ const ViewTeam = ({
     return <Redirect to="/create-team" />;
   }
 
+  // const teamIdInteger = parseInt(teamId, 10);
   const teamIndex = teamId
     ? findIndex(allTeams, ["id", parseInt(teamId, 10)])
     : 0;
   const team = allTeams[teamIndex];
+
+  // const channelIdInteger = parseInt(channelId, 10);
   const channelIndex = channelId
     ? findIndex(team.channels, ["id", parseInt(channelId, 10)])
     : 0;
@@ -41,11 +44,13 @@ const ViewTeam = ({
         }))}
         team={team}
       />
-      <Header channelName={channel.name} />
-      <Messages channelId={channel.id}>
-        <ul className="message-list" />
-      </Messages>
-      <SendMessage channelName={channel.name} />
+      {channel && <Header channelName={channel.name} />}
+      {channel && (
+        <Messages channelId={channel.id}>
+          <ul className="message-list" />
+        </Messages>
+      )}
+      {channel && <SendMessage channelName={channel.name} />}
     </Layout>
   );
 };
