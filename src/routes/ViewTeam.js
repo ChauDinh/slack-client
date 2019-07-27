@@ -25,8 +25,6 @@ const ViewTeam = ({
     return <Redirect to="/create-team" />;
   }
 
-  console.log(inviteTeams);
-
   // const teamIdInteger = parseInt(teamId, 10);
   const teamIndex = teamId ? findIndex(teams, ["id", parseInt(teamId, 10)]) : 0;
   const team = teamIndex === -1 ? teams[0] : teams[teamIndex];
