@@ -12,10 +12,9 @@ import MessageContainer from "../container/MessageContainer";
 import gql from "graphql-tag";
 
 const ViewTeam = ({
-  mutate,
   data: { loading, me },
   match: {
-    params: { teamId, channelId }
+    params: { teamId, channelId, userId }
   }
 }) => {
   if (loading) {
@@ -32,13 +31,6 @@ const ViewTeam = ({
   const teamIndex = teamId ? findIndex(teams, ["id", parseInt(teamId, 10)]) : 0;
   const team = teamIndex === -1 ? teams[0] : teams[teamIndex];
 
-  // const channelIdInteger = parseInt(channelId, 10);
-  const channelIndex = channelId
-    ? findIndex(team.channels, ["id", parseInt(channelId, 10)])
-    : 0;
-  const channel =
-    channelIndex === -1 ? team.channels[0] : team.channels[channelIndex];
-
   return (
     <Layout className="app-layout">
       <Sidebar
@@ -49,18 +41,9 @@ const ViewTeam = ({
         team={team}
         username={username}
       />
-      {channel && <Header channelName={channel.name} />}
-      {channel && <MessageContainer channelId={channel.id} />}
-      {channel && (
-        <SendMessage
-          placeholder={channel.name}
-          onSubmit={async text => {
-            return mutate({
-              variables: { text, channelId: channel.id }
-            });
-          }}
-        />
-      )}
+      {/* <Header channelName={channel.name} />
+      <MessageContainer channelId={channel.id} /> */}
+      <SendMessage onSubmit={() => {}} placeholder={userId} />
     </Layout>
   );
 };
