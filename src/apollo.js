@@ -18,22 +18,24 @@ const middlewareLink = setContext(() => ({
 
 // Afterware
 const afterwareLink = new ApolloLink((operation, forward) => {
-  const { headers } = operation.getContext();
+  return forward(operation).map(response => {
+    const {
+      response: { headers }
+    } = operation.getContext();
+    if (headers) {
+      const token = headers.get("x-token");
+      const refreshToken = headers.get("x-refresh-token");
 
-  if (headers) {
-    const token = headers.get("x-token");
-    const refreshToken = headers.get("x-refresh-token");
+      if (token) {
+        localStorage.setItem("token", token);
+      }
 
-    if (token) {
-      localStorage.setItem("token", token);
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
     }
-
-    if (refreshToken) {
-      localStorage.setItem("refreshToken", refreshToken);
-    }
-  }
-
-  return forward(operation);
+    return response;
+  });
 });
 
 const httpLinkWithMiddlewares = afterwareLink.concat(

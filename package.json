@@ -13,8 +13,8 @@
     "formik": "^1.5.8",
     "graphql": "^14.4.2",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.14",
-    "mobx": "^5.11.0",
+    "lodash": "^4.17.15",
+    "mobx": "^5.13.0",
     "mobx-react": "^6.1.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
@@ -49,6 +49,6 @@
     ]
   },
   "devDependencies": {
-    "babel-eslint": "10.0.1"
+    "babel-eslint": "10.0.2"
   }
 }
