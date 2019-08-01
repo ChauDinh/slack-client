@@ -51,7 +51,7 @@ class DirectMessageContainer extends React.Component {
               <Comment.Content>
                 <Comment.Author as="a">{m.sender.username}</Comment.Author>
                 <Comment.Metadata>
-                  <div>{m.createdAt}</div>
+                  <div>{m.created_at}</div>
                 </Comment.Metadata>
                 <Comment.Text>{m.text}</Comment.Text>
                 <Comment.Actions>
@@ -67,8 +67,8 @@ class DirectMessageContainer extends React.Component {
 }
 
 const directmessagesQuery = gql`
-  query($teamId: Int!) {
-    directMessages(teamId: $teamId, otherUserId: 5) {
+  query($teamId: Int!, $userId: Int!) {
+    directMessages(teamId: $teamId, otherUserId: $userId) {
       id
       sender {
         username
@@ -82,7 +82,7 @@ const directmessagesQuery = gql`
 export default graphql(directmessagesQuery, {
   variales: props => ({
     teamId: props.teamId,
-    otherUserId: 5
+    userId: props.userId
   }),
   options: {
     fetchPolicy: "network-only"

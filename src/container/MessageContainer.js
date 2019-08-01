@@ -13,7 +13,7 @@ const newChannelMessageSubscription = gql`
       user {
         username
       }
-      createdAt
+      created_at
     }
   }
 `;
@@ -64,7 +64,7 @@ class MessageContainer extends React.Component {
               <Comment.Content>
                 <Comment.Author as="a">{m.user.username}</Comment.Author>
                 <Comment.Metadata>
-                  <div>{m.createdAt}</div>
+                  <div>{m.created_at}</div>
                 </Comment.Metadata>
                 <Comment.Text>{m.text}</Comment.Text>
                 <Comment.Actions>
@@ -87,7 +87,7 @@ const messagesQuery = gql`
       user {
         username
       }
-      createdAt
+      created_at
     }
   }
 `;

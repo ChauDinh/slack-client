@@ -43,15 +43,20 @@ const ViewTeam = ({
         username={username}
       />
       <Header channelName={"Someone's username"} />
-      <DirectMessageContainer teamId={parseInt(teamId, 10)} userId={userId} />
+      <DirectMessageContainer
+        teamId={parseInt(teamId, 10)}
+        userId={parseInt(userId, 10)}
+      />
       <SendMessage
         onSubmit={async text => {
-          await mutate({
+          const response = await mutate({
             variables: {
               text,
-              receiverId: userId
+              receiverId: parseInt(userId, 10),
+              teamId: parseInt(teamId, 10)
             }
           });
+          console.log(response);
         }}
         placeholder={userId}
       />
@@ -60,8 +65,8 @@ const ViewTeam = ({
 };
 
 const createDirectMessageMutation = gql`
-  mutation($receiverId: Int!, $text: String!) {
-    createDirectMessage(receiverId: $receiverId, text: $text)
+  mutation($receiverId: Int!, $text: String!, $teamId: Int!) {
+    createDirectMessage(receiverId: $receiverId, text: $text, teamId: $teamId)
   }
 `;
 
