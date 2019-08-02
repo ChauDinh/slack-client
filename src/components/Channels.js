@@ -50,9 +50,11 @@ const channel = ({ id, name }, teamId) => (
     <ListItem>{`#${name}`}</ListItem>
   </Link>
 );
-const user = ({ id, name }) => (
+const user = ({ id, username }, teamId) => (
   <ListItem key={`user-${id}`}>
-    <Circle /> {name}
+    <Link to={`/view-team/user/${teamId}/${id}`}>
+      <Circle /> {username}
+    </Link>
   </ListItem>
 );
 
@@ -87,7 +89,7 @@ export default ({
           Direct Messages{" "}
           <Icon onClick={onDirectMessageClick} name="add circle" />
         </ListHeader>
-        {users.map(user)}
+        {users.map(u => user(u, teamId))}
       </List>
     </div>
     {isOwner && (
