@@ -1,15 +1,16 @@
 import React from "react";
-import decode from "jwt-decode";
 
 import Channels from "../components/Channels";
 import Teams from "../components/Teams";
 import AddChannelModal from "../components/AddChannelModal";
 import InvitePeopleModal from "../components/InvitePeopleModal";
+import DirectMessageModal from "../components/DirectMessageModal";
 
 export default class Sidebar extends React.Component {
   state = {
     openAddChannelModal: false,
-    openInvitePeopleModal: false
+    openInvitePeopleModal: false,
+    openDirectMessageModal: false
   };
 
   toggleAddChannelModal = e => {
@@ -30,9 +31,22 @@ export default class Sidebar extends React.Component {
     }));
   };
 
+  toggleDirectMessageModal = e => {
+    if (e) {
+      e.preventDefault();
+    }
+    this.setState(state => ({
+      openDirectMessageModal: !state.openDirectMessageModal
+    }));
+  };
+
   render() {
     const { teams, team, username } = this.props;
-    const { openAddChannelModal, openInvitePeopleModal } = this.state;
+    const {
+      openAddChannelModal,
+      openInvitePeopleModal,
+      openDirectMessageModal
+    } = this.state;
 
     return [
       <Teams key="team-sidebar" teams={teams} />,
@@ -46,6 +60,7 @@ export default class Sidebar extends React.Component {
         users={[{ id: 1, name: "slackbot" }, { id: 2, name: "user1" }]}
         onAddChannelClick={this.toggleAddChannelModal}
         onInvitePeopleClick={this.toggleInvitePeopleModal}
+        onDirectMessageClick={this.toggleDirectMessageModal}
       />,
       <AddChannelModal
         teamId={team ? team.id : 0}
@@ -58,6 +73,12 @@ export default class Sidebar extends React.Component {
         onClose={this.toggleInvitePeopleModal}
         open={openInvitePeopleModal}
         key="sidebar-invite-people-modal"
+      />,
+      <DirectMessageModal
+        teamId={team ? team.id : 0}
+        open={openDirectMessageModal}
+        onClose={this.toggleDirectMessageModal}
+        key="sidebar-direct-message-modal"
       />
     ];
   }
