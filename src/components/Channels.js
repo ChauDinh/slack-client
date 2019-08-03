@@ -43,7 +43,11 @@ const Green = styled.span`
   color: #38978d;
 `;
 
-const Circle = ({ on = true }) => (on ? <Green>❤︎</Green> : "❤");
+const Gray = styled.span`
+  color: gray;
+`;
+
+const Circle = ({ on = true }) => (on ? <Green>●</Green> : <Gray>✗</Gray>);
 
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
