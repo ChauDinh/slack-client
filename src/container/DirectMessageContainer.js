@@ -5,39 +5,55 @@ import { graphql } from "react-apollo";
 
 import { Comment } from "semantic-ui-react";
 
+const newDirectMessageSubscription = gql`
+  subscription($teamId: Int!, $userId: Int!) {
+    newDirectMessage(teamId: $teamId, userId: $userId) {
+      id
+      sender {
+        username
+      }
+      text
+      created_at
+    }
+  }
+`;
+
 class DirectMessageContainer extends React.Component {
-  // componentWillMount() {
-  //   this.unsubscribe = this.subscribe(this.props.channelId);
-  // }
+  componentWillMount() {
+    this.unsubscribe = this.subscribe(this.props.teamId, this.props.userId);
+  }
 
-  // componentWillReceiveProps({ channelId }) {
-  //   if (this.props.channelId !== channelId) {
-  //     if (this.unsubscribe) {
-  //       this.unsubscribe();
-  //     }
-  //     this.unsubscribe = this.subscribe(channelId);
-  //   }
-  // }
+  componentWillReceiveProps({ teamId, userId }) {
+    if (this.props.teamId !== teamId || this.props.userId !== userId) {
+      if (this.unsubscribe) {
+        this.unsubscribe();
+      }
+      this.unsubscribe = this.subscribe(teamId, userId);
+    }
+  }
 
-  // componentWillUnmount() {
-  //   if (this.unsubscribe) {
-  //     this.unsubscribe();
-  //   }
-  // }
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
 
-  // subscribe = channelId => {
-  //   return this.props.data.subscribeToMore({
-  //     document: newChannelMessageSubscription,
-  //     variables: { channelId },
-  //     updateQuery: (prev, { subscriptionData }) => {
-  //       if (!subscriptionData) return { prev };
-  //       return {
-  //         ...prev,
-  //         messages: [...prev.messages, subscriptionData.data.newChannelMessage]
-  //       };
-  //     }
-  //   });
-  // };
+  subscribe = (teamId, userId) => {
+    return this.props.data.subscribeToMore({
+      document: newDirectMessageSubscription,
+      variables: { teamId, userId },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData) return { prev };
+        return {
+          ...prev,
+          directMessages: [
+            ...prev.directMessages,
+            subscriptionData.data.newDirectMessage
+          ]
+        };
+      }
+    });
+  };
   render() {
     const {
       data: { loading, directMessages }
@@ -80,11 +96,11 @@ const directmessagesQuery = gql`
 `;
 
 export default graphql(directmessagesQuery, {
-  variales: props => ({
-    teamId: props.teamId,
-    userId: props.userId
-  }),
-  options: {
-    fetchPolicy: "network-only"
-  }
+  options: props => ({
+    fetchPolicy: "network-only",
+    variales: props => ({
+      teamId: props.teamId,
+      userId: props.userId
+    })
+  })
 })(DirectMessageContainer);
