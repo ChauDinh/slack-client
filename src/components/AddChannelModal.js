@@ -14,9 +14,16 @@ const AddChannelModal = ({
   handleChange,
   handleBlur,
   handleSubmit,
-  isSubmitting
+  isSubmitting,
+  resetForm
 }) => (
-  <Modal open={open} onClose={onClose}>
+  <Modal
+    open={open}
+    onClose={e => {
+      resetForm();
+      onClose(e);
+    }}
+  >
     <Modal.Header>Add Channel</Modal.Header>
     <Modal.Content>
       <Form>
@@ -31,7 +38,15 @@ const AddChannelModal = ({
           />
         </Form.Field>
         <Form.Group widths="equal">
-          <Button disabled={isSubmitting} onClick={onClose} secondary fluid>
+          <Button
+            disabled={isSubmitting}
+            onClick={e => {
+              resetForm();
+              onClose(e);
+            }}
+            secondary
+            fluid
+          >
             Cancel
           </Button>
           <Button
