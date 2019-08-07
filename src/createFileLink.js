@@ -86,9 +86,9 @@ export default ({ uri, includeExtensions, ...requestOptions } = {}) => {
         };
 
         if (has(variables, "file")) {
-          // because we cannot post file directly to graphql, so we have to extract it
+          const stringBody = serializedBody;
           serializedBody = new FormData();
-          serializedBody.append("operations", JSON.stringify(body));
+          serializedBody.append("operations", stringBody);
           serializedBody.append("file", variables.file);
         } else {
           myHeaders["content-type"] = "application/json";
