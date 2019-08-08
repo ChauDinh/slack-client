@@ -35,6 +35,14 @@ const Message = ({ message: { url, text, filetype } }) => {
           </audio>
         </div>
       );
+    } else if (filetype.startsWith("video/")) {
+      return (
+        <div>
+          <video width="420" height="240" controls>
+            <source src={url} type={filetype} />
+          </video>
+        </div>
+      );
     }
   }
   return <Comment.Text>{text}</Comment.Text>;
