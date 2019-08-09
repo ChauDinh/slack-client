@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
-  background-color: #3e103f;
+  background-color: #06849f;
   color: #d9cfd9;
 `;
 
@@ -22,17 +22,23 @@ const List = styled.ul`
 `;
 
 const paddingLeft = "padding-left: 10px";
+const paddingRight = "padding-right: 10px";
 
 const ListItem = styled.li`
   padding: 2px;
   ${paddingLeft};
+  color: #f4f4f4;
   &:hover {
     background: #3e313c;
   }
 `;
 
 const ListHeader = styled.li`
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
   ${paddingLeft}
+  ${paddingRight}
 `;
 
 const PushLeft = styled.div`
@@ -40,7 +46,7 @@ const PushLeft = styled.div`
 `;
 
 const Green = styled.span`
-  color: #38978d;
+  color: #4cd4c5;
 `;
 
 const Gray = styled.span`
@@ -51,7 +57,7 @@ const Circle = ({ on = true }) => (on ? <Green>●</Green> : <Gray>✗</Gray>);
 
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
-    <ListItem>{`#${name}`}</ListItem>
+    <ListItem>{`# ${name}`}</ListItem>
   </Link>
 );
 const user = ({ id, username }, teamId) => (
@@ -76,13 +82,19 @@ export default ({
   <Wrapper>
     <PushLeft>
       <Header>{teamName}</Header>
-      {userName}
+      <Green>●</Green> {userName}
     </PushLeft>
     <div>
       <List>
         <ListHeader>
           Channels{" "}
-          {isOwner && <Icon onClick={onAddChannelClick} name="add circle" />}{" "}
+          {isOwner && (
+            <Icon
+              style={{ cursor: "pointer" }}
+              onClick={onAddChannelClick}
+              name="add circle"
+            />
+          )}{" "}
         </ListHeader>
         {channels ? channels.map(c => channel(c, teamId)) : null}
       </List>
@@ -91,17 +103,25 @@ export default ({
       <List>
         <ListHeader>
           Direct Messages{" "}
-          <Icon onClick={onDirectMessageClick} name="add circle" />
+          <Icon
+            style={{ cursor: "pointer" }}
+            onClick={onDirectMessageClick}
+            name="add circle"
+          />
         </ListHeader>
         {users.map(u => user(u, teamId))}
       </List>
     </div>
     {isOwner && (
-      <div>
-        <a href="#invite-people" onClick={onInvitePeopleClick}>
+      <PushLeft>
+        <a
+          style={{ color: "#f4f4f4" }}
+          href="#invite-people"
+          onClick={onInvitePeopleClick}
+        >
           + Invite People
         </a>
-      </div>
+      </PushLeft>
     )}
   </Wrapper>
 );
