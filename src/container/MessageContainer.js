@@ -43,6 +43,12 @@ const Message = ({ message: { url, text, filetype } }) => {
           </video>
         </div>
       );
+    } else if (filetype === "application/pdf") {
+      return (
+        <div>
+          <embed src={url} type={filetype} width="800px" height="1000px" />
+        </div>
+      );
     }
   }
   return <Comment.Text>{text}</Comment.Text>;
