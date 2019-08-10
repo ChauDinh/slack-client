@@ -18,7 +18,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   height: 50px;
   width: 50px;
-  background-color: #676066;
+  background-color: #388e94;
   color: #fff;
   margin: auto;
   margin-bottom: 10px;
@@ -30,7 +30,7 @@ const ListItem = styled.li`
   &:hover {
     border-style: solid;
     border-width: thick;
-    border-color: #767676;
+    border-color: #16939c;
     cursor: pointer;
   }
 `;

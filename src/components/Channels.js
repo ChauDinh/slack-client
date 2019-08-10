@@ -62,7 +62,7 @@ const channel = ({ id, name }, teamId) => (
 );
 const dmChannel = ({ id, name }, teamId) => (
   <ListItem key={`user-${id}`}>
-    <Link style={{ color: "#f5f5f5" }} to={`/view-team/user/${teamId}/${id}`}>
+    <Link style={{ color: "#f5f5f5" }} to={`/view-team/${teamId}/${id}`}>
       <Circle /> {name}
     </Link>
   </ListItem>

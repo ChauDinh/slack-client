@@ -3,9 +3,11 @@ import { Form, Button, Modal } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { withFormik } from "formik";
 import { graphql, compose } from "react-apollo";
+import gql from "graphql-tag";
+import findIndex from "lodash/findIndex";
 
 import MultiSelectUsers from "./MultiSelectUsers";
-import gql from "graphql-tag";
+import { meQuery } from "../graphql/team";
 
 const DirectMessageModal = ({
   open,
@@ -54,7 +56,10 @@ const DirectMessageModal = ({
 
 const getOrCreateChannelMutation = gql`
   mutation($teamId: Int!, $members: [Int!]!) {
-    getOrCreateChannel(teamId: $teamId, members: $members)
+    getOrCreateChannel(teamId: $teamId, members: $members) {
+      id
+      name
+    }
   }
 `;
 
@@ -65,12 +70,31 @@ export default compose(
     mapPropsToValues: () => ({ members: [] }),
     handleSubmit: async (
       { members },
-      { props: { onClose, teamId, mutate }, setSubmitting }
+      { props: { history, onClose, teamId, mutate }, setSubmitting, resetForm }
     ) => {
-      const response = await mutate({ variables: { members, teamId } });
+      const response = await mutate({
+        variables: { members, teamId },
+        update: (proxy, { data: { getOrCreateChannel } }) => {
+          const { id, name } = getOrCreateChannel;
+          const data = proxy.readQuery({ query: meQuery });
+          const teamIndex = findIndex(data.me.teams, ["id", teamId]);
+          const notInChannelList = data.me.teams[teamIndex].channels.every(
+            channel => channel.id !== id
+          );
+          if (notInChannelList) {
+            data.me.teams[teamIndex].channels.push({ id, name, dm: true });
+            proxy.writeQuery({
+              query: meQuery,
+              data
+            });
+          }
+          // history.push(`/view-team/${teamId}/${id}`);
+        }
+      });
       console.log(response);
       onClose();
-      setSubmitting(false);
+      // setSubmitting(false);
+      resetForm();
     }
   })
 )(DirectMessageModal);
