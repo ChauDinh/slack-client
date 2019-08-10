@@ -88,7 +88,7 @@ export default compose(
               data
             });
           }
-          // history.push(`/view-team/${teamId}/${id}`);
+          history.push(`/view-team/${teamId}/${id}`);
         }
       });
       console.log(response);
