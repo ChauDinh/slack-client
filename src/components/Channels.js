@@ -60,10 +60,10 @@ const channel = ({ id, name }, teamId) => (
     <ListItem>{`# ${name}`}</ListItem>
   </Link>
 );
-const user = ({ id, username }, teamId) => (
+const dmChannel = ({ id, name }, teamId) => (
   <ListItem key={`user-${id}`}>
-    <Link to={`/view-team/user/${teamId}/${id}`}>
-      <Circle /> {username}
+    <Link style={{ color: "#f5f5f5" }} to={`/view-team/user/${teamId}/${id}`}>
+      <Circle /> {name}
     </Link>
   </ListItem>
 );
@@ -72,7 +72,7 @@ export default ({
   teamName,
   userName,
   channels,
-  users,
+  dmChannels,
   onAddChannelClick,
   teamId,
   onInvitePeopleClick,
@@ -109,7 +109,7 @@ export default ({
             name="add circle"
           />
         </ListHeader>
-        {users.map(u => user(u, teamId))}
+        {dmChannels.map(dmc => dmChannel(dmc, teamId))}
       </List>
     </div>
     {isOwner && (

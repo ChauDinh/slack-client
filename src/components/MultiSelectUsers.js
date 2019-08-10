@@ -8,7 +8,8 @@ const MultiSelectUsers = ({
   data: { loading, getTeamMembers },
   value,
   handleChange,
-  placeholder
+  placeholder,
+  currentUserId
 }) => {
   if (loading) {
     return null;
@@ -23,11 +24,13 @@ const MultiSelectUsers = ({
       multiple
       search
       selection
-      options={getTeamMembers.map(teamMember => ({
-        key: teamMember.id,
-        value: teamMember.id,
-        text: teamMember.username
-      }))}
+      options={getTeamMembers
+        .filter(team => team.id !== currentUserId)
+        .map(teamMember => ({
+          key: teamMember.id,
+          value: teamMember.id,
+          text: teamMember.username
+        }))}
       placeholder={placeholder}
     />
   );
