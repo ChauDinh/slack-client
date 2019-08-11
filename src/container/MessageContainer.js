@@ -93,7 +93,7 @@ class MessageContainer extends React.Component {
   };
   render() {
     const {
-      data: { loading, messages },
+      data: { loading, messages, fetchMore },
       channelId
     } = this.props;
 
@@ -112,13 +112,13 @@ class MessageContainer extends React.Component {
         disableClick
       >
         <Comment.Group>
-          {this.state.hasMoreItems && (
+          {this.state.hasMoreItems && messages.length >= 10 && (
             <Button
               onClick={() => {
-                this.props.data.fetchMore({
+                fetchMore({
                   variables: {
-                    channelId: this.props.channelId,
-                    offset: this.props.data.messages.length
+                    channelId,
+                    cursor: messages[messages.length - 1].created_at
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {
                     if (!fetchMoreResult) return prev;
@@ -162,8 +162,8 @@ class MessageContainer extends React.Component {
 }
 
 const messagesQuery = gql`
-  query($channelId: Int!, $offset: Int!) {
-    messages(channelId: $channelId, offset: $offset) {
+  query($channelId: Int!, $cursor: String) {
+    messages(channelId: $channelId, cursor: $cursor) {
       id
       text
       user {
@@ -180,8 +180,7 @@ export default graphql(messagesQuery, {
   options: props => ({
     fetchPolicy: "network-only",
     variables: {
-      channelId: props.channelId,
-      offset: 0
+      channelId: props.channelId
     }
   })
 })(MessageContainer);
