@@ -86,7 +86,7 @@ class MessageContainer extends React.Component {
         if (!subscriptionData) return { prev };
         return {
           ...prev,
-          messages: [...prev.messages, subscriptionData.data.newChannelMessage]
+          messages: [subscriptionData.data.newChannelMessage, ...prev.messages]
         };
       }
     });
@@ -138,20 +138,23 @@ class MessageContainer extends React.Component {
               Load more
             </Button>
           )}
-          {messages.map(m => (
-            <Comment key={`${m.id}-message`}>
-              <Comment.Content>
-                <Comment.Author as="a">{m.user.username}</Comment.Author>
-                <Comment.Metadata>
-                  <div>{m.created_at}</div>
-                </Comment.Metadata>
-                <Message message={m} />
-                <Comment.Actions>
-                  <Comment.Action>Reply</Comment.Action>
-                </Comment.Actions>
-              </Comment.Content>
-            </Comment>
-          ))}
+          {messages
+            .slice()
+            .reverse()
+            .map(m => (
+              <Comment key={`${m.id}-message`}>
+                <Comment.Content>
+                  <Comment.Author as="a">{m.user.username}</Comment.Author>
+                  <Comment.Metadata>
+                    <div>{m.created_at}</div>
+                  </Comment.Metadata>
+                  <Message message={m} />
+                  <Comment.Actions>
+                    <Comment.Action>Reply</Comment.Action>
+                  </Comment.Actions>
+                </Comment.Content>
+              </Comment>
+            ))}
         </Comment.Group>
       </FileUpload>
     );
