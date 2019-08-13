@@ -14,6 +14,8 @@ import styled from "styled-components";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
+import { wsLink } from "../apollo";
+
 const Wrapper = styled.div`
   padding: auto, 0;
   padding-top: 25%;
@@ -50,8 +52,7 @@ class Login extends Component {
     if (ok) {
       localStorage.setItem("token", token);
       localStorage.setItem("refreshToken", refreshToken);
-      console.log("token from login: ", token);
-      console.log("refreshToken from login: ", refreshToken);
+      wsLink.subscriptionClient.tryReconnect();
       this.props.history.push("/view-team");
     } else {
       const err = {};
