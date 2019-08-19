@@ -6,7 +6,10 @@ import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 import createFileLink from "./createFileLink";
 
-const httpLink = createFileLink({ uri: "http://localhost:8080/graphql" });
+const httpLink = createFileLink({
+  // eslint-disable-next-line no-undef
+  uri: `http://${process.env.REACT_APP_SERVER_URL}/graphql`
+});
 
 // Middleware
 const middlewareLink = setContext(() => ({
@@ -44,7 +47,8 @@ const httpLinkWithMiddlewares = afterwareLink.concat(
 
 // Create a WebSocket link:
 export const wsLink = new WebSocketLink({
-  uri: `ws://localhost:8080/subscriptions`,
+  // eslint-disable-next-line no-undef
+  uri: `ws://${process.env.REACT_APP_SERVER_URL}/graphql/subscriptions`,
   options: {
     reconnect: true,
     lazy: true,
