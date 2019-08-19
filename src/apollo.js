@@ -48,7 +48,7 @@ const httpLinkWithMiddlewares = afterwareLink.concat(
 // Create a WebSocket link:
 export const wsLink = new WebSocketLink({
   // eslint-disable-next-line no-undef
-  uri: `ws://${process.env.REACT_APP_SERVER_URL}/graphql/subscriptions`,
+  uri: `ws://${process.env.REACT_APP_SERVER_URL}/subscriptions`,
   options: {
     reconnect: true,
     lazy: true,
