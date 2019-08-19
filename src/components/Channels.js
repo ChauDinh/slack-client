@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
-  background-color: #06849f;
+  background-color: #12bdcb;
   color: #d9cfd9;
 `;
 
