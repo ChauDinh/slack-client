@@ -27,6 +27,7 @@ const AddChannelModal = ({
       resetForm();
       onClose(e);
     }}
+    style={{ marginLeft: "50%", transform: "translate(-50%, 0)" }}
   >
     <Modal.Header>Add Channel</Modal.Header>
     <Modal.Content>
