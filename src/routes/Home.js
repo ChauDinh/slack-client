@@ -15,6 +15,17 @@ const allUsersQuery = gql`
   }
 `;
 
+function handleClick() {
+  const menuButtonNavBar = document.getElementById("menu-button");
+  const menuListNavBar = document.querySelector(".active");
+
+  menuButtonNavBar.addEventListener("click", e => {
+    menuListNavBar.classList.remove("active");
+    menuListNavBar.classList.toggle("active-toggle");
+    menuListNavBar.classList.add("active");
+  });
+}
+
 function Home({ data: { allUsers = [] } }) {
   return (
     <React.Fragment>
@@ -23,7 +34,12 @@ function Home({ data: { allUsers = [] } }) {
           <h1 key={user.id}>{user.email}</h1>
         ))} */}
         <aside className="nav-bar">
-          <img id="menu-button" src={MenuButton} alt="menu-button" />
+          <img
+            onClick={handleClick}
+            id="menu-button"
+            src={MenuButton}
+            alt="menu-button"
+          />
           <figure>
             <div className="avatar" />
             <figcaption>hello, guest!</figcaption>
@@ -55,7 +71,11 @@ function Home({ data: { allUsers = [] } }) {
               <a href="/register">Join with us today!</a>
             </span>
           </p>
-          <button className="create-team__button">create team</button>
+          <button className="create-team__button">
+            <a href="/create-team" style={{ color: "#fff" }}>
+              create team
+            </a>
+          </button>
         </main>
         <footer className="footer">
           <p>Created by ChauDinh @ 2019</p>

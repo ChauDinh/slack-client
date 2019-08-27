@@ -2,7 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
-import { Comment, Button } from "semantic-ui-react";
+import { Comment } from "semantic-ui-react";
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
 
@@ -24,7 +24,9 @@ const newChannelMessageSubscription = gql`
 const Message = ({ message: { url, text, filetype } }) => {
   if (url) {
     if (filetype.startsWith("image/")) {
-      return <img style={{ width: "50%", height: "50%" }} src={url} alt="" />;
+      return (
+        <img style={{ width: "420px", height: "240px" }} src={url} alt="" />
+      );
     } else if (filetype === "text/plain") {
       return <RenderText url={url} />;
     } else if (filetype.startsWith("audio/")) {
@@ -172,21 +174,29 @@ class MessageContainer extends React.Component {
           channelId={channelId}
           disableClick
         >
-          <Comment.Group>
+          <Comment.Group style={{ maxWidth: "100%" }}>
             {messages
               .slice()
               .reverse()
               .map(m => (
                 <Comment key={`${m.id}-message`}>
+                  <Comment.Avatar
+                    src={`https://ui-avatars.com/api/?name=${m.user.username}`}
+                  />
                   <Comment.Content>
-                    <Comment.Author as="a">{m.user.username}</Comment.Author>
+                    <Comment.Author as="a">
+                      <span style={{ fontWeight: "700", fontFamily: "Arial" }}>
+                        {m.user.username}
+                      </span>
+                    </Comment.Author>
                     <Comment.Metadata>
                       <div>{m.created_at}</div>
                     </Comment.Metadata>
+                    <br />
                     <Message message={m} />
-                    <Comment.Actions>
+                    {/* <Comment.Actions>
                       <Comment.Action>Reply</Comment.Action>
-                    </Comment.Actions>
+                    </Comment.Actions> */}
                   </Comment.Content>
                 </Comment>
               ))}

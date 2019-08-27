@@ -18,10 +18,11 @@ import { wsLink } from "../apollo";
 
 const Wrapper = styled.div`
   padding: auto, 0;
-  padding-top: 25%;
   width: 100vw;
   height: 100vh;
-  background-color: #06849f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 class Login extends Component {
   constructor(props) {
@@ -82,8 +83,16 @@ class Login extends Component {
 
     return (
       <Wrapper>
-        <Container text>
-          <div>
+        <Container
+          text
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <div style={{ width: "100%" }}>
             <Header as="h2">Login</Header>
             {errorList.length ? (
               <Message
@@ -92,7 +101,7 @@ class Login extends Component {
                 list={errorList}
               />
             ) : null}
-            <Form>
+            <Form style={{ width: "100%" }}>
               <FormField error={!!emailError}>
                 <label>Email</label>
                 <Input
@@ -114,7 +123,17 @@ class Login extends Component {
                   fluid
                 />
               </FormField>
-              <Button onClick={this.handleSubmit}>Login</Button>
+              <Button
+                primary
+                onClick={this.handleSubmit}
+                style={{
+                  marginLeft: "50%",
+                  transform: "translate(-50%, 0)",
+                  boxShadow: "1px 1px 4px 2px rgb(145, 146, 146)"
+                }}
+              >
+                Login
+              </Button>
             </Form>
           </div>
         </Container>

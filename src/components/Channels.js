@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
   background-color: #12bdcb;
-  color: #d9cfd9;
 `;
 
 const Header = styled.h1`
@@ -27,9 +26,11 @@ const paddingRight = "padding-right: 10px";
 const ListItem = styled.li`
   padding: 2px;
   ${paddingLeft};
-  color: #f4f4f4;
+  color: white;
+  font-weight: bolder;
   &:hover {
     background: #3e313c;
+    color: white;
   }
 `;
 
@@ -62,7 +63,7 @@ const channel = ({ id, name }, teamId) => (
 );
 const dmChannel = ({ id, name }, teamId) => (
   <ListItem key={`user-${id}`}>
-    <Link style={{ color: "#f5f5f5" }} to={`/view-team/${teamId}/${id}`}>
+    <Link style={{ color: "white" }} to={`/view-team/${teamId}/${id}`}>
       <Circle /> {name}
     </Link>
   </ListItem>
@@ -86,7 +87,7 @@ export default ({
     </PushLeft>
     <div>
       <List>
-        <ListHeader>
+        <ListHeader style={{ marginTop: "2rem" }}>
           Channels{" "}
           {isOwner && (
             <Icon
@@ -101,7 +102,7 @@ export default ({
     </div>
     <div>
       <List>
-        <ListHeader>
+        <ListHeader style={{ marginTop: "2rem" }}>
           Direct Messages{" "}
           <Icon
             style={{ cursor: "pointer" }}
@@ -113,7 +114,7 @@ export default ({
       </List>
     </div>
     {isOwner && (
-      <PushLeft>
+      <PushLeft style={{ marginTop: "2rem" }}>
         <a
           style={{ color: "#f4f4f4" }}
           href="#invite-people"

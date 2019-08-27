@@ -9,8 +9,16 @@ import {
   FormField
 } from "semantic-ui-react";
 import gql from "graphql-tag";
+import styled from "styled-components";
 import { graphql } from "react-apollo";
 
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 export class Register extends Component {
   state = {
     username: "",
@@ -75,50 +83,70 @@ export class Register extends Component {
     }
 
     return (
-      <Container text>
-        <Header as="h2">Register</Header>
-        {errorList.length ? (
-          <Message
-            error
-            header="There was some errors with your submission"
-            list={errorList}
-          />
-        ) : null}
-        <Form>
-          <FormField error={!!usernameError}>
-            <label>Username</label>
-            <Input
-              name="username"
-              onChange={this.handleChange}
-              value={username}
-              placeholder="username"
-              fluid
+      <Wrapper>
+        <Container
+          text
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <Header as="h2">Register</Header>
+          {errorList.length ? (
+            <Message
+              error
+              header="There was some errors with your submission"
+              list={errorList}
             />
-          </FormField>
-          <FormField error={!!emailError}>
-            <label>Email</label>
-            <Input
-              name="email"
-              onChange={this.handleChange}
-              value={email}
-              placeholder="email"
-              fluid
-            />
-          </FormField>
-          <FormField error={!!passwordError}>
-            <label>Password</label>
-            <Input
-              name="password"
-              onChange={this.handleChange}
-              value={password}
-              placeholder="password"
-              type="password"
-              fluid
-            />
-          </FormField>
-          <Button onClick={this.handleSubmit}>Register</Button>
-        </Form>
-      </Container>
+          ) : null}
+          <Form style={{ width: "100%" }}>
+            <FormField error={!!usernameError}>
+              <label>Username</label>
+              <Input
+                name="username"
+                onChange={this.handleChange}
+                value={username}
+                placeholder="username"
+                fluid
+              />
+            </FormField>
+            <FormField error={!!emailError}>
+              <label>Email</label>
+              <Input
+                name="email"
+                onChange={this.handleChange}
+                value={email}
+                placeholder="email"
+                fluid
+              />
+            </FormField>
+            <FormField error={!!passwordError}>
+              <label>Password</label>
+              <Input
+                name="password"
+                onChange={this.handleChange}
+                value={password}
+                placeholder="password"
+                type="password"
+                fluid
+              />
+            </FormField>
+            <Button
+              primary
+              onClick={this.handleSubmit}
+              style={{
+                marginLeft: "50%",
+                transform: "translate(-50%, 0)",
+                boxShadow: "1px 1px 4px 2px rgb(145, 146, 146)"
+              }}
+            >
+              Register
+            </Button>
+          </Form>
+        </Container>
+      </Wrapper>
     );
   }
 }
