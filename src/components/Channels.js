@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
   background-color: #12bdcb;
+  padding-top: 20px;
 `;
 
 const Header = styled.h1`
@@ -47,7 +48,7 @@ const PushLeft = styled.div`
 `;
 
 const Green = styled.span`
-  color: #4cd4c5;
+  color: #00e832;
 `;
 
 const Gray = styled.span`
@@ -82,8 +83,11 @@ export default ({
 }) => (
   <Wrapper>
     <PushLeft>
-      <Header>{teamName}</Header>
-      <Green>●</Green> {userName}
+      <Header style={{ color: "#000" }}>{teamName}</Header>
+      <Green>
+        <Icon name="user circle" />
+      </Green>{" "}
+      {userName}
     </PushLeft>
     <div>
       <List>

@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   grid-row: 1 / 4;
   background-color: #449fa7;
   color: #d9cfd9;
+  padding-top: 20px;
 `;
 
 const List = styled.ul`

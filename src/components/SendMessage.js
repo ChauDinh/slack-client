@@ -26,7 +26,10 @@ const SendMessage = ({
 }) => (
   <Wrapper>
     <FileUpload channelId={channelId}>
-      <Button icon>
+      <Button
+        icon
+        style={{ border: "2px solid #000", backgroundColor: "white" }}
+      >
         <Icon name="plus" />
       </Button>
     </FileUpload>
@@ -40,6 +43,10 @@ const SendMessage = ({
         if (e.keyCode === ENTER_KEY && !isSubmitting) {
           handleSubmit(e);
         }
+      }}
+      style={{
+        border: "2px solid #000",
+        borderRadius: "7px"
       }}
     />
   </Wrapper>
