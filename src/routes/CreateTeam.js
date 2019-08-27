@@ -11,7 +11,16 @@ import {
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { observer } from "mobx-react";
+import styled from "styled-components";
 import { graphql } from "react-apollo";
+
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 class CreateTeam extends Component {
   constructor(props) {
@@ -72,28 +81,47 @@ class CreateTeam extends Component {
     }
 
     return (
-      <Container text>
-        <Header as="h2">Create a team</Header>
-        {errorList.length ? (
-          <Message
-            error
-            header="There was some errors with your submission"
-            list={errorList}
-          />
-        ) : null}
-        <Form>
-          <FormField error={!!nameError}>
-            <Input
-              name="name"
-              onChange={this.handleChange}
-              value={name}
-              placeholder="Name"
-              fluid
+      <Wrapper>
+        <Container
+          text
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <Header as="h2">Create a team</Header>
+          {errorList.length ? (
+            <Message
+              error
+              header="There was some errors with your submission"
+              list={errorList}
             />
-          </FormField>
-          <Button onClick={this.handleSubmit}>Create</Button>
-        </Form>
-      </Container>
+          ) : null}
+          <Form style={{ width: "100%" }}>
+            <FormField error={!!nameError}>
+              <Input
+                name="name"
+                onChange={this.handleChange}
+                value={name}
+                placeholder="Name"
+                fluid
+              />
+            </FormField>
+            <Button
+              primary
+              style={{
+                marginLeft: "50%",
+                transform: "translate(-50%, 0)"
+              }}
+              onClick={this.handleSubmit}
+            >
+              Create
+            </Button>
+          </Form>
+        </Container>
+      </Wrapper>
     );
   }
 }

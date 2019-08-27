@@ -128,8 +128,7 @@ class Login extends Component {
                 onClick={this.handleSubmit}
                 style={{
                   marginLeft: "50%",
-                  transform: "translate(-50%, 0)",
-                  boxShadow: "1px 1px 4px 2px rgb(145, 146, 146)"
+                  transform: "translate(-50%, 0)"
                 }}
               >
                 Login
