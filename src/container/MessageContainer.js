@@ -2,7 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
-import { Comment } from "semantic-ui-react";
+import { Comment, Popup } from "semantic-ui-react";
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
 
@@ -21,38 +21,47 @@ const newChannelMessageSubscription = gql`
   }
 `;
 
-const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
-  if (url) {
-    if (filetype.startsWith("image/")) {
-      return (
-        <img style={{ width: "240px", height: "240px" }} src={url} alt="" />
-      );
-    } else if (filetype === "text/plain") {
-      return <RenderText url={url} />;
-    } else if (filetype.startsWith("audio/")) {
-      return (
-        <div>
-          <audio controls>
-            <source src={url} type={filetype} />
-          </audio>
-        </div>
-      );
-    } else if (filetype.startsWith("video/")) {
-      return (
-        <div>
-          <video width="420" height="240" controls>
-            <source src={url} type={filetype} />
-          </video>
-        </div>
-      );
-    } else if (filetype === "application/pdf") {
-      return (
-        <div>
-          <embed src={url} type={filetype} width="800px" height="1000px" />
-        </div>
-      );
-    }
-  }
+const TextMessage = ({ url }) => {
+  return <RenderText url={url} />;
+};
+const ImageMessage = ({ url }) => {
+  return (
+    <img
+      border="1px solid #ddd"
+      borderRadius="8px"
+      width="350px"
+      padding="5px"
+      src={url}
+      alt="image"
+    />
+  );
+};
+const AudioMessage = ({ url, filetype }) => {
+  return (
+    <div>
+      <audio controls>
+        <source src={url} type={filetype} />
+      </audio>
+    </div>
+  );
+};
+const PDFMessage = ({ url, filetype }) => {
+  return (
+    <div>
+      <embed src={url} type={filetype} width="800px" height="1000px" />
+    </div>
+  );
+};
+const VideoMessage = ({ url, filetype }) => {
+  return (
+    <div>
+      <video width="420" height="240" controls>
+        <source src={url} type={filetype} />
+      </video>
+    </div>
+  );
+};
+const NormalMessage = ({ text }) => {
   return (
     <Comment.Text
       style={{
@@ -73,36 +82,35 @@ const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
   );
 };
 
+const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
+  if (url) {
+    if (filetype.startsWith("image/")) {
+      return <ImageMessage url={url} />;
+    } else if (filetype === "text/plain") {
+      return <TextMessage url={url} />;
+    } else if (filetype.startsWith("audio/")) {
+      return <AudioMessage url={url} filetype={filetype} />;
+    } else if (filetype.startsWith("video/")) {
+      return <VideoMessage url={url} filetype={filetype} />;
+    } else if (filetype === "application/pdf") {
+      return <PDFMessage url={url} filetype={filetype} />;
+    }
+  }
+  return <NormalMessage text={text} />;
+};
+
 const MessageOfOthers = ({ message: { url, text, filetype } }) => {
   if (url) {
     if (filetype.startsWith("image/")) {
-      return (
-        <img style={{ width: "240px", height: "240px" }} src={url} alt="" />
-      );
+      return <ImageMessage url={url} />;
     } else if (filetype === "text/plain") {
-      return <RenderText url={url} />;
+      return <TextMessage url={url} />;
     } else if (filetype.startsWith("audio/")) {
-      return (
-        <div>
-          <audio controls>
-            <source src={url} type={filetype} />
-          </audio>
-        </div>
-      );
+      return <AudioMessage url={url} filetype={filetype} />;
     } else if (filetype.startsWith("video/")) {
-      return (
-        <div>
-          <video width="420" height="240" controls>
-            <source src={url} type={filetype} />
-          </video>
-        </div>
-      );
+      return <VideoMessage url={url} filetype={filetype} />;
     } else if (filetype === "application/pdf") {
-      return (
-        <div>
-          <embed src={url} type={filetype} width="800px" height="1000px" />
-        </div>
-      );
+      return <PDFMessage url={url} filetype={filetype} />;
     }
   }
   return (
