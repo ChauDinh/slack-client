@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon } from "semantic-ui-react";
+import { Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
-  background-color: #12bdcb;
+  background-color: #f4f7fa;
   padding-top: 20px;
 `;
 
@@ -27,8 +27,8 @@ const paddingRight = "padding-right: 10px";
 const ListItem = styled.li`
   padding: 2px;
   ${paddingLeft};
-  color: white;
-  font-weight: bolder;
+  color: #93a5ad;
+  font-weight: 500;
   &:hover {
     background: #3e313c;
     color: white;
@@ -39,6 +39,8 @@ const ListHeader = styled.li`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  font-weight: 700;
+  color: #79868c;
   ${paddingLeft}
   ${paddingRight}
 `;
@@ -47,12 +49,16 @@ const PushLeft = styled.div`
   ${paddingLeft}
 `;
 
-const Green = styled.span`
-  color: #00e832;
+const Dark = styled.span`
+  color: #000;
 `;
 
 const Gray = styled.span`
   color: gray;
+`;
+
+const Green = styled.span`
+  color: #5de01f;
 `;
 
 const Circle = ({ on = true }) => (on ? <Green>●</Green> : <Gray>✗</Gray>);
@@ -63,11 +69,11 @@ const channel = ({ id, name }, teamId) => (
   </Link>
 );
 const dmChannel = ({ id, name }, teamId) => (
-  <ListItem key={`user-${id}`}>
-    <Link style={{ color: "white" }} to={`/view-team/${teamId}/${id}`}>
+  <Link style={{ color: "black" }} to={`/view-team/${teamId}/${id}`}>
+    <ListItem key={`user-${id}`}>
       <Circle /> {name}
-    </Link>
-  </ListItem>
+    </ListItem>
+  </Link>
 );
 
 export default ({
@@ -83,15 +89,32 @@ export default ({
 }) => (
   <Wrapper>
     <PushLeft>
-      <Header style={{ color: "#000" }}>{teamName}</Header>
-      <Green>
-        <Icon name="user circle" />
-      </Green>{" "}
-      {userName}
+      <Header style={{ color: "#000", textTransform: "capitalize" }}>
+        @{teamName}
+      </Header>
+      <Dark>
+        <Image />
+      </Dark>{" "}
+      <div
+        style={{
+          background: "#5dd985",
+          display: "inline-block",
+          padding: " .2rem .6rem",
+          borderRadius: "5px",
+          fontWeight: "700",
+          color: "#fff"
+        }}
+      >
+        {userName}
+      </div>
     </PushLeft>
     <div>
       <List>
-        <ListHeader style={{ marginTop: "2rem" }}>
+        <ListHeader
+          style={{
+            marginTop: "2rem"
+          }}
+        >
           Channels{" "}
           {isOwner && (
             <Icon
@@ -106,7 +129,11 @@ export default ({
     </div>
     <div>
       <List>
-        <ListHeader style={{ marginTop: "2rem" }}>
+        <ListHeader
+          style={{
+            marginTop: "2rem"
+          }}
+        >
           Direct Messages{" "}
           <Icon
             style={{ cursor: "pointer" }}
@@ -120,7 +147,14 @@ export default ({
     {isOwner && (
       <PushLeft style={{ marginTop: "2rem" }}>
         <a
-          style={{ color: "#f4f4f4" }}
+          style={{
+            color: "#000",
+            fontWeight: "700",
+            background: "#f7f7f7",
+            padding: ".5rem 1rem",
+            borderRadius: "5px",
+            border: "2px solid #000"
+          }}
           href="#invite-people"
           onClick={onInvitePeopleClick}
         >

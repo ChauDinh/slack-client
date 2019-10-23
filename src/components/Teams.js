@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Icon, Popup } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #449fa7;
+  background-color: #474e5d;
   color: #d9cfd9;
   padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const List = styled.ul`
@@ -19,7 +24,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   height: 50px;
   width: 50px;
-  background-color: #388e94;
+  background-color: #8aabbf;
   color: #fff;
   margin: auto;
   margin-bottom: 10px;
@@ -31,9 +36,17 @@ const ListItem = styled.li`
   &:hover {
     border-style: solid;
     border-width: thick;
-    border-color: #16939c;
+    border-color: #809eb0;
     cursor: pointer;
   }
+`;
+
+const Back = styled.div`
+  color: #93a5ad;
+  display: block;
+  margin-bottom: 50%;
+  transform: translate(0, -50%);
+  font-size: 2.2rem;
 `;
 
 const team = ({ id, letter }) => (
@@ -50,5 +63,11 @@ export default ({ teams }) => (
         <ListItem>+</ListItem>
       </Link>
     </List>
+
+    <Link key="home" to={`/`}>
+      <Back>
+        <Icon name="home" />
+      </Back>
+    </Link>
   </Wrapper>
 );

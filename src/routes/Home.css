@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 * {
   padding: 0;
@@ -7,7 +9,7 @@
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   height: calc(100%-2em);
 }
 

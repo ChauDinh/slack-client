@@ -21,11 +21,11 @@ const newChannelMessageSubscription = gql`
   }
 `;
 
-const Message = ({ message: { url, text, filetype } }) => {
+const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
   if (url) {
     if (filetype.startsWith("image/")) {
       return (
-        <img style={{ width: "420px", height: "240px" }} src={url} alt="" />
+        <img style={{ width: "240px", height: "240px" }} src={url} alt="" />
       );
     } else if (filetype === "text/plain") {
       return <RenderText url={url} />;
@@ -53,7 +53,76 @@ const Message = ({ message: { url, text, filetype } }) => {
       );
     }
   }
-  return <Comment.Text>{text}</Comment.Text>;
+  return (
+    <Comment.Text
+      style={{
+        display: "inline-block",
+        background: "#7bc6f5",
+        color: "#edf6fc",
+        paddingTop: ".75rem",
+        paddingBottom: ".75rem",
+        paddingLeft: ".5rem",
+        paddingRight: "2rem",
+        borderRadius: "3px",
+        fontWeight: "300",
+        textAlign: "left"
+      }}
+    >
+      {text}
+    </Comment.Text>
+  );
+};
+
+const MessageOfOthers = ({ message: { url, text, filetype } }) => {
+  if (url) {
+    if (filetype.startsWith("image/")) {
+      return (
+        <img style={{ width: "240px", height: "240px" }} src={url} alt="" />
+      );
+    } else if (filetype === "text/plain") {
+      return <RenderText url={url} />;
+    } else if (filetype.startsWith("audio/")) {
+      return (
+        <div>
+          <audio controls>
+            <source src={url} type={filetype} />
+          </audio>
+        </div>
+      );
+    } else if (filetype.startsWith("video/")) {
+      return (
+        <div>
+          <video width="420" height="240" controls>
+            <source src={url} type={filetype} />
+          </video>
+        </div>
+      );
+    } else if (filetype === "application/pdf") {
+      return (
+        <div>
+          <embed src={url} type={filetype} width="800px" height="1000px" />
+        </div>
+      );
+    }
+  }
+  return (
+    <Comment.Text
+      style={{
+        display: "inline-block",
+        background: "#f4f7fa",
+        color: "#93a5ad",
+        paddingTop: ".75rem",
+        paddingBottom: ".75rem",
+        paddingLeft: ".5rem",
+        paddingRight: "2rem",
+        borderRadius: "3px",
+        fontWeight: "300",
+        textAlign: "left"
+      }}
+    >
+      {text}
+    </Comment.Text>
+  );
 };
 
 class MessageContainer extends React.Component {
@@ -147,7 +216,8 @@ class MessageContainer extends React.Component {
   render() {
     const {
       data: { loading, messages, fetchMore },
-      channelId
+      channelId,
+      username
     } = this.props;
 
     return loading ? null : (
@@ -174,29 +244,42 @@ class MessageContainer extends React.Component {
           channelId={channelId}
           disableClick
         >
-          <Comment.Group style={{ maxWidth: "100%" }}>
+          <Comment.Group size="large" style={{ maxWidth: "100%" }}>
             {messages
               .slice()
               .reverse()
               .map(m => (
-                <Comment key={`${m.id}-message`}>
-                  <Comment.Avatar
-                    src={`https://ui-avatars.com/api/?name=${m.user.username}`}
-                  />
-                  <Comment.Content>
+                <Comment
+                  key={`${m.id}-message`}
+                  style={
+                    m.user.username === username
+                      ? {
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "flex-start"
+                        }
+                      : {}
+                  }
+                >
+                  <Comment.Content
+                    style={
+                      m.user.username === username ? { marginLeft: "1rem" } : {}
+                    }
+                  >
                     <Comment.Author as="a">
                       <span style={{ fontWeight: "700", fontFamily: "Arial" }}>
                         {m.user.username}
                       </span>
                     </Comment.Author>
-                    <Comment.Metadata>
+                    {/* <Comment.Metadata>
                       <div>{m.created_at}</div>
-                    </Comment.Metadata>
+                    </Comment.Metadata> */}
                     <br />
-                    <Message message={m} />
-                    {/* <Comment.Actions>
-                      <Comment.Action>Reply</Comment.Action>
-                    </Comment.Actions> */}
+                    {m.user.username === username ? (
+                      <MessageOfAuthor message={m} />
+                    ) : (
+                      <MessageOfOthers message={m} />
+                    )}
                   </Comment.Content>
                 </Comment>
               ))}
