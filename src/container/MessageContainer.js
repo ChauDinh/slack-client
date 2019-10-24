@@ -27,10 +27,11 @@ const TextMessage = ({ url }) => {
 const ImageMessage = ({ url }) => {
   return (
     <img
-      border="1px solid #ddd"
-      borderRadius="8px"
+      style={{
+        borderRadius: "8px",
+        margin: ".25rem 0 .5rem"
+      }}
       width="350px"
-      padding="5px"
       src={url}
       alt="image"
     />
@@ -276,7 +277,7 @@ class MessageContainer extends React.Component {
                   >
                     <Comment.Author as="a">
                       <span style={{ fontWeight: "700", fontFamily: "Arial" }}>
-                        {m.user.username}
+                        {m.user.username === username ? "You" : username}
                       </span>
                     </Comment.Author>
                     {/* <Comment.Metadata>

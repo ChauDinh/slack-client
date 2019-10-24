@@ -1,9 +1,9 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+
+import Image from "../images/chatting-application.svg";
 import "./Home.css";
-import Logo from "../images/Logo.svg";
-import MenuButton from "../images/menu.svg";
 
 const allUsersQuery = gql`
   {
@@ -15,70 +15,59 @@ const allUsersQuery = gql`
   }
 `;
 
-function handleClick() {
-  const menuButtonNavBar = document.getElementById("menu-button");
-  const menuListNavBar = document.querySelector(".active");
-
-  menuButtonNavBar.addEventListener("click", e => {
-    menuListNavBar.classList.remove("active");
-    menuListNavBar.classList.toggle("active-toggle");
-    menuListNavBar.classList.add("active");
-  });
-}
-
 function Home({ data: { allUsers = [] } }) {
   return (
     <React.Fragment>
       <div className="wrapper">
-        {/* {allUsers.map(user => (
-          <h1 key={user.id}>{user.email}</h1>
-        ))} */}
-        <aside className="nav-bar">
-          <img
-            onClick={handleClick}
-            id="menu-button"
-            src={MenuButton}
-            alt="menu-button"
-          />
-          <figure>
-            <div className="avatar" />
-            <figcaption>hello, guest!</figcaption>
-          </figure>
-        </aside>
-        <nav className="active">
-          <ul>
-            <li>
-              <a href="/register">register</a>
-            </li>
-            <li>
-              <a href="/login">login</a>
-            </li>
-            <li>
-              <a href="/view-team">teams</a>
-            </li>
-            <li>
-              <a href="#">privacy</a>
-            </li>
-          </ul>
-        </nav>
+        <header className="header-home">
+          <h1 className="logo">
+            <span style={{ color: "#7285ad" }}>Slack</span>App
+          </h1>
+          <div className="menu">
+            <ul>
+              <li>
+                <a href="/register">register</a>
+              </li>
+              <li>
+                <a href="/login">login</a>
+              </li>
+              <li>
+                <a href="/view-team">chat room</a>
+              </li>
+              <li>
+                <a href="/faq">faq</a>
+              </li>
+            </ul>
+          </div>
+        </header>
         <main className="main">
-          <img className="logo" src={Logo} alt="logo" />
-          <h1 className="title">Hi, I’m a web application for chatting</h1>
-          <p className="subtitle">
-            You design things and then want to share it on the browser… yeah!{" "}
-            <br /> <br />
-            <span>
-              <a href="/register">Join with us today!</a>
-            </span>
+          <h1 className="title">says what in your mind.</h1>
+          <p className="sub-title">
+            The Next Level of conversations on the Internet
           </p>
-          <button className="create-team__button">
-            <a href="/create-team" style={{ color: "#fff" }}>
-              create team
-            </a>
-          </button>
+          <a style={{ color: "#f4f7fa" }} href="/create-team">
+            <button
+              style={{
+                padding: "1rem 2rem",
+                borderRadius: "5px",
+                cursor: "pointer",
+                background: "#474e5d",
+                color: "#f4f7fa",
+                ":focus": {
+                  outline: "none"
+                }
+              }}
+            >
+              GET STARTED
+            </button>{" "}
+          </a>
+          <img src={Image} width="560px" style={{ marginTop: "1rem" }} />
         </main>
         <footer className="footer">
-          <p>Created by ChauDinh @ 2019</p>
+          <h5>
+            WHY <span style={{ color: "#6f83ab" }}>Slack</span>App
+          </h5>
+          <p className="slogan">It's so simple. It's like magic!</p>
         </footer>
       </div>
     </React.Fragment>
