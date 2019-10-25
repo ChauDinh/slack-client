@@ -39,6 +39,7 @@ const SendMessage = ({
     </FileUpload>
     <Input
       name="message"
+      icon="send"
       value={values.message}
       onChange={handleChange}
       onBlur={handleBlur}

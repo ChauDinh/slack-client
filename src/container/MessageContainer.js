@@ -1,8 +1,8 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-
 import { Comment, Popup } from "semantic-ui-react";
+
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
 
@@ -73,7 +73,7 @@ const NormalMessage = ({ text }) => {
         paddingBottom: ".75rem",
         paddingLeft: ".5rem",
         paddingRight: "2rem",
-        borderRadius: "3px",
+        borderRadius: "8px",
         fontWeight: "300",
         textAlign: "left"
       }}
@@ -124,7 +124,7 @@ const MessageOfOthers = ({ message: { url, text, filetype } }) => {
         paddingBottom: ".75rem",
         paddingLeft: ".5rem",
         paddingRight: "2rem",
-        borderRadius: "3px",
+        borderRadius: "8px",
         fontWeight: "300",
         textAlign: "left"
       }}
@@ -267,22 +267,29 @@ class MessageContainer extends React.Component {
                           justifyContent: "flex-end",
                           alignItems: "flex-start"
                         }
-                      : {}
+                      : {
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignItems: "flex-start"
+                        }
                   }
                 >
-                  <Comment.Content
-                    style={
-                      m.user.username === username ? { marginLeft: "1rem" } : {}
-                    }
-                  >
+                  <Comment.Content style={{ marginLeft: ".5rem" }}>
                     <Comment.Author as="a">
-                      <span style={{ fontWeight: "700", fontFamily: "Arial" }}>
-                        {m.user.username === username ? "You" : username}
+                      <span
+                        style={
+                          m.user.username === username
+                            ? { fontWeight: "bolder", fontFamily: "Arial" }
+                            : {
+                                fontWeight: "700",
+                                fontFamily: "Open Sans",
+                                color: "#c5c5c5"
+                              }
+                        }
+                      >
+                        {m.user.username === username ? "You" : m.user.username}
                       </span>
                     </Comment.Author>
-                    {/* <Comment.Metadata>
-                      <div>{m.created_at}</div>
-                    </Comment.Metadata> */}
                     <br />
                     {m.user.username === username ? (
                       <MessageOfAuthor message={m} />
