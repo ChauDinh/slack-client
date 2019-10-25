@@ -8,21 +8,24 @@ import {
   Header,
   Form,
   FormField,
-  Message
+  Message,
+  Image
 } from "semantic-ui-react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
 import { wsLink } from "../apollo";
+import LoginImage from "../images/login.png";
 
 const Wrapper = styled.div`
   padding: auto, 0;
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 0 20px;
 `;
 class Login extends Component {
   constructor(props) {
@@ -88,12 +91,25 @@ class Login extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center"
+            alignItems: "flex-start",
+            justifyContent: "center",
+            height: "80%",
+            width: "650px",
+            padding: "0 4.55rem"
           }}
         >
           <div style={{ width: "100%" }}>
-            <Header as="h2">Login</Header>
+            <Header
+              as="h2"
+              style={{
+                fontWeight: "100",
+                fontSize: "3.5rem",
+                color: "#474e5d",
+                fontFamily: "Open Sans"
+              }}
+            >
+              Login
+            </Header>
             {errorList.length ? (
               <Message
                 error
@@ -103,32 +119,60 @@ class Login extends Component {
             ) : null}
             <Form style={{ width: "100%" }}>
               <FormField error={!!emailError}>
-                <label>Email</label>
+                <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                  Email
+                </label>
                 <Input
                   name="email"
                   onChange={this.handleChange}
                   value={email}
-                  placeholder="email"
-                  fluid
+                  placeholder="please enter your email..."
+                  transparent
+                  size="big"
+                  style={{
+                    borderBottom: "1px solid #ddd"
+                  }}
                 />
               </FormField>
               <FormField error={!!passwordError}>
-                <label>Password</label>
+                <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                  Password
+                </label>
                 <Input
                   name="password"
                   onChange={this.handleChange}
                   value={password}
-                  placeholder="password"
+                  placeholder="please enter your password..."
                   type="password"
-                  fluid
+                  transparent
+                  size="big"
+                  style={{
+                    borderBottom: "1px solid #ddd"
+                  }}
                 />
               </FormField>
+              <a
+                href="/register"
+                style={{
+                  borderRadius: "50px",
+                  fontSize: "1.2rem",
+                  fontWeight: "200",
+                  color: "#6c7a87",
+                  padding: "0.785714em 1.5em 0 0",
+                  display: "block"
+                }}
+              >
+                Do not have account?
+              </a>
               <Button
                 primary
                 onClick={this.handleSubmit}
                 style={{
-                  marginLeft: "50%",
-                  transform: "translate(-50%, 0)"
+                  background: "#707a9c",
+                  borderRadius: "50px",
+                  fontSize: "1.2rem",
+                  fontWeight: "200",
+                  marginTop: "2rem"
                 }}
               >
                 Login
@@ -136,6 +180,7 @@ class Login extends Component {
             </Form>
           </div>
         </Container>
+        <Image src={LoginImage} width="50%" alt="login" />
       </Wrapper>
     );
   }

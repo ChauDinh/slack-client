@@ -98,10 +98,7 @@ export class Register extends Component {
             justifyContent: "center",
             height: "80%",
             width: "650px",
-            padding: "0 4.55rem",
-            background: "#ac9ef7",
-            borderRadius: "10px",
-            boxShadow: "1px 1px 6px 5px rgba(0, 0, 0, 0.2)"
+            padding: "0 4.55rem"
           }}
         >
           <Header
@@ -113,9 +110,9 @@ export class Register extends Component {
               fontFamily: "Open Sans"
             }}
           >
-            Stand for Business
+            Join with us today!
           </Header>
-          <p style={{ fontSize: "1.4rem", color: "#fff" }}>
+          <p style={{ fontSize: "1.4rem", color: "#a5a5a5" }}>
             Join a community of over 1 milion people helping connect the
             business and career we love.
           </p>
@@ -138,7 +135,6 @@ export class Register extends Component {
                 placeholder="please enter your username..."
                 transparent
                 size="big"
-                inverted
                 style={{
                   borderBottom: "1px solid #ddd"
                 }}
@@ -154,7 +150,6 @@ export class Register extends Component {
                 value={email}
                 placeholder="please enter your email..."
                 transparent
-                inverted
                 size="big"
                 style={{
                   borderBottom: "1px solid #ddd"
@@ -172,7 +167,6 @@ export class Register extends Component {
                 placeholder="password must be at least 6 characters long..."
                 type="password"
                 transparent
-                inverted
                 size="big"
                 style={{
                   borderBottom: "1px solid #ddd"
@@ -192,6 +186,18 @@ export class Register extends Component {
             >
               Register
             </Button>
+            <a
+              href="/"
+              style={{
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "200",
+                color: "#6c7a87",
+                padding: "0.785714em 1.5em 0 1.5em"
+              }}
+            >
+              Go to Homepage
+            </a>
           </Form>
         </Container>
       </Wrapper>
