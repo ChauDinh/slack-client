@@ -6,7 +6,7 @@ import { Icon } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #474e5d;
+  background-color: #340a63;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;
@@ -66,7 +66,7 @@ export default ({ teams }) => (
 
     <Link key="home" to={`/`}>
       <Back>
-        <Icon name="home" />
+        <Icon style={{ color: "#af69ff" }} name="home" />
       </Back>
     </Link>
   </Wrapper>

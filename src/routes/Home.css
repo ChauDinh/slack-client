@@ -18,10 +18,10 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  border-left: 25px solid #474e5d;
-  border-right: 25px solid #474e5d;
-  border-top: 40px solid #474e5d;
-  border-bottom: 40px solid #474e5d;
+  border-left: 20px solid #a36ee0;
+  border-right: 20px solid #a36ee0;
+  border-top: 25px solid #a36ee0;
+  border-bottom: 25px solid #a36ee0;
   height: 100vh;
 }
 
@@ -65,10 +65,10 @@ body {
 
 .main .title {
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 500;
   font-family: "Montserrat", sans-serif;
   text-transform: capitalize;
-  color: #52607d;
+  color: #845bb3;
 }
 
 .main .sub-title {

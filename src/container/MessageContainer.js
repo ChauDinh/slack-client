@@ -67,8 +67,8 @@ const NormalMessage = ({ text }) => {
     <Comment.Text
       style={{
         display: "inline-block",
-        background: "#7bc6f5",
-        color: "#edf6fc",
+        background: "#b078f0",
+        color: "#fbf7ff",
         paddingTop: ".75rem",
         paddingBottom: ".75rem",
         paddingLeft: ".5rem",

@@ -106,7 +106,7 @@ export class Register extends Component {
             style={{
               fontWeight: "100",
               fontSize: "3.5rem",
-              color: "#474e5d",
+              color: "#6124a6",
               fontFamily: "Open Sans"
             }}
           >
@@ -177,7 +177,7 @@ export class Register extends Component {
               primary
               onClick={this.handleSubmit}
               style={{
-                background: "#707a9c",
+                background: "#6124a6",
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
@@ -192,7 +192,7 @@ export class Register extends Component {
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
-                color: "#6c7a87",
+                color: "#6124a6",
                 padding: "0.785714em 1.5em 0 1.5em"
               }}
             >

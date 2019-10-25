@@ -7,19 +7,21 @@ import {
   FormField,
   Input,
   Button,
-  Message
+  Message,
+  Image
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
 
+import CreateTeamImage from "../images/create-team.jpg";
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 class CreateTeam extends Component {
@@ -88,10 +90,27 @@ class CreateTeam extends Component {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "flex-start"
           }}
         >
-          <Header as="h2">Create a team</Header>
+          <Image
+            src={CreateTeamImage}
+            alt="create-team"
+            width="50%"
+            style={{ marginBottom: "2rem" }}
+          />
+          <Header
+            as="h2"
+            style={{
+              textTransform: "capitalize",
+              fontWeight: "100",
+              fontSize: "3.5rem",
+              color: "#6124a6",
+              fontFamily: "Open Sans"
+            }}
+          >
+            Create your team
+          </Header>
           {errorList.length ? (
             <Message
               error
@@ -113,11 +132,16 @@ class CreateTeam extends Component {
               primary
               style={{
                 marginLeft: "50%",
-                transform: "translate(-50%, 0)"
+                transform: "translate(-50%, 0)",
+                background: "#6124a6",
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "200",
+                marginTop: "2rem"
               }}
               onClick={this.handleSubmit}
             >
-              Create
+              Create Team
             </Button>
           </Form>
         </Container>
