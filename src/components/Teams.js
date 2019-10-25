@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Icon, Popup } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   grid-column: 1;

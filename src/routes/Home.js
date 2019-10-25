@@ -61,7 +61,12 @@ function Home({ data: { allUsers = [] } }) {
               GET STARTED
             </button>{" "}
           </a>
-          <img src={Image} width="560px" style={{ marginTop: "1rem" }} />
+          <img
+            src={Image}
+            width="560px"
+            alt="home"
+            style={{ marginTop: "1rem" }}
+          />
         </main>
         <footer className="footer">
           <h5>

@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import { Comment, Popup } from "semantic-ui-react";
+import { Comment } from "semantic-ui-react";
 
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";

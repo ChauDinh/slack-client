@@ -6,18 +6,22 @@ import {
   Input,
   Button,
   Message,
-  FormField
+  FormField,
+  Image
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
 
+import RegisterImage from "../images/register.png";
+
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 0 20px;
 `;
 export class Register extends Component {
   state = {
@@ -84,16 +88,37 @@ export class Register extends Component {
 
     return (
       <Wrapper>
+        <Image src={RegisterImage} width="50%" alt="register" />
         <Container
           text
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center"
+            alignItems: "flex-start",
+            justifyContent: "center",
+            height: "80%",
+            width: "650px",
+            padding: "0 4.55rem",
+            background: "#ac9ef7",
+            borderRadius: "10px",
+            boxShadow: "1px 1px 6px 5px rgba(0, 0, 0, 0.2)"
           }}
         >
-          <Header as="h2">Register</Header>
+          <Header
+            as="h2"
+            style={{
+              fontWeight: "100",
+              fontSize: "3.5rem",
+              color: "#474e5d",
+              fontFamily: "Open Sans"
+            }}
+          >
+            Stand for Business
+          </Header>
+          <p style={{ fontSize: "1.4rem", color: "#fff" }}>
+            Join a community of over 1 milion people helping connect the
+            business and career we love.
+          </p>
           {errorList.length ? (
             <Message
               error
@@ -103,42 +128,66 @@ export class Register extends Component {
           ) : null}
           <Form style={{ width: "100%" }}>
             <FormField error={!!usernameError}>
-              <label>Username</label>
+              <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                Username
+              </label>
               <Input
                 name="username"
                 onChange={this.handleChange}
                 value={username}
-                placeholder="username"
-                fluid
+                placeholder="please enter your username..."
+                transparent
+                size="big"
+                inverted
+                style={{
+                  borderBottom: "1px solid #ddd"
+                }}
               />
             </FormField>
             <FormField error={!!emailError}>
-              <label>Email</label>
+              <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                Email
+              </label>
               <Input
                 name="email"
                 onChange={this.handleChange}
                 value={email}
-                placeholder="email"
-                fluid
+                placeholder="please enter your email..."
+                transparent
+                inverted
+                size="big"
+                style={{
+                  borderBottom: "1px solid #ddd"
+                }}
               />
             </FormField>
             <FormField error={!!passwordError}>
-              <label>Password</label>
+              <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                Password
+              </label>
               <Input
                 name="password"
                 onChange={this.handleChange}
                 value={password}
-                placeholder="password"
+                placeholder="password must be at least 6 characters long..."
                 type="password"
-                fluid
+                transparent
+                inverted
+                size="big"
+                style={{
+                  borderBottom: "1px solid #ddd"
+                }}
               />
             </FormField>
             <Button
               primary
               onClick={this.handleSubmit}
               style={{
-                marginLeft: "50%",
-                transform: "translate(-50%, 0)"
+                background: "#707a9c",
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "200",
+                marginTop: "2rem"
               }}
             >
               Register
