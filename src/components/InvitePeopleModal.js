@@ -1,10 +1,11 @@
 import React from "react";
-import { Form, Input, Button, Modal } from "semantic-ui-react";
+import { Form, Input, Button, Modal, Image } from "semantic-ui-react";
 import { withFormik } from "formik";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 
 import normalizeErrors from "../normalizeErrors";
+import InvitePeople from "../images/invite.png";
 
 const InvitePeopleModal = ({
   open,
@@ -17,9 +18,16 @@ const InvitePeopleModal = ({
   touched,
   errors
 }) => (
-  <Modal open={open} onClose={onClose}>
-    <Modal.Header>Add people to your team</Modal.Header>
+  <Modal open={open} onClose={onClose} style={{ width: "400px" }}>
+    <Modal.Header style={{ textTransform: "capitalize" }}>
+      Invite your friends
+    </Modal.Header>
     <Modal.Content>
+      <Image
+        src={InvitePeople}
+        width="400px"
+        style={{ marginLeft: "50%", transform: "translate(-50%, 0)" }}
+      />
       <Form>
         <Form.Field>
           <Input
@@ -42,6 +50,7 @@ const InvitePeopleModal = ({
             onClick={handleSubmit}
             primary
             fluid
+            style={{ background: "#521CCB" }}
           >
             Add User
           </Button>

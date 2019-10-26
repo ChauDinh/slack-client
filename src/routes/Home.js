@@ -20,20 +20,21 @@ function Home({ data: { allUsers = [] } }) {
     <React.Fragment>
       <div className="wrapper">
         <header className="header-home">
-          <h1 className="logo">
-            <span style={{ color: "#7285ad" }}>Slack</span>App
+          <h1 className="logo" style={{ color: "#808080" }}>
+            <span style={{ color: "#521CCB" }}>Slack</span>App
           </h1>
           <div className="menu">
             <ul>
+              <li>
+                <a href="/view-team">chat room</a>
+              </li>
               <li>
                 <a href="/register">register</a>
               </li>
               <li>
                 <a href="/login">login</a>
               </li>
-              <li>
-                <a href="/view-team">chat room</a>
-              </li>
+
               <li>
                 <a href="/faq">faq</a>
               </li>
@@ -51,7 +52,7 @@ function Home({ data: { allUsers = [] } }) {
                 padding: "1rem 2rem",
                 borderRadius: "5px",
                 cursor: "pointer",
-                background: "rgb(97, 36, 166)",
+                background: "#521CCB",
                 color: "#f4f7fa",
                 ":focus": {
                   outline: "none"

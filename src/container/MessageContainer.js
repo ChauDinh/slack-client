@@ -61,11 +61,11 @@ const NormalMessage = ({ text }) => {
     <Comment.Text
       style={{
         display: "inline-block",
-        background: "#b078f0",
+        background: "#521CCB",
         color: "#fbf7ff",
         paddingTop: ".75rem",
         paddingBottom: ".75rem",
-        paddingLeft: ".5rem",
+        paddingLeft: "1rem",
         paddingRight: "2rem",
         borderRadius: "8px",
         fontWeight: "300",
@@ -112,7 +112,7 @@ const MessageOfOthers = ({ message: { url, text, filetype } }) => {
         color: "#93a5ad",
         paddingTop: ".75rem",
         paddingBottom: ".75rem",
-        paddingLeft: ".5rem",
+        paddingLeft: "1rem",
         paddingRight: "2rem",
         borderRadius: "8px",
         fontWeight: "300",

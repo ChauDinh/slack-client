@@ -20,7 +20,7 @@ const DirectMessageModal = ({
   resetForm,
   setFieldValue
 }) => (
-  <Modal open={open} onClose={onClose}>
+  <Modal open={open} onClose={onClose} style={{ width: "400px" }}>
     <Modal.Header>Direct Messages</Modal.Header>
     <Modal.Content>
       <Form>
@@ -45,7 +45,13 @@ const DirectMessageModal = ({
           >
             Cancel
           </Button>
-          <Button primary disabled={isSubmitting} fluid onClick={handleSubmit}>
+          <Button
+            primary
+            disabled={isSubmitting}
+            fluid
+            onClick={handleSubmit}
+            style={{ background: "#3e149c" }}
+          >
             Start Messaging
           </Button>
         </Form.Group>

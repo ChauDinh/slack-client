@@ -6,7 +6,7 @@ import { Icon } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #340a63;
+  background-color: #3e149c;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;

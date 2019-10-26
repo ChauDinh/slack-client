@@ -27,6 +27,7 @@ const AddChannelModal = ({
       resetForm();
       onClose(e);
     }}
+    style={{ width: "400px" }}
   >
     <Modal.Header>Add Channel</Modal.Header>
     <Modal.Content>
@@ -78,6 +79,7 @@ const AddChannelModal = ({
             onClick={handleSubmit}
             primary
             fluid
+            style={{ background: "#3e149c" }}
           >
             Create Channel
           </Button>
