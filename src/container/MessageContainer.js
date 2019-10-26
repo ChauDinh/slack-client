@@ -46,13 +46,7 @@ const AudioMessage = ({ url, filetype }) => {
     </div>
   );
 };
-const PDFMessage = ({ url, filetype }) => {
-  return (
-    <div>
-      <embed src={url} type={filetype} width="800px" height="1000px" />
-    </div>
-  );
-};
+
 const VideoMessage = ({ url, filetype }) => {
   return (
     <div>
@@ -93,8 +87,6 @@ const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
       return <AudioMessage url={url} filetype={filetype} />;
     } else if (filetype.startsWith("video/")) {
       return <VideoMessage url={url} filetype={filetype} />;
-    } else if (filetype === "application/pdf") {
-      return <PDFMessage url={url} filetype={filetype} />;
     }
   }
   return <NormalMessage text={text} />;
@@ -110,8 +102,6 @@ const MessageOfOthers = ({ message: { url, text, filetype } }) => {
       return <AudioMessage url={url} filetype={filetype} />;
     } else if (filetype.startsWith("video/")) {
       return <VideoMessage url={url} filetype={filetype} />;
-    } else if (filetype === "application/pdf") {
-      return <PDFMessage url={url} filetype={filetype} />;
     }
   }
   return (

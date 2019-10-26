@@ -51,7 +51,7 @@ function Home({ data: { allUsers = [] } }) {
                 padding: "1rem 2rem",
                 borderRadius: "5px",
                 cursor: "pointer",
-                background: "#a36ee0",
+                background: "rgb(97, 36, 166)",
                 color: "#f4f7fa",
                 ":focus": {
                   outline: "none"

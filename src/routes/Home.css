@@ -18,10 +18,10 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  border-left: 20px solid #a36ee0;
-  border-right: 20px solid #a36ee0;
-  border-top: 25px solid #a36ee0;
-  border-bottom: 25px solid #a36ee0;
+  border-left: 20px solid rgb(97, 36, 166);
+  border-right: 20px solid rgb(97, 36, 166);
+  border-top: 25px solid rgb(97, 36, 166);
+  border-bottom: 25px solid rgb(97, 36, 166);
   height: 100vh;
 }
 
