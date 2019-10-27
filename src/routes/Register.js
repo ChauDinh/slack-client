@@ -21,7 +21,23 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
+  padding: 1rem 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    img {
+      width: 100%;
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+    .container {
+      padding: 0 20px !important;
+    }
+    .header {
+      font-size: 2rem !important;
+      font-weight: 700 !important;
+    }
+  }
 `;
 export class Register extends Component {
   state = {
@@ -123,7 +139,7 @@ export class Register extends Component {
               list={errorList}
             />
           ) : null}
-          <Form style={{ width: "100%" }}>
+          <Form style={{ width: "100%", marginBottom: "1rem" }}>
             <FormField error={!!usernameError}>
               <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
                 Username
@@ -193,7 +209,7 @@ export class Register extends Component {
                 fontSize: "1.2rem",
                 fontWeight: "200",
                 color: "#6124a6",
-                padding: "0.785714em 1.5em 0 1.5em"
+                paddingLeft: "1rem"
               }}
             >
               Go to Homepage

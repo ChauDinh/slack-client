@@ -26,6 +26,23 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    img {
+      width: 100%;
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+    .container {
+      padding: 0 20px !important;
+      width: 100% !important;
+    }
+    .header {
+      font-size: 2rem !important;
+      font-weight: 700 !important;
+    }
+  }
 `;
 class Login extends Component {
   constructor(props) {
@@ -94,7 +111,7 @@ class Login extends Component {
             alignItems: "flex-start",
             justifyContent: "center",
             height: "80%",
-            width: "650px",
+            width: "100% !important",
             padding: "0 4.55rem"
           }}
         >
@@ -180,7 +197,7 @@ class Login extends Component {
             </Form>
           </div>
         </Container>
-        <Image src={LoginImage} width="50%" alt="login" />
+        {/* <Image src={LoginImage} width="50%" alt="login" /> */}
       </Wrapper>
     );
   }

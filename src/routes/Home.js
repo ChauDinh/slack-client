@@ -40,6 +40,24 @@ function Home({ data: { allUsers = [] } }) {
               </li>
             </ul>
           </div>
+
+          <div className="menu-toggled">
+            <ul>
+              <li>
+                <a href="/view-team">chat room</a>
+              </li>
+              <li>
+                <a href="/register">register</a>
+              </li>
+              <li>
+                <a href="/login">login</a>
+              </li>
+
+              <li>
+                <a href="/faq">faq</a>
+              </li>
+            </ul>
+          </div>
         </header>
         <main className="main">
           <h1 className="title">says what in your mind.</h1>

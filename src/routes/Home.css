@@ -4,7 +4,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Actor&display=swap");
 
-* {
+*,
+*:before,
+*:after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -54,6 +56,10 @@ body {
   margin-right: 3rem;
 }
 
+.menu-toggled {
+  display: none;
+}
+
 .main {
   background: #f4f7fa;
   flex-grow: 1;
@@ -92,4 +98,35 @@ body {
   font-size: 1.275rem;
   font-weight: bolder;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    border: none;
+    overflow-x: hidden;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .main {
+    width: 100%;
+    padding: 0 20px;
+    justify-content: space-around;
+  }
+
+  .main .title {
+    margin-bottom: 2rem;
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+
+  .main .sub-title {
+    display: none;
+  }
+
+  .footer {
+    display: none;
+  }
 }

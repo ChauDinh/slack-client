@@ -8,4 +8,25 @@ export default styled.div`
   display: flex;
   flex-direction: column-reverse;
   overflow-y: auto;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #f6f6f6;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #3e149c;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    flex-grow: 1;
+  }
 `;

@@ -5,6 +5,7 @@ import { Comment } from "semantic-ui-react";
 
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
+import Message from "../components/Messages";
 
 const newChannelMessageSubscription = gql`
   subscription($channelId: Int!) {
@@ -220,16 +221,16 @@ class MessageContainer extends React.Component {
     } = this.props;
 
     return loading ? null : (
-      <div
-        style={{
-          gridColumn: 3,
-          gridRow: 2,
-          paddingLeft: "20px",
-          paddingRight: "20px",
-          display: "flex",
-          flexDirection: "column-reverse",
-          overflowY: "auto"
-        }}
+      <Message
+        // style={{
+        //   gridColumn: 3,
+        //   gridRow: 2,
+        //   paddingLeft: "20px",
+        //   paddingRight: "20px",
+        //   display: "flex",
+        //   flexDirection: "column-reverse",
+        //   overflowY: "auto"
+        // }}
         onScroll={this.handleScroll}
         ref={scroller => {
           this.scroller = scroller;
@@ -291,7 +292,7 @@ class MessageContainer extends React.Component {
               ))}
           </Comment.Group>
         </FileUpload>{" "}
-      </div>
+      </Message>
     );
   }
 }

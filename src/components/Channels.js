@@ -8,6 +8,10 @@ const Wrapper = styled.div`
   grid-row: 1 / 4;
   background-color: #f4f7fa;
   padding-top: 20px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Header = styled.h1`

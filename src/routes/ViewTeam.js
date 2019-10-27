@@ -42,6 +42,7 @@ const ViewTeam = ({
   return (
     <Layout className="app-layout">
       <Sidebar
+        className="side-bar_view-message"
         teams={teams.map(t => ({
           id: t.id,
           letter: t.name.charAt(0).toUpperCase()
@@ -52,10 +53,15 @@ const ViewTeam = ({
       />
       {channel && <Header channelName={channel.name} />}
       {channel && (
-        <MessageContainer channelId={channel.id} username={username} />
+        <MessageContainer
+          className="message-container_view-message"
+          channelId={channel.id}
+          username={username}
+        />
       )}
       {channel && (
         <SendMessage
+          className="send-message_view-message"
           channelId={channel.id}
           placeholder={channel.name}
           onSubmit={async text => {

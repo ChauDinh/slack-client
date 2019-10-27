@@ -12,6 +12,13 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 50px auto;
   background: #ebedf2;
+
+  @media (max-width: 768px) {
+    display: flex;
+    .input {
+      flex-grow: 1;
+    }
+  }
 `;
 
 const ENTER_KEY = 13;
