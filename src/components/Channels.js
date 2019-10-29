@@ -7,7 +7,11 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
   background-color: #f4f7fa;
-  padding-top: 20px;
+  border-right: 1px solid lightgray;
+  padding-top: 10px;
+  font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 768px) {
     display: none;
@@ -16,25 +20,30 @@ const Wrapper = styled.div`
 
 const Header = styled.h1`
   color: #f5f5f5;
-  font-size: 20px;
+  font-size: 24px;
 `;
 
 const List = styled.ul`
   width: 100%;
   list-style: none;
   padding-left: 0;
+  font-size: 15px;
 `;
 
 const paddingLeft = "padding-left: 10px";
 const paddingRight = "padding-right: 10px";
 
 const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
   padding: 2px;
   ${paddingLeft};
-  color: #93a5ad;
+  ${paddingRight};
+  color: #333;
   font-weight: 500;
+  font-size: 15px;
   &:hover {
-    background: #3e313c;
+    background: #3e149c;
     color: white;
   }
 `;
@@ -58,14 +67,41 @@ const Dark = styled.span`
 `;
 
 const Gray = styled.span`
-  color: gray;
+  color: #333;
 `;
 
 const Green = styled.span`
-  color: #5de01f;
+  color: #fff;
 `;
 
-const Circle = ({ on = true }) => (on ? <Green>●</Green> : <Gray>✗</Gray>);
+const Circle = ({ isOnline = false }) =>
+  isOnline ? (
+    <Green>
+      <span
+        style={{
+          padding: ".2rem .5rem",
+          background: "#5dd985",
+          borderRadius: "3px",
+          fontSize: "13px"
+        }}
+      >
+        online
+      </span>
+    </Green>
+  ) : (
+    <Gray>
+      <span
+        style={{
+          padding: ".2rem .5rem",
+          background: "lightgray",
+          borderRadius: "3px",
+          fontSize: "13px"
+        }}
+      >
+        offline
+      </span>
+    </Gray>
+  );
 
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
@@ -73,9 +109,13 @@ const channel = ({ id, name }, teamId) => (
   </Link>
 );
 const dmChannel = ({ id, name }, teamId) => (
-  <Link style={{ color: "black" }} to={`/view-team/${teamId}/${id}`}>
-    <ListItem key={`user-${id}`}>
-      <Circle /> {name}
+  <Link
+    key={`user-${id}`}
+    style={{ color: "black" }}
+    to={`/view-team/${teamId}/${id}`}
+  >
+    <ListItem>
+      {name} <Circle />
     </ListItem>
   </Link>
 );
@@ -93,30 +133,47 @@ export default ({
 }) => (
   <Wrapper>
     <PushLeft>
-      <Header style={{ color: "#000", textTransform: "capitalize" }}>
-        @{teamName}
+      <Header
+        style={{
+          color: "#000",
+          textTransform: "capitalize",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        {teamName}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "15px",
+            fontWeight: "700"
+          }}
+        >
+          <img
+            src={`https://api.adorable.io/avatars/60/${userName}@adorable.png`}
+            style={{
+              borderRadius: "50%",
+              marginTop: "20px"
+            }}
+          />
+          {userName}
+        </div>
       </Header>
       <Dark>
         <Image />
       </Dark>{" "}
-      <div
-        style={{
-          background: "#5dd985",
-          display: "inline-block",
-          padding: " .2rem .6rem",
-          borderRadius: "5px",
-          fontWeight: "700",
-          color: "#fff"
-        }}
-      >
-        {userName}
-      </div>
     </PushLeft>
     <div>
       <List>
         <ListHeader
           style={{
-            marginTop: "2rem"
+            marginTop: "2rem",
+            marginBottom: "1rem"
           }}
         >
           Channels{" "}
@@ -135,7 +192,8 @@ export default ({
       <List>
         <ListHeader
           style={{
-            marginTop: "2rem"
+            marginTop: "2rem",
+            marginBottom: "1rem"
           }}
         >
           Direct Messages{" "}

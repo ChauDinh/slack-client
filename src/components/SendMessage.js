@@ -9,9 +9,24 @@ const Wrapper = styled.div`
   grid-column: 3;
   grid-row: 3;
   padding: 20px;
+  padding-bottom: 25px;
   display: grid;
   grid-template-columns: 50px auto;
-  background: #ebedf2;
+  background: #fff;
+  .input > input {
+    background: #ebedf2;
+    border: 1px solid #ebedf2 !important;
+    border-radius: 8px;
+  }
+  .input > input:focus {
+    background: #ebedf2;
+    border: 1px solid #ebedf2 !important;
+  }
+  .input > i {
+    color: rgb(82, 28, 203);
+    opacity: 1 !important;
+    font-size: 20px;
+  }
 
   @media (max-width: 768px) {
     display: flex;
@@ -37,8 +52,19 @@ const SendMessage = ({
       <Popup
         content="Add static files to your feed"
         trigger={
-          <Button icon style={{ backgroundColor: "white" }}>
-            <Icon name="plus" />
+          <Button
+            icon
+            style={{ backgroundColor: "#ebedf2", borderRadius: "8px" }}
+          >
+            <Icon
+              name="plus"
+              style={{
+                fontSize: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            />
           </Button>
         }
         inverted
@@ -46,7 +72,7 @@ const SendMessage = ({
     </FileUpload>
     <Input
       name="message"
-      icon="send"
+      icon="facebook messenger"
       value={values.message}
       onChange={handleChange}
       onBlur={handleBlur}
@@ -55,12 +81,6 @@ const SendMessage = ({
         if (e.keyCode === ENTER_KEY && !isSubmitting) {
           handleSubmit(e);
         }
-      }}
-      style={{
-        borderRadius: "7px",
-        outline: "none",
-        border: "1px solid #f0f3f5 !important",
-        boxShadow: "none"
       }}
     />
   </Wrapper>

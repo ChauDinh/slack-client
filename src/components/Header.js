@@ -4,6 +4,7 @@ import { Header, Icon } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   height: 50px;
+  box-shadow: -2px 4px 2px -3px lightgray;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,7 +38,12 @@ export default ({ channelName }) => (
   <Wrapper>
     <Header
       className="channel-name__header"
-      style={{ padding: "0", margin: "0", color: "#93a5ad" }}
+      style={{
+        padding: "0",
+        margin: "0",
+        color: "#333",
+        textTransform: "capitalize"
+      }}
     >
       # {channelName}
     </Header>

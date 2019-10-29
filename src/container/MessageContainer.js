@@ -34,7 +34,7 @@ const ImageMessage = ({ url }) => {
       }}
       width="350px"
       src={url}
-      alt="image"
+      alt="sdfghjk5678"
     />
   );
 };
@@ -58,27 +58,10 @@ const VideoMessage = ({ url, filetype }) => {
   );
 };
 const NormalMessage = ({ text }) => {
-  return (
-    <Comment.Text
-      style={{
-        display: "inline-block",
-        background: "#521CCB",
-        color: "#fbf7ff",
-        paddingTop: ".75rem",
-        paddingBottom: ".75rem",
-        paddingLeft: "1rem",
-        paddingRight: "2rem",
-        borderRadius: "8px",
-        fontWeight: "300",
-        textAlign: "left"
-      }}
-    >
-      {text}
-    </Comment.Text>
-  );
+  return <Comment.Text>{text}</Comment.Text>;
 };
 
-const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
+const DisplayMessage = ({ message: { url, text, filetype } }) => {
   if (url) {
     if (filetype.startsWith("image/")) {
       return <ImageMessage url={url} />;
@@ -91,38 +74,6 @@ const MessageOfAuthor = ({ message: { url, text, filetype } }) => {
     }
   }
   return <NormalMessage text={text} />;
-};
-
-const MessageOfOthers = ({ message: { url, text, filetype } }) => {
-  if (url) {
-    if (filetype.startsWith("image/")) {
-      return <ImageMessage url={url} />;
-    } else if (filetype === "text/plain") {
-      return <TextMessage url={url} />;
-    } else if (filetype.startsWith("audio/")) {
-      return <AudioMessage url={url} filetype={filetype} />;
-    } else if (filetype.startsWith("video/")) {
-      return <VideoMessage url={url} filetype={filetype} />;
-    }
-  }
-  return (
-    <Comment.Text
-      style={{
-        display: "inline-block",
-        background: "#f4f7fa",
-        color: "#93a5ad",
-        paddingTop: ".75rem",
-        paddingBottom: ".75rem",
-        paddingLeft: "1rem",
-        paddingRight: "2rem",
-        borderRadius: "8px",
-        fontWeight: "300",
-        textAlign: "left"
-      }}
-    >
-      {text}
-    </Comment.Text>
-  );
 };
 
 class MessageContainer extends React.Component {
@@ -213,6 +164,14 @@ class MessageContainer extends React.Component {
     }
   };
 
+  getRandomHex() {
+    let length = 3;
+    let chars = "0123456789ABCDEF";
+    let hex = "";
+    while (length--) hex += chars[(Math.random() * 16) | 0];
+    return hex;
+  }
+
   render() {
     const {
       data: { loading, messages, fetchMore },
@@ -222,15 +181,6 @@ class MessageContainer extends React.Component {
 
     return loading ? null : (
       <Message
-        // style={{
-        //   gridColumn: 3,
-        //   gridRow: 2,
-        //   paddingLeft: "20px",
-        //   paddingRight: "20px",
-        //   display: "flex",
-        //   flexDirection: "column-reverse",
-        //   overflowY: "auto"
-        // }}
         onScroll={this.handleScroll}
         ref={scroller => {
           this.scroller = scroller;
@@ -249,23 +199,20 @@ class MessageContainer extends React.Component {
               .slice()
               .reverse()
               .map(m => (
-                <Comment
-                  key={`${m.id}-message`}
-                  style={
-                    m.user.username === username
-                      ? {
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          alignItems: "flex-start"
-                        }
-                      : {
-                          display: "flex",
-                          justifyContent: "flex-start",
-                          alignItems: "flex-start"
-                        }
-                  }
-                >
-                  <Comment.Content style={{ marginLeft: ".5rem" }}>
+                <Comment key={`${m.id}-message`}>
+                  <Comment.Content
+                    style={{
+                      borderBottom: "1px solid lightgray",
+                      paddingBottom: "1.75rem",
+                      marginTop: "1rem"
+                    }}
+                  >
+                    <Comment.Avatar
+                      src={`https://api.adorable.io/avatars/40/${m.user.username}@adorable.png`}
+                      style={{
+                        marginRight: "1rem"
+                      }}
+                    />
                     <Comment.Author as="a">
                       <span
                         style={
@@ -273,20 +220,19 @@ class MessageContainer extends React.Component {
                             ? { fontWeight: "bolder", fontFamily: "Arial" }
                             : {
                                 fontWeight: "700",
-                                fontFamily: "Open Sans",
-                                color: "#c5c5c5"
+                                // fontFamily: "Open Sans",
+                                color: "#333"
                               }
                         }
                       >
-                        {m.user.username === username ? "You" : m.user.username}
+                        {m.user.username}
                       </span>
                     </Comment.Author>
+                    <Comment.Metadata>
+                      <div>Today at 5:42PM</div>
+                    </Comment.Metadata>
                     <br />
-                    {m.user.username === username ? (
-                      <MessageOfAuthor message={m} />
-                    ) : (
-                      <MessageOfOthers message={m} />
-                    )}
+                    <DisplayMessage message={m} />
                   </Comment.Content>
                 </Comment>
               ))}

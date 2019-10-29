@@ -6,7 +6,7 @@ import { Icon } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #3e149c;
+  background-color: #e3e5e8;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;
@@ -36,19 +36,21 @@ const List = styled.ul`
 const ListItem = styled.li`
   height: 50px;
   width: 50px;
-  background-color: #8aabbf;
-  color: #fff;
+  background-color: #fff;
+  color: #333;
   margin: auto;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  border-radius: 11px;
+  font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
+  font-size: 25px;
+  border-radius: 50%;
+  transition: all 0.3s ease-out;
   &:hover {
-    border-style: solid;
-    border-width: thick;
-    border-color: #809eb0;
+    border-radius: 10px;
+    background: #3e149c;
+    color: #fff;
     cursor: pointer;
   }
 
@@ -74,7 +76,7 @@ const ListItem = styled.li`
 `;
 
 const Back = styled.div`
-  color: #93a5ad;
+  color: #fff;
   display: block;
   margin-bottom: 50%;
   transform: translate(0, -50%);
@@ -98,13 +100,13 @@ export default ({ teams }) => (
     <List>
       {teams.map(team)}
       <Link key="add-team" to={`/create-team`}>
-        <ListItem>+</ListItem>
+        <ListItem style={{ background: "#3e149c", color: "#fff" }}>+</ListItem>
       </Link>
     </List>
 
     <Link key="home" to={`/`} style={{ marginTop: "10px" }}>
       <Back>
-        <Icon style={{ color: "#af69ff" }} name="home" />
+        <Icon style={{ color: "#3e149c" }} name="home" />
       </Back>
     </Link>
   </Wrapper>

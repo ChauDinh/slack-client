@@ -8,6 +8,8 @@ export default styled.div`
   display: flex;
   flex-direction: column-reverse;
   overflow-y: auto;
+  font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
+  font-size: 15px;
 
   /* width */
   ::-webkit-scrollbar {
@@ -17,13 +19,13 @@ export default styled.div`
   /* Track */
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #f6f6f6;
-    border-radius: 10px;
+    border-radius: 0px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #3e149c;
-    border-radius: 10px;
+    background: #d1d1d1;
+    border-radius: 0px;
   }
 
   @media (max-width: 768px) {

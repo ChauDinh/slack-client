@@ -11,7 +11,7 @@ const FileUpload = ({
   style = {}
 }) => (
   <Dropzone
-    style={style}
+    style={{}}
     className="ignore"
     onDrop={async ([file]) => {
       const response = await mutate({

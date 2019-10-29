@@ -8,15 +8,13 @@ import {
   Header,
   Form,
   FormField,
-  Message,
-  Image
+  Message
 } from "semantic-ui-react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
 import { wsLink } from "../apollo";
-import LoginImage from "../images/login.png";
 
 const Wrapper = styled.div`
   padding: auto, 0;
