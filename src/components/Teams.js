@@ -62,10 +62,10 @@ const ListItem = styled.li`
     text-align: center;
     padding-top: 16px;
     margin-left: 20px;
-    background: rgb(175, 105, 255);
+    background: #fff;
     font-family: "Arial";
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 50%;
     &:hover {
       border-style: none;
       border-width: none;

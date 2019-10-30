@@ -13,10 +13,6 @@ const Wrapper = styled.div`
 
   @media (max-width: 768px) {
     padding: 20px 20px;
-    .channel-name__header {
-      font-size: 1rem;
-      color: rgb(175, 105, 255) !important;
-    }
     .user__semantic-icon {
       display: none;
     }
@@ -27,7 +23,8 @@ const Wrapper = styled.div`
       display: none;
     }
     .channel-name__header {
-      border: 2px solid rgb(175, 105, 255);
+      background: #fff;
+      color: #333;
       padding: 0.5rem 1rem !important;
       border-radius: 5px;
     }

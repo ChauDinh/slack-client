@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Comment } from "semantic-ui-react";
+import styled from "styled-components";
 
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
@@ -20,6 +21,11 @@ const newChannelMessageSubscription = gql`
       created_at
     }
   }
+`;
+
+const StyledImage = styled.img`
+  border-radius: 50%;
+  margin-right: 1rem;
 `;
 
 const TextMessage = ({ url }) => {
@@ -58,7 +64,15 @@ const VideoMessage = ({ url, filetype }) => {
   );
 };
 const NormalMessage = ({ text }) => {
-  return <Comment.Text>{text}</Comment.Text>;
+  return (
+    <Comment.Text
+      style={{
+        fontWeight: "300"
+      }}
+    >
+      {text}
+    </Comment.Text>
+  );
 };
 
 const DisplayMessage = ({ message: { url, text, filetype } }) => {
@@ -204,35 +218,43 @@ class MessageContainer extends React.Component {
                     style={{
                       borderBottom: "1px solid lightgray",
                       paddingBottom: "1.75rem",
-                      marginTop: "1rem"
+                      marginTop: "1rem",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "flex-start"
                     }}
                   >
-                    <Comment.Avatar
+                    {/* <Comment.Avatar
                       src={`https://api.adorable.io/avatars/40/${m.user.username}@adorable.png`}
                       style={{
-                        marginRight: "1rem"
+                        marginRight: "1rem",
+                        styledImage
                       }}
+                    /> */}
+                    <StyledImage
+                      src={`https://api.adorable.io/avatars/40/${m.user.username.toUpperCase()}dYHDDWmw99`}
                     />
-                    <Comment.Author as="a">
-                      <span
-                        style={
-                          m.user.username === username
-                            ? { fontWeight: "bolder", fontFamily: "Arial" }
-                            : {
-                                fontWeight: "700",
-                                // fontFamily: "Open Sans",
-                                color: "#333"
-                              }
-                        }
-                      >
-                        {m.user.username}
-                      </span>
-                    </Comment.Author>
-                    <Comment.Metadata>
-                      <div>Today at 5:42PM</div>
-                    </Comment.Metadata>
-                    <br />
-                    <DisplayMessage message={m} />
+                    <div>
+                      <Comment.Author as="a">
+                        <span
+                          style={
+                            m.user.username === username
+                              ? { fontWeight: "600" }
+                              : {
+                                  fontWeight: "600",
+                                  color: "#333"
+                                }
+                          }
+                        >
+                          {m.user.username}
+                        </span>
+                      </Comment.Author>
+                      <Comment.Metadata>
+                        <div>Today at 5:42PM</div>
+                      </Comment.Metadata>
+                      <br />
+                      <DisplayMessage message={m} />
+                    </div>
                   </Comment.Content>
                 </Comment>
               ))}

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   grid-row: 1 / 4;
   background-color: #f4f7fa;
   border-right: 1px solid lightgray;
-  padding-top: 10px;
+  // padding-top: 10px;
   font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -132,42 +132,45 @@ export default ({
   isOwner
 }) => (
   <Wrapper>
-    <PushLeft>
-      <Header
+    <div
+      style={{
+        display: "flex",
+        // flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        fontSize: "15px",
+        fontWeight: "700",
+        background: "#fff",
+        height: "50px",
+        boxShadow: "0px 4px 2px -3px lightgray"
+      }}
+    >
+      <img
+        src={`https://api.adorable.io/avatars/40/${userName.toUpperCase()}dYHDDWmw99`}
         style={{
-          color: "#000",
-          textTransform: "capitalize",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center"
+          borderRadius: "50%",
+          marginLeft: "10px",
+          marginRight: "10px"
         }}
-      >
-        {teamName}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "15px",
-            fontWeight: "700"
-          }}
-        >
-          <img
-            src={`https://api.adorable.io/avatars/60/${userName}@adorable.png`}
-            style={{
-              borderRadius: "50%",
-              marginTop: "20px"
-            }}
-          />
-          {userName}
-        </div>
-      </Header>
-      <Dark>
-        <Image />
-      </Dark>{" "}
-    </PushLeft>
+      />
+      {userName}
+    </div>
+    <Header
+      style={{
+        color: "#000",
+        textTransform: "capitalize",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "center",
+        marginLeft: "10px"
+      }}
+    >
+      @{teamName}
+    </Header>
+    <Dark>
+      <Image />
+    </Dark>{" "}
     <div>
       <List>
         <ListHeader
