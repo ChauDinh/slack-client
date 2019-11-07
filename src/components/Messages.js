@@ -9,23 +9,27 @@ export default styled.div`
   flex-direction: column-reverse;
   overflow-y: auto;
   font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 15px !important;
 
   /* width */
   ::-webkit-scrollbar {
-    width: 11px;
+    width: 14px;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #f6f6f6;
-    border-radius: 0px;
+    background-color: #f3f3f3;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #d1d1d1;
-    border-radius: 0px;
+    background-color: #d3e1ef;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
   }
 
   @media (max-width: 768px) {

@@ -20,20 +20,22 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  border-left: 20px solid #521ccb;
-  border-right: 20px solid #521ccb;
-  border-top: 25px solid #521ccb;
-  border-bottom: 25px solid #521ccb;
+  border-left: 200px solid #00b5ad;
+  border-right: 200px solid #00b5ad;
+  border-top: 80px solid #00b5ad;
+  border-bottom: 80px solid #00b5ad;
   height: 100vh;
+  background: #00b5ad;
 }
 
 .header-home {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f4f7fa;
+  background: #bfffe8;
   padding: 2rem 5.2567rem;
   width: 100%;
+  border-radius: 20px 20px 0 0;
 }
 
 .logo {
@@ -61,7 +63,7 @@ body {
 }
 
 .main {
-  background: #f4f7fa;
+  background: #bfffe8;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -74,14 +76,14 @@ body {
   font-weight: 500;
   font-family: "Open Sans", sans-serif;
   text-transform: capitalize;
-  color: #521ccb;
+  color: #000;
 }
 
 .main .sub-title {
   font-weight: lighter;
   font-size: 1.5rem;
   font-family: "Open Sans", sans-serif;
-  color: #a8a8a8;
+  color: #00b5ad;
 }
 
 .footer {
@@ -90,7 +92,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 25px 0;
-  color: #b5b5b5;
+  color: #000;
+  background: #bfffe8;
+  border-radius: 0 0 20px 20px;
 }
 
 .footer .slogan {

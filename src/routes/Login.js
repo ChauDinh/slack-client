@@ -53,11 +53,17 @@ class Login extends Component {
       password: "",
       errors: {}
     });
+
+    this.goBack = this.goBack.bind(this);
   }
 
   handleChange = e => {
     const { name, value } = e.target;
     this[name] = value;
+  };
+
+  goBack = () => {
+    this.props.history.goBack();
   };
 
   handleSubmit = async () => {
@@ -67,10 +73,11 @@ class Login extends Component {
     });
     console.log(response);
 
-    const { ok, token, refreshToken, errors } = response.data.login;
+    const { ok, token, refreshToken, isOnline, errors } = response.data.login;
     if (ok) {
       localStorage.setItem("token", token);
       localStorage.setItem("refreshToken", refreshToken);
+      sessionStorage.setItem("isOnline", isOnline);
       wsLink.subscriptionClient.tryReconnect();
       this.props.history.push("/view-team");
     } else {
@@ -119,7 +126,7 @@ class Login extends Component {
               style={{
                 fontWeight: "100",
                 fontSize: "3.5rem",
-                color: "#6124a6",
+                color: "rgb(0, 181, 173)",
                 fontFamily: "Open Sans"
               }}
             >
@@ -143,7 +150,7 @@ class Login extends Component {
                   value={email}
                   placeholder="please enter your email..."
                   transparent
-                  size="big"
+                  size="small"
                   style={{
                     borderBottom: "1px solid #ddd"
                   }}
@@ -160,7 +167,7 @@ class Login extends Component {
                   placeholder="please enter your password..."
                   type="password"
                   transparent
-                  size="big"
+                  size="small"
                   style={{
                     borderBottom: "1px solid #ddd"
                   }}
@@ -172,7 +179,7 @@ class Login extends Component {
                   borderRadius: "50px",
                   fontSize: "1.2rem",
                   fontWeight: "200",
-                  color: "#6124a6",
+                  color: "rgb(0, 181, 173)",
                   padding: "0.785714em 1.5em 0 0",
                   display: "block"
                 }}
@@ -183,14 +190,27 @@ class Login extends Component {
                 primary
                 onClick={this.handleSubmit}
                 style={{
-                  background: "#6124a6",
+                  background: "rgb(0, 181, 173)",
+                  borderRadius: "50px",
+                  fontSize: "1.2rem",
+                  fontWeight: "200",
+                  marginTop: "2rem",
+                  marginRight: "20px"
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                secondary
+                style={{
                   borderRadius: "50px",
                   fontSize: "1.2rem",
                   fontWeight: "200",
                   marginTop: "2rem"
                 }}
+                onClick={this.goBack}
               >
-                Login
+                Go Back
               </Button>
             </Form>
           </div>

@@ -6,7 +6,7 @@ import { Icon } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #e3e5e8;
+  background-color: #e0e4e8;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;
@@ -49,7 +49,7 @@ const ListItem = styled.li`
   transition: all 0.3s ease-out;
   &:hover {
     border-radius: 10px;
-    background: #3e149c;
+    background: #00b5ad;
     color: #fff;
     cursor: pointer;
   }
@@ -100,13 +100,13 @@ export default ({ teams }) => (
     <List>
       {teams.map(team)}
       <Link key="add-team" to={`/create-team`}>
-        <ListItem style={{ background: "#3e149c", color: "#fff" }}>+</ListItem>
+        <ListItem style={{ background: "#00b5ad", color: "#fff" }}>+</ListItem>
       </Link>
     </List>
 
     <Link key="home" to={`/`} style={{ marginTop: "10px" }}>
       <Back>
-        <Icon style={{ color: "#3e149c" }} name="home" />
+        <Icon style={{ color: "#00b5ad" }} name="home" />
       </Back>
     </Link>
   </Wrapper>

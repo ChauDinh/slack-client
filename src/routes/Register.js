@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem 40px;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -104,7 +104,16 @@ export class Register extends Component {
 
     return (
       <Wrapper>
-        <Image src={RegisterImage} width="50%" alt="register" />
+        <Image
+          src={RegisterImage}
+          width="50%"
+          alt="register"
+          style={{
+            borderRadius: "20px",
+            boxShadow: "3px 2px 5px 3px rgba(0, 181, 173, 0.1)",
+            background: "#00b5ad"
+          }}
+        />
         <Container
           text
           style={{
@@ -122,7 +131,7 @@ export class Register extends Component {
             style={{
               fontWeight: "100",
               fontSize: "3.5rem",
-              color: "#6124a6",
+              color: "#00b5ad",
               fontFamily: "Open Sans"
             }}
           >
@@ -150,7 +159,7 @@ export class Register extends Component {
                 value={username}
                 placeholder="please enter your username..."
                 transparent
-                size="big"
+                size="small"
                 style={{
                   borderBottom: "1px solid #ddd"
                 }}
@@ -166,7 +175,7 @@ export class Register extends Component {
                 value={email}
                 placeholder="please enter your email..."
                 transparent
-                size="big"
+                size="small"
                 style={{
                   borderBottom: "1px solid #ddd"
                 }}
@@ -183,7 +192,7 @@ export class Register extends Component {
                 placeholder="password must be at least 6 characters long..."
                 type="password"
                 transparent
-                size="big"
+                size="small"
                 style={{
                   borderBottom: "1px solid #ddd"
                 }}
@@ -193,7 +202,7 @@ export class Register extends Component {
               primary
               onClick={this.handleSubmit}
               style={{
-                background: "#6124a6",
+                background: "#00b5ad",
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
@@ -208,7 +217,7 @@ export class Register extends Component {
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
-                color: "#6124a6",
+                color: "#00b5ad",
                 paddingLeft: "1rem"
               }}
             >

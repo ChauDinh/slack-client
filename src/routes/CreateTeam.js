@@ -32,11 +32,17 @@ class CreateTeam extends Component {
       name: "",
       errors: {}
     });
+
+    this.goBack = this.goBack.bind(this);
   }
 
   handleChange = e => {
     const { name, value } = e.target;
     this[name] = value;
+  };
+
+  goBack = () => {
+    this.props.history.goBack();
   };
 
   handleSubmit = async () => {
@@ -105,7 +111,7 @@ class CreateTeam extends Component {
               textTransform: "capitalize",
               fontWeight: "100",
               fontSize: "3.5rem",
-              color: "#6124a6",
+              color: "#00b5ad",
               fontFamily: "Open Sans"
             }}
           >
@@ -128,21 +134,41 @@ class CreateTeam extends Component {
                 fluid
               />
             </FormField>
-            <Button
-              primary
+            <div
               style={{
-                marginLeft: "50%",
-                transform: "translate(-50%, 0)",
-                background: "#6124a6",
-                borderRadius: "50px",
-                fontSize: "1.2rem",
-                fontWeight: "200",
-                marginTop: "2rem"
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
               }}
-              onClick={this.handleSubmit}
             >
-              Create Team
-            </Button>
+              <Button
+                primary
+                style={{
+                  background: "#00b5ad",
+                  borderRadius: "50px",
+                  fontSize: "1.2rem",
+                  fontWeight: "200",
+                  marginTop: "2rem",
+                  marginRight: "20px"
+                }}
+                onClick={this.handleSubmit}
+              >
+                Create Team
+              </Button>
+
+              <Button
+                secondary
+                style={{
+                  borderRadius: "50px",
+                  fontSize: "1.2rem",
+                  fontWeight: "200",
+                  marginTop: "2rem"
+                }}
+                onClick={this.goBack}
+              >
+                Go Back
+              </Button>
+            </div>
           </Form>
         </Container>
       </Wrapper>

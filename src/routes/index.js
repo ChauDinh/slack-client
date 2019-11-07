@@ -7,6 +7,7 @@ import Register from "./Register";
 import Login from "./Login";
 import CreateTeam from "./CreateTeam";
 import ViewTeam from "./ViewTeam";
+import FAQ from "./FAQ";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
@@ -54,6 +55,7 @@ export default () => (
         exact
         component={ViewTeam}
       />
+      <Route path="/faq" exact component={FAQ} />
     </Switch>
   </BrowserRouter>
 );

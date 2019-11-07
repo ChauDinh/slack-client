@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon, Image } from "semantic-ui-react";
+import { Icon, Image, Dropdown } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
+  width: inherit;
   grid-column: 2;
   grid-row: 1 / 4;
   background-color: #f4f7fa;
-  border-right: 1px solid lightgray;
-  // padding-top: 10px;
   font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -18,9 +17,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Header = styled.h1`
+const Header = styled.h3`
   color: #f5f5f5;
-  font-size: 24px;
+  margin-top: 16px;
 `;
 
 const List = styled.ul`
@@ -30,8 +29,8 @@ const List = styled.ul`
   font-size: 15px;
 `;
 
-const paddingLeft = "padding-left: 10px";
-const paddingRight = "padding-right: 10px";
+const paddingLeft = "padding-left: 20px";
+const paddingRight = "padding-right: 20px";
 
 const ListItem = styled.li`
   display: flex;
@@ -43,8 +42,8 @@ const ListItem = styled.li`
   font-weight: 500;
   font-size: 15px;
   &:hover {
-    background: #3e149c;
-    color: white;
+    background: #e0e4e8;
+    border-radius: 0;
   }
 `;
 
@@ -54,8 +53,8 @@ const ListHeader = styled.li`
   font-size: 18px;
   font-weight: 700;
   color: #79868c;
-  ${paddingLeft}
-  ${paddingRight}
+  ${paddingLeft};
+  ${paddingRight};
 `;
 
 const PushLeft = styled.div`
@@ -74,38 +73,14 @@ const Green = styled.span`
   color: #fff;
 `;
 
-const Circle = ({ isOnline = false }) =>
-  isOnline ? (
-    <Green>
-      <span
-        style={{
-          padding: ".2rem .5rem",
-          background: "#5dd985",
-          borderRadius: "3px",
-          fontSize: "13px"
-        }}
-      >
-        online
-      </span>
-    </Green>
-  ) : (
-    <Gray>
-      <span
-        style={{
-          padding: ".2rem .5rem",
-          background: "lightgray",
-          borderRadius: "3px",
-          fontSize: "13px"
-        }}
-      >
-        offline
-      </span>
-    </Gray>
-  );
-
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
-    <ListItem>{`# ${name}`}</ListItem>
+    <ListItem>
+      <div>
+        <Icon name="slack hash" />
+        {`${name}`}
+      </div>
+    </ListItem>
   </Link>
 );
 const dmChannel = ({ id, name }, teamId) => (
@@ -114,9 +89,7 @@ const dmChannel = ({ id, name }, teamId) => (
     style={{ color: "black" }}
     to={`/view-team/${teamId}/${id}`}
   >
-    <ListItem>
-      {name} <Circle />
-    </ListItem>
+    <ListItem>{name}</ListItem>
   </Link>
 );
 
@@ -136,24 +109,30 @@ export default ({
       style={{
         display: "flex",
         // flexDirection: "column",
-        justifyContent: "flex-start",
+        justifyContent: "space-between",
         alignItems: "center",
         fontSize: "15px",
         fontWeight: "700",
-        background: "#fff",
+        background: "#f4f7fa",
         height: "50px",
-        boxShadow: "0px 4px 2px -3px lightgray"
+        boxShadow: "0px 4px 3px -3px #e0e4e8",
+        borderBottom: "2px solid #e0e4e8"
       }}
     >
-      <img
-        src={`https://api.adorable.io/avatars/40/${userName.toUpperCase()}dYHDDWmw99`}
-        style={{
-          borderRadius: "50%",
-          marginLeft: "10px",
-          marginRight: "10px"
-        }}
-      />
-      {userName}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src={`https://api.adorable.io/avatars/40/${userName.toUpperCase()}dYHDDWmw99`}
+          style={{
+            borderRadius: "50%",
+            marginLeft: "20px",
+            marginRight: "10px",
+            width: "30px",
+            height: "30px"
+          }}
+        />
+        {userName}
+      </div>
+      <Dropdown style={{ marginRight: "20px" }} />
     </div>
     <Header
       style={{
@@ -163,7 +142,7 @@ export default ({
         flexDirection: "column",
         alignItems: "flex-start",
         justifyContent: "center",
-        marginLeft: "10px"
+        marginLeft: "20px"
       }}
     >
       @{teamName}

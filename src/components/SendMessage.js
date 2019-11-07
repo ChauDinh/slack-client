@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     border: 1px solid #ebedf2 !important;
   }
   .input > i {
-    color: rgb(82, 28, 203);
+    color: #00b5ad;
     opacity: 1 !important;
     font-size: 20px;
   }
@@ -57,9 +57,10 @@ const SendMessage = ({
             style={{ backgroundColor: "#ebedf2", borderRadius: "8px" }}
           >
             <Icon
-              name="plus"
+              name="add circle"
               style={{
-                fontSize: "20px",
+                fontSize: "16px",
+                fontWeight: "lighter",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center"

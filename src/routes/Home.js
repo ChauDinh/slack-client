@@ -20,8 +20,8 @@ function Home({ data: { allUsers = [] } }) {
     <React.Fragment>
       <div className="wrapper">
         <header className="header-home">
-          <h1 className="logo" style={{ color: "#808080" }}>
-            <span style={{ color: "#521CCB" }}>Slack</span>App
+          <h1 className="logo" style={{ color: "#000" }}>
+            <span style={{ color: "#00b5ad" }}>Graph.</span>Chat
           </h1>
           <div className="menu">
             <ul>
@@ -70,8 +70,9 @@ function Home({ data: { allUsers = [] } }) {
                 padding: "1rem 2rem",
                 borderRadius: "5px",
                 cursor: "pointer",
-                background: "#521CCB",
+                background: "#00b5ad",
                 color: "#f4f7fa",
+                border: "none",
                 ":focus": {
                   outline: "none"
                 }
@@ -82,16 +83,16 @@ function Home({ data: { allUsers = [] } }) {
           </a>
           <img
             src={Image}
-            width="560px"
+            width="400px"
             alt="home"
             style={{ marginTop: "1rem" }}
           />
         </main>
         <footer className="footer">
           <h5>
-            WHY <span style={{ color: "#6f83ab" }}>Slack</span>App
+            Why <span style={{ color: "#00b5ad" }}>Graph.</span>Chat
           </h5>
-          <p className="slogan">It's so simple. It's like magic!</p>
+          <p className="slogan">It's so simple. It's a single endpoint!</p>
         </footer>
       </div>
     </React.Fragment>

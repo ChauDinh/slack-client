@@ -7,6 +7,7 @@ import findIndex from "lodash/findIndex";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import SendMessage from "../components/SendMessage";
+import OnlineUserWrapper from "../components/OnlineUsers";
 import Sidebar from "../container/Sidebar";
 import MessageContainer from "../container/MessageContainer";
 import gql from "graphql-tag";
@@ -71,6 +72,7 @@ const ViewTeam = ({
           }}
         />
       )}
+      <OnlineUserWrapper />
     </Layout>
   );
 };
