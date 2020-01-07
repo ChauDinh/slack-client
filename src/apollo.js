@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { InMemoryCache } from "apollo-boost";
 import { ApolloClient } from "apollo-client";
 import { setContext } from "apollo-link-context";
@@ -47,7 +48,6 @@ const httpLinkWithMiddlewares = afterwareLink.concat(
 
 // Create a WebSocket link:
 export const wsLink = new WebSocketLink({
-  // eslint-disable-next-line no-undef
   uri: `ws://${process.env.REACT_APP_SERVER_URL}/subscriptions`,
   options: {
     reconnect: true,
@@ -60,7 +60,7 @@ export const wsLink = new WebSocketLink({
         ) || localStorage.getItem("token"),
       refreshToken:
         console.log(
-          "connectionParams rtoken: ",
+          "connectionParams: ",
           localStorage.getItem("refreshToken")
         ) || localStorage.getItem("refreshToken")
     })

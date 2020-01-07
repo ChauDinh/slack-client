@@ -8,8 +8,9 @@ export default styled.div`
   display: flex;
   flex-direction: column-reverse;
   overflow-y: auto;
-  font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue;
   font-size: 15px !important;
+  background-color: #f4f7fa;
 
   /* width */
   ::-webkit-scrollbar {

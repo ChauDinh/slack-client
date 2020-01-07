@@ -22,7 +22,6 @@ const ViewTeam = ({
   if (loading || !me) {
     return null;
   }
-
   const { id: currentUserId, username, teams } = me;
 
   if (!teams.length) {
@@ -46,7 +45,8 @@ const ViewTeam = ({
         className="side-bar_view-message"
         teams={teams.map(t => ({
           id: t.id,
-          letter: t.name.charAt(0).toUpperCase()
+          letter: t.name.charAt(0).toUpperCase(),
+          name: t.name
         }))}
         team={team}
         username={username}

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   padding-bottom: 25px;
   display: grid;
   grid-template-columns: 50px auto;
-  background: #fff;
+  background: #f4f7fa;
   .input > input {
     background: #ebedf2;
     border: 1px solid #ebedf2 !important;
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     border: 1px solid #ebedf2 !important;
   }
   .input > i {
-    color: #00b5ad;
+    color: #0f8deb;
     opacity: 1 !important;
     font-size: 20px;
   }
@@ -54,7 +54,11 @@ const SendMessage = ({
         trigger={
           <Button
             icon
-            style={{ backgroundColor: "#ebedf2", borderRadius: "8px" }}
+            style={{
+              backgroundColor: "#0f8deb",
+              borderRadius: "8px",
+              color: "#fff"
+            }}
           >
             <Icon
               name="add circle"

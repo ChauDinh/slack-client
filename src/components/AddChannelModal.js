@@ -79,7 +79,7 @@ const AddChannelModal = ({
             onClick={handleSubmit}
             primary
             fluid
-            style={{ background: "#3e149c" }}
+            style={{ background: "#0f8deb" }}
           >
             Create Channel
           </Button>

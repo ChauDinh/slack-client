@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon, Image, Dropdown } from "semantic-ui-react";
+import { Icon, Dropdown, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -8,19 +8,20 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 1 / 4;
   background-color: #f4f7fa;
-  font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
-const Header = styled.h3`
-  color: #f5f5f5;
-  margin-top: 16px;
-`;
+// const Header = styled.h3`
+//   color: #f5f5f5;
+//   margin-top: 16px;
+// `;
 
 const List = styled.ul`
   width: 100%;
@@ -35,14 +36,16 @@ const paddingRight = "padding-right: 20px";
 const ListItem = styled.li`
   display: flex;
   justify-content: space-between;
-  padding: 2px;
+  padding: 1.75px;
   ${paddingLeft};
   ${paddingRight};
   color: #333;
   font-weight: 500;
   font-size: 15px;
+  margin-bottom: 7px;
   &:hover {
-    background: #e0e4e8;
+    background: #bbcad9;
+    color: #fff;
     border-radius: 0;
   }
 `;
@@ -50,9 +53,10 @@ const ListItem = styled.li`
 const ListHeader = styled.li`
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: #79868c;
+  text-transform: uppercase;
   ${paddingLeft};
   ${paddingRight};
 `;
@@ -61,23 +65,15 @@ const PushLeft = styled.div`
   ${paddingLeft}
 `;
 
-const Dark = styled.span`
-  color: #000;
-`;
-
-const Gray = styled.span`
-  color: #333;
-`;
-
-const Green = styled.span`
-  color: #fff;
-`;
+// const Dark = styled.span`
+//   color: #000;
+// `;
 
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
     <ListItem>
       <div>
-        <Icon name="slack hash" />
+        <Icon name="globe" size="small" color="blue" />
         {`${name}`}
       </div>
     </ListItem>
@@ -111,61 +107,53 @@ export default ({
         // flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
-        fontSize: "15px",
-        fontWeight: "700",
+        fontSize: "20px",
+        fontWeight: "500",
         background: "#f4f7fa",
-        height: "50px",
-        boxShadow: "0px 4px 3px -3px #e0e4e8",
-        borderBottom: "2px solid #e0e4e8"
+        height: "50px"
+        // boxShadow: "0px 4px 3px -3px #e0e4e8",
+        // borderBottom: "2px solid #e0e4e8"
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img
-          src={`https://api.adorable.io/avatars/40/${userName.toUpperCase()}dYHDDWmw99`}
-          style={{
-            borderRadius: "50%",
-            marginLeft: "20px",
-            marginRight: "10px",
-            width: "30px",
-            height: "30px"
-          }}
-        />
-        {userName}
+        <div style={{ marginLeft: "20px" }}>{teamName}</div>
       </div>
       <Dropdown style={{ marginRight: "20px" }} />
     </div>
-    <Header
-      style={{
-        color: "#000",
-        textTransform: "capitalize",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        marginLeft: "20px"
-      }}
-    >
-      @{teamName}
-    </Header>
-    <Dark>
+    {/* <Dark>
       <Image />
-    </Dark>{" "}
+    </Dark>{" "} */}
     <div>
       <List>
         <ListHeader
           style={{
-            marginTop: "2rem",
-            marginBottom: "1rem"
+            marginTop: "1rem",
+            marginBottom: ".4rem"
           }}
         >
-          Channels{" "}
-          {isOwner && (
-            <Icon
-              style={{ cursor: "pointer" }}
-              onClick={onAddChannelClick}
-              name="add circle"
-            />
-          )}{" "}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%"
+            }}
+          >
+            Channels{" "}
+            {isOwner && (
+              <Button
+                onClick={onAddChannelClick}
+                style={{
+                  background: "#0f8deb",
+                  color: "#fff",
+                  padding: "5px 10px",
+                  fontSize: "13px",
+                  fontWeight: "700"
+                }}
+              >
+                create new
+              </Button>
+            )}
+          </div>
         </ListHeader>
         {channels ? channels.map(c => channel(c, teamId)) : null}
       </List>
@@ -178,12 +166,27 @@ export default ({
             marginBottom: "1rem"
           }}
         >
-          Direct Messages{" "}
-          <Icon
-            style={{ cursor: "pointer" }}
-            onClick={onDirectMessageClick}
-            name="add circle"
-          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%"
+            }}
+          >
+            Direct Messages{" "}
+            <Button
+              onClick={onDirectMessageClick}
+              style={{
+                background: "#0f8deb",
+                color: "#fff",
+                padding: "5px 10px",
+                fontSize: "13px",
+                fontWeight: "700"
+              }}
+            >
+              invite
+            </Button>
+          </div>
         </ListHeader>
         {dmChannels.map(dmc => dmChannel(dmc, teamId))}
       </List>

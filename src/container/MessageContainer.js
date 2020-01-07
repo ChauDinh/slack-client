@@ -25,7 +25,7 @@ const newChannelMessageSubscription = gql`
 
 const StyledImage = styled.img`
   border-radius: 50%;
-  margin-right: 20px;
+  margin-right: 16px;
 `;
 
 const TextMessage = ({ url }) => {
@@ -36,7 +36,7 @@ const ImageMessage = ({ url }) => {
     <img
       style={{
         borderRadius: "8px",
-        margin: ".25rem 0 .5rem",
+        marginTop: "20px",
         boxShadow: "1px 1px 6px 1px rgba(0, 0, 0, 0.1)"
       }}
       width="350px"
@@ -68,7 +68,8 @@ const NormalMessage = ({ text }) => {
   return (
     <Comment.Text
       style={{
-        fontWeight: "300"
+        fontWeight: "400",
+        fontSize: "15px"
       }}
     >
       {text}
@@ -189,11 +190,13 @@ class MessageContainer extends React.Component {
 
   render() {
     const {
-      data: { loading, messages, fetchMore },
-      channelId,
-      username
+      data: { loading, messages },
+      channelId
     } = this.props;
 
+    if (!messages) {
+      return <div>No message!</div>;
+    }
     return loading ? null : (
       <Message
         onScroll={this.handleScroll}
@@ -216,11 +219,16 @@ class MessageContainer extends React.Component {
               .map(m => (
                 <Comment
                   key={`${m.id}-message`}
-                  style={{ margin: "0", padding: "0" }}
+                  style={{
+                    marginBottom: "16px",
+                    padding: "5px 1rem",
+                    backgroundColor: "#fff",
+                    boxShadow: "none",
+                    borderRadius: "10px"
+                  }}
                 >
                   <Comment.Content
                     style={{
-                      borderBottom: "1.5px solid rgba(0, 0, 0, 0.1)",
                       paddingBottom: "20px",
                       marginTop: "20px",
                       display: "flex",
@@ -228,33 +236,17 @@ class MessageContainer extends React.Component {
                       justifyContent: "flex-start"
                     }}
                   >
-                    {/* <Comment.Avatar
-                      src={`https://api.adorable.io/avatars/40/${m.user.username}@adorable.png`}
-                      style={{
-                        marginRight: "1rem",
-                        styledImage
-                      }}
-                    /> */}
                     <StyledImage
-                      src={`https://api.adorable.io/avatars/30/${m.user.username.toUpperCase()}dYHDDWmw99`}
+                      src={`https://api.adorable.io/avatars/30/${m.user.username}@adorable.io`}
                     />
                     <div>
                       <Comment.Author as="a">
-                        <span
-                          style={
-                            m.user.username === username
-                              ? { fontWeight: "600" }
-                              : {
-                                  fontWeight: "600",
-                                  color: "#333"
-                                }
-                          }
-                        >
+                        <span style={{ fontWeight: "600", fontSize: "15px" }}>
                           {m.user.username}
                         </span>
                       </Comment.Author>
                       <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
+                        <div>{m.created_at}</div>
                       </Comment.Metadata>
                       <br />
                       <DisplayMessage message={m} />

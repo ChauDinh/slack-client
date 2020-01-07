@@ -8,8 +8,8 @@ const Wrapper = styled.div`
   grid-column-end: 5;
   grid-row: 1;
   height: 50px;
-  box-shadow: -3px 4px 3px -3px #e0e4e8;
-  border-bottom: 2px solid #e0e4e8;
+  // box-shadow: -3px 4px 3px -3px #e0e4e8;
+  // border-bottom: 2px solid #e0e4e8;
   display: flex;
   align-items: center;
   justify-content: space-between;

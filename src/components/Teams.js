@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Icon } from "semantic-ui-react";
+import { Icon, Popup } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #e0e4e8;
+  background-color: #0f8deb;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow-y: auto;
 
   @media (max-width: 768px) {
     display: flex;
@@ -22,10 +23,21 @@ const Wrapper = styled.div`
   }
 `;
 
+const popStyle = {
+  marginLeft: "4rem",
+  height: "36px",
+  display: "flex"
+  // justifyContent: "center",
+  // alignItems: "center"
+};
+
 const List = styled.ul`
   width: 100%;
   padding-left: 0;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media (max-width: 768px) {
     padding-top: 0;
@@ -34,17 +46,18 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  height: 50px;
-  width: 50px;
+  height: 36px;
+  width: 36px;
   background-color: #fff;
-  color: #333;
+  color: #0f8deb;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Helvetica, Segoe UI, Helvetica, Arial, sans-serif;
-  font-size: 25px;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
   border-radius: 50%;
   transition: all 0.3s ease-out;
   &:hover {
@@ -80,7 +93,7 @@ const Back = styled.div`
   display: block;
   margin-bottom: 50%;
   transform: translate(0, -50%);
-  font-size: 2.2rem;
+  font-size: 20px;
 
   @media (max-width: 768px) {
     margin-bottom: 0;
@@ -89,10 +102,36 @@ const Back = styled.div`
   }
 `;
 
-const team = ({ id, letter }) => (
-  <Link key={`team-${id}`} to={`/view-team/${id}`}>
-    <ListItem>{letter}</ListItem>
-  </Link>
+const team = ({ id, letter, name }) => (
+  <div
+    key={`team-${id}`}
+    style={{
+      width: "36px",
+      height: "36px",
+      marginBottom: "20px"
+    }}
+  >
+    <Link to={`/view-team/${id}`}>
+      <Popup
+        style={popStyle}
+        trigger={<ListItem>{letter}</ListItem>}
+        content={
+          <div
+            style={{
+              fontSize: "14px",
+              fontWeight: "500",
+              fontFamily: "Helvetica, sans-serif"
+            }}
+          >
+            {name}
+          </div>
+        }
+        basic
+        position="right center"
+        inverted
+      />
+    </Link>
+  </div>
 );
 
 export default ({ teams }) => (
@@ -104,9 +143,13 @@ export default ({ teams }) => (
       </Link>
     </List>
 
-    <Link key="home" to={`/`} style={{ marginTop: "10px" }}>
+    <Link
+      key="home"
+      to={`/`}
+      style={{ marginTop: "50px", marginBottom: "20px", display: "block" }}
+    >
       <Back>
-        <Icon style={{ color: "#00b5ad" }} name="home" />
+        <Icon style={{ color: "#fff" }} name="home" />
       </Back>
     </Link>
   </Wrapper>

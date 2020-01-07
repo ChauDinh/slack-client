@@ -8,6 +8,7 @@ import Login from "./Login";
 import CreateTeam from "./CreateTeam";
 import ViewTeam from "./ViewTeam";
 import FAQ from "./FAQ";
+import client from "../apollo";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
@@ -53,6 +54,7 @@ export default () => (
       <PrivateRoute
         path="/view-team/:teamId?/:channelId?"
         exact
+        client={client}
         component={ViewTeam}
       />
       <Route path="/faq" exact component={FAQ} />

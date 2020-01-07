@@ -6,14 +6,11 @@ import {
   Input,
   Button,
   Message,
-  FormField,
-  Image
+  FormField
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
-
-import RegisterImage from "../images/register.png";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -22,6 +19,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem 40px;
+  background: #f8f9fb;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -104,16 +102,6 @@ export class Register extends Component {
 
     return (
       <Wrapper>
-        <Image
-          src={RegisterImage}
-          width="50%"
-          alt="register"
-          style={{
-            borderRadius: "20px",
-            boxShadow: "3px 2px 5px 3px rgba(0, 181, 173, 0.1)",
-            background: "#00b5ad"
-          }}
-        />
         <Container
           text
           style={{
@@ -129,18 +117,15 @@ export class Register extends Component {
           <Header
             as="h2"
             style={{
-              fontWeight: "100",
+              fontWeight: "500",
               fontSize: "3.5rem",
-              color: "#00b5ad",
-              fontFamily: "Open Sans"
+              color: "#0878CB",
+              fontFamily: "Helvetica Neue",
+              marginBottom: "50px"
             }}
           >
-            Join with us today!
+            Register
           </Header>
-          <p style={{ fontSize: "1.4rem", color: "#a5a5a5" }}>
-            Join a community of over 1 milion people helping connect the
-            business and career we love.
-          </p>
           {errorList.length ? (
             <Message
               error
@@ -150,14 +135,20 @@ export class Register extends Component {
           ) : null}
           <Form style={{ width: "100%", marginBottom: "1rem" }}>
             <FormField error={!!usernameError}>
-              <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+              <label
+                style={{
+                  color: "#474e5d",
+                  fontFamily: "Helvetica Neue",
+                  fontSize: "15px",
+                  fontWeight: "700"
+                }}
+              >
                 Username
               </label>
               <Input
                 name="username"
                 onChange={this.handleChange}
                 value={username}
-                placeholder="please enter your username..."
                 transparent
                 size="small"
                 style={{
@@ -166,14 +157,20 @@ export class Register extends Component {
               />
             </FormField>
             <FormField error={!!emailError}>
-              <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+              <label
+                style={{
+                  color: "#474e5d",
+                  fontFamily: "Helvetica Neue",
+                  fontSize: "15px",
+                  fontWeight: "700"
+                }}
+              >
                 Email
               </label>
               <Input
                 name="email"
                 onChange={this.handleChange}
                 value={email}
-                placeholder="please enter your email..."
                 transparent
                 size="small"
                 style={{
@@ -182,14 +179,20 @@ export class Register extends Component {
               />
             </FormField>
             <FormField error={!!passwordError}>
-              <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+              <label
+                style={{
+                  color: "#474e5d",
+                  fontFamily: "Helvetica Neue",
+                  fontSize: "15px",
+                  fontWeight: "700"
+                }}
+              >
                 Password
               </label>
               <Input
                 name="password"
                 onChange={this.handleChange}
                 value={password}
-                placeholder="password must be at least 6 characters long..."
                 type="password"
                 transparent
                 size="small"
@@ -202,7 +205,7 @@ export class Register extends Component {
               primary
               onClick={this.handleSubmit}
               style={{
-                background: "#00b5ad",
+                background: "#0878CB",
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
@@ -217,7 +220,7 @@ export class Register extends Component {
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
-                color: "#00b5ad",
+                color: "#0878CB",
                 paddingLeft: "1rem"
               }}
             >

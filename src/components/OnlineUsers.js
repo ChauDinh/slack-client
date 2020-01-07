@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Image } from "semantic-ui-react";
-import { withApollo } from "react-apollo";
+import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+
 import OnlineUser from "./OnlineUser";
 
 const Wrapper = styled.div`
@@ -20,41 +20,37 @@ const Wrapper = styled.div`
   }
 `;
 
-class OnlineUserWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-    this.client = props.client;
-    this.state = {
-      onlineUsers: [
-        {
-          name: "Bob"
-        },
-        {
-          name: "Alice"
-        },
-        {
-          name: "Bill"
-        },
-        {
-          name: "Tommy"
-        }
-      ]
-    };
+const GET_ONLINE_USERS = gql`
+  {
+    onlineUsers {
+      username
+      last_seen
+    }
   }
+`;
 
-  render() {
-    const onlineUsersList = [];
-    this.state.onlineUsers.forEach((user, index) => {
-      onlineUsersList.push(<OnlineUser key={index} name={user.name} />);
-    });
-
-    return (
-      <Wrapper>
-        <h3 style={{ marginTop: "16px" }}>Online Users</h3>
-        {onlineUsersList}
-      </Wrapper>
-    );
+const OnlineUserWrapper = ({ data: { onlineUsers }, loading }) => {
+  try {
+    // const { onlineUsers } = data;
+    if (loading || !onlineUsers) {
+      return <div>loading...</div>;
+    } else {
+      return (
+        <Wrapper>
+          <h3>Online Users</h3>
+          {onlineUsers.map((user, index) => (
+            <OnlineUser
+              key={index}
+              name={user.username}
+              last_seen={user.last_seen}
+            />
+          ))}
+        </Wrapper>
+      );
+    }
+  } catch (error) {
+    console.error(error);
   }
-}
+};
 
-export default withApollo(OnlineUserWrapper);
+export default graphql(GET_ONLINE_USERS)(OnlineUserWrapper);

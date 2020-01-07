@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 20px;
+  background: #f8f9fb;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -73,11 +74,10 @@ class Login extends Component {
     });
     console.log(response);
 
-    const { ok, token, refreshToken, isOnline, errors } = response.data.login;
+    const { ok, token, refreshToken, errors } = response.data.login;
     if (ok) {
       localStorage.setItem("token", token);
       localStorage.setItem("refreshToken", refreshToken);
-      sessionStorage.setItem("isOnline", isOnline);
       wsLink.subscriptionClient.tryReconnect();
       this.props.history.push("/view-team");
     } else {
@@ -124,10 +124,11 @@ class Login extends Component {
             <Header
               as="h2"
               style={{
-                fontWeight: "100",
+                fontWeight: "500",
                 fontSize: "3.5rem",
-                color: "rgb(0, 181, 173)",
-                fontFamily: "Open Sans"
+                color: "#0878CB",
+                fontFamily: "Helvetica Neue",
+                marginBottom: "50px"
               }}
             >
               Login
@@ -141,14 +142,20 @@ class Login extends Component {
             ) : null}
             <Form style={{ width: "100%" }}>
               <FormField error={!!emailError}>
-                <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                <label
+                  style={{
+                    color: "#474e5d",
+                    fontFamily: "Helvetica Neue",
+                    fontSize: "15px",
+                    fontWeight: "700"
+                  }}
+                >
                   Email
                 </label>
                 <Input
                   name="email"
                   onChange={this.handleChange}
                   value={email}
-                  placeholder="please enter your email..."
                   transparent
                   size="small"
                   style={{
@@ -157,14 +164,20 @@ class Login extends Component {
                 />
               </FormField>
               <FormField error={!!passwordError}>
-                <label style={{ color: "#474e5d", fontFamily: "Open Sans" }}>
+                <label
+                  style={{
+                    color: "#474e5d",
+                    fontFamily: "Helvetica Neue",
+                    fontSize: "15px",
+                    fontWeight: "700"
+                  }}
+                >
                   Password
                 </label>
                 <Input
                   name="password"
                   onChange={this.handleChange}
                   value={password}
-                  placeholder="please enter your password..."
                   type="password"
                   transparent
                   size="small"
@@ -179,7 +192,7 @@ class Login extends Component {
                   borderRadius: "50px",
                   fontSize: "1.2rem",
                   fontWeight: "200",
-                  color: "rgb(0, 181, 173)",
+                  color: "#0878CB",
                   padding: "0.785714em 1.5em 0 0",
                   display: "block"
                 }}
@@ -190,7 +203,7 @@ class Login extends Component {
                 primary
                 onClick={this.handleSubmit}
                 style={{
-                  background: "rgb(0, 181, 173)",
+                  background: "#0878CB",
                   borderRadius: "50px",
                   fontSize: "1.2rem",
                   fontWeight: "200",

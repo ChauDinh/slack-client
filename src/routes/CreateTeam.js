@@ -7,15 +7,13 @@ import {
   FormField,
   Input,
   Button,
-  Message,
-  Image
+  Message
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
 
-import CreateTeamImage from "../images/create-team.jpg";
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -58,7 +56,7 @@ class CreateTeam extends Component {
       return;
     }
 
-    console.log(response);
+    // console.log(response);
 
     const {
       ok,
@@ -99,20 +97,15 @@ class CreateTeam extends Component {
             justifyContent: "flex-start"
           }}
         >
-          <Image
-            src={CreateTeamImage}
-            alt="create-team"
-            width="50%"
-            style={{ marginBottom: "2rem" }}
-          />
           <Header
             as="h2"
             style={{
               textTransform: "capitalize",
-              fontWeight: "100",
+              fontWeight: "500",
               fontSize: "3.5rem",
-              color: "#00b5ad",
-              fontFamily: "Open Sans"
+              color: "#0878CB",
+              fontFamily: "Helvetica Neue",
+              marginTop: "35px"
             }}
           >
             Create your team
@@ -130,7 +123,7 @@ class CreateTeam extends Component {
                 name="name"
                 onChange={this.handleChange}
                 value={name}
-                placeholder="Name"
+                placeholder="Team name"
                 fluid
               />
             </FormField>
@@ -144,7 +137,7 @@ class CreateTeam extends Component {
               <Button
                 primary
                 style={{
-                  background: "#00b5ad",
+                  background: "#0878CB",
                   borderRadius: "50px",
                   fontSize: "1.2rem",
                   fontWeight: "200",

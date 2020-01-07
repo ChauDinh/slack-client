@@ -50,7 +50,7 @@ const DirectMessageModal = ({
             disabled={isSubmitting}
             fluid
             onClick={handleSubmit}
-            style={{ background: "#3e149c" }}
+            style={{ background: "#0f8deb" }}
           >
             Start Messaging
           </Button>

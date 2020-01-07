@@ -50,7 +50,7 @@ const InvitePeopleModal = ({
             onClick={handleSubmit}
             primary
             fluid
-            style={{ background: "#521CCB" }}
+            style={{ background: "#0f8deb" }}
           >
             Add User
           </Button>
