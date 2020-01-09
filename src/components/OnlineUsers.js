@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 
-import OnlineUser from "./OnlineUser";
+import UserModal from "./UserModal";
 
 const Wrapper = styled.div`
   grid-column: 4;
@@ -39,7 +39,7 @@ const OnlineUserWrapper = ({ data: { onlineUsers }, loading }) => {
         <Wrapper>
           <h3>Online Users</h3>
           {onlineUsers.map((user, index) => (
-            <OnlineUser
+            <UserModal
               key={index}
               name={user.username}
               last_seen={user.last_seen}

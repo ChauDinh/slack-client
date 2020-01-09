@@ -34,7 +34,8 @@ const Me = ({ username }) => (
         fontFamily: "sans-serif",
         fontSize: "16px",
         fontWeight: "bolder",
-        paddingLeft: "7px"
+        paddingLeft: "7px",
+        color: "#0f8deb"
       }}
     >
       {username}
@@ -42,7 +43,7 @@ const Me = ({ username }) => (
         style={{
           fontSize: "13px",
           fontWeight: "lighter",
-          color: "#79868c"
+          color: "#6899bd"
         }}
       >
         member
