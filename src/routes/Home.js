@@ -36,7 +36,7 @@ function Home({ data: { allUsers = [] } }) {
             </div>
           </main>
           <footer className="footer">
-            <a className="footer__button" href="/view-team">
+            <a className="footer__button" href="/login">
               Start Free
             </a>
           </footer>

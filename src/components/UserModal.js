@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { Button, Header, Image, Modal, Icon } from "semantic-ui-react";
 
 import OnlineUser from "./OnlineUser";
 
@@ -23,8 +23,17 @@ const UserModal = ({ name, last_seen }) => (
       maxWidth: "450px"
     }}
   >
-    <Modal.Header>User info</Modal.Header>
-    <Modal.Content image style={{ display: "flex", flexDirection: "column" }}>
+    <Modal.Header style={{ backgroundColor: "#0f8deb", color: "#fff" }}>
+      User info
+    </Modal.Header>
+    <Modal.Content
+      image
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#f4f7fa"
+      }}
+    >
       <Image
         wrapped
         size="medium"
@@ -40,13 +49,29 @@ const UserModal = ({ name, last_seen }) => (
         <Header style={{ textAlign: "center", marginTop: "10px" }}>
           {name}
         </Header>
-        <p>Last seen: {Date(`${last_seen}`)}</p>
         <p>
-          Email adress: {name}@{name}.com
+          <Icon name="clock outline" />
+          <span style={{ fontWeight: "bolder" }}>Last seen:</span>{" "}
+          {Date(`${last_seen}`)}
         </p>
-        <p>Phone: +84 389 139 3849</p>
-        <p>Adress: MO 2, United State</p>
-        <p>Position: Developer</p>
+        <p>
+          <Icon name="mail outline" />
+          <span style={{ fontWeight: "bolder" }}>Email adress:</span> {name}@
+          {name}.com
+        </p>
+        <p>
+          <Icon name="text telephone" />
+          <span style={{ fontWeight: "bolder" }}>Phone:</span> +84 389 139 3849
+        </p>
+        <p>
+          <Icon name="at" />
+          <span style={{ fontWeight: "bolder" }}>Adress:</span> MO 2, United
+          State
+        </p>
+        <p>
+          <Icon name="credit card outline" />
+          <span style={{ fontWeight: "bolder" }}>Position:</span> Developer
+        </p>
       </Modal.Description>
     </Modal.Content>
   </Modal>

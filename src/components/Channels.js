@@ -110,7 +110,8 @@ export default ({
         fontSize: "20px",
         fontWeight: "500",
         background: "#f4f7fa",
-        height: "50px"
+        height: "50px",
+        position: "relative"
         // boxShadow: "0px 4px 3px -3px #e0e4e8",
         // borderBottom: "2px solid #e0e4e8"
       }}
@@ -118,7 +119,22 @@ export default ({
       <div style={{ display: "flex", alignItems: "center" }}>
         <div style={{ marginLeft: "20px" }}>{teamName}</div>
       </div>
-      <Dropdown style={{ marginRight: "20px" }} />
+      <Dropdown
+        pointing="top right"
+        style={{ right: "20px", position: "absolute", zIndex: "2" }}
+      >
+        <Dropdown.Menu>
+          <Dropdown.Item>
+            <h4>name: {teamName}</h4>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Icon name="connectdevelop" /> Connect with others
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Icon name="add user" /> Invite others
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
     {/* <Dark>
       <Image />
