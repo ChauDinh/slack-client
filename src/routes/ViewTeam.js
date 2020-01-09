@@ -10,6 +10,7 @@ import SendMessage from "../components/SendMessage";
 import OnlineUserWrapper from "../components/OnlineUsers";
 import Sidebar from "../container/Sidebar";
 import MessageContainer from "../container/MessageContainer";
+import Me from "../components/Me";
 import gql from "graphql-tag";
 
 const ViewTeam = ({
@@ -73,6 +74,7 @@ const ViewTeam = ({
         />
       )}
       <OnlineUserWrapper />
+      <Me username={username} />
     </Layout>
   );
 };
