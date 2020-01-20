@@ -26,9 +26,7 @@ function Home({ data: { allUsers = [] } }) {
           </header>
           <main className="content">
             <div className="content__slogan">
-              Get your <br />
-              work done. <br />
-              Together.{" "}
+              <span>IT</span> COMMUNITY
             </div>
             <div className="content__description">
               Project management and <br />

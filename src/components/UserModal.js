@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Header, Image, Modal, Icon } from "semantic-ui-react";
 
 import OnlineUser from "./OnlineUser";
+import "./UserModal.css";
 
 const UserModal = ({ name, last_seen }) => (
   <Modal
@@ -10,6 +11,7 @@ const UserModal = ({ name, last_seen }) => (
         style={{
           backgroundColor: "transparent",
           padding: "0",
+          margin: "0",
           display: "block"
         }}
       >
@@ -36,6 +38,7 @@ const UserModal = ({ name, last_seen }) => (
     >
       <Image
         wrapped
+        className="user_avatar"
         size="medium"
         src={`https://api.adorable.io/avatars/100/${name}@adorable.io`}
         style={{

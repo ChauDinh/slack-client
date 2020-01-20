@@ -8,8 +8,6 @@ const Wrapper = styled.div`
   grid-column-end: 5;
   grid-row: 1;
   height: 50px;
-  // box-shadow: -3px 4px 3px -3px #e0e4e8;
-  // border-bottom: 2px solid #e0e4e8;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,22 +20,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 20px 20px;
-    .user__semantic-icon {
-      display: none;
-    }
-    .phone__semantic-icon {
-      display: none;
-    }
-    .photo__semantic-icon {
-      display: none;
-    }
-    .channel-name__header {
-      background: #fff;
-      color: #333;
-      padding: 0.5rem 1rem !important;
-      border-radius: 5px;
-    }
+    display: none;
   }
 `;
 

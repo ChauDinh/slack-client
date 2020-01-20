@@ -11,15 +11,21 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Me = ({ username }) => (
   <Wrapper>
     <Image
-      src={`https://api.adorable.io/avatars/50/${username}@adorable.io`}
+      src={`https://api.adorable.io/avatars/40/${username}@adorable.io`}
       style={{
         borderRadius: "50%",
-        margin: "5px"
+        margin: "5px",
+        border: "2px solid #0f68b9",
+        padding: "3px"
       }}
     />
     <div
@@ -35,7 +41,7 @@ const Me = ({ username }) => (
         fontSize: "16px",
         fontWeight: "bolder",
         paddingLeft: "7px",
-        color: "#0f8deb"
+        color: "#0f68b9"
       }}
     >
       {username}

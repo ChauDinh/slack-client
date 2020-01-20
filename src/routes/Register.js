@@ -205,7 +205,7 @@ export class Register extends Component {
               primary
               onClick={this.handleSubmit}
               style={{
-                background: "#0878CB",
+                background: "#0f68b9",
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",

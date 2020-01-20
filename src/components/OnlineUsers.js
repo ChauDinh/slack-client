@@ -12,11 +12,49 @@ const Wrapper = styled.div`
   background: #f4f7fa;
   padding: 0 20px;
   width: 240px;
+  overflow-y: auto;
+
+  @media (max-width: 1080px) {
+    display: none;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #f3f3f3;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: #d3e1ef;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
+  }
 
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
+    flex-shrink: 0;
     width: 100%;
-    padding: 10px 20px;
+    background: #0f8deb;
+    color: #fff;
+    overflow-x: auto;
+    h3 {
+      display: none;
+    }
+    div {
+      margin: 5px 0 !important;
+    }
+    p {
+      display: none;
+    }
   }
 `;
 

@@ -28,6 +28,12 @@ const StyledImage = styled.img`
   margin-right: 16px;
 `;
 
+const StyledDate = styled.span`
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+`;
+
 const TextMessage = ({ url }) => {
   return <RenderText url={url} />;
 };
@@ -35,9 +41,10 @@ const ImageMessage = ({ url }) => {
   return (
     <img
       style={{
-        borderRadius: "8px",
+        borderRadius: "5px",
         marginTop: "20px",
-        boxShadow: "1px 1px 6px 1px rgba(0, 0, 0, 0.1)"
+        boxShadow: "1px 1px 6px 1px rgba(0, 0, 0, 0.1)",
+        width: "100%"
       }}
       width="350px"
       src={url}
@@ -68,8 +75,9 @@ const NormalMessage = ({ text }) => {
   return (
     <Comment.Text
       style={{
-        fontWeight: "400",
-        fontSize: "15px"
+        fontWeight: "300",
+        fontSize: "16px",
+        fontFamily: "Open Sans, sans-serif"
       }}
     >
       {text}
@@ -223,8 +231,8 @@ class MessageContainer extends React.Component {
                     marginBottom: "16px",
                     padding: "5px 1rem",
                     backgroundColor: "#fff",
-                    boxShadow: "none",
-                    borderRadius: "10px"
+                    borderRadius: "5px",
+                    boxShadow: "0 1px 5px rgb(222, 222, 222)"
                   }}
                 >
                   <Comment.Content
@@ -246,7 +254,7 @@ class MessageContainer extends React.Component {
                         </span>
                       </Comment.Author>
                       <Comment.Metadata>
-                        <div>{m.created_at}</div>
+                        <StyledDate className="date">{m.created_at}</StyledDate>
                       </Comment.Metadata>
                       <br />
                       <DisplayMessage message={m} />

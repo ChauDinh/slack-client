@@ -6,7 +6,7 @@ import { Icon, Popup } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #0f8deb;
+  background-color: #0f68b9;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;
@@ -15,11 +15,29 @@ const Wrapper = styled.div`
   align-items: center;
   overflow-y: auto;
 
+  /* width */
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #f3f3f3;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: #d3e1ef;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
+  }
+
   @media (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    display: none;
   }
 `;
 
@@ -65,26 +83,6 @@ const ListItem = styled.li`
     background: #00b5ad;
     color: #fff;
     cursor: pointer;
-  }
-
-  @media (max-width: 768px) {
-    width: 50px;
-    height: 50px;
-    font-size: 2rem;
-    display: inline-block;
-    text-align: center;
-    padding-top: 16px;
-    margin-left: 20px;
-    background: #fff;
-    font-family: "Arial";
-    font-weight: 500;
-    border-radius: 50%;
-    &:hover {
-      border-style: none;
-      border-width: none;
-      border-color: none;
-      cursor: pointer;
-    }
   }
 `;
 

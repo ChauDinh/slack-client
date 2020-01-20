@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: rgb(2, 0, 36);
   background: linear-gradient(
     125deg,
     rgba(2, 0, 36, 1) 0%,
@@ -60,7 +59,7 @@ body {
   font-size: 28px;
   font-weight: 700;
   color: #0878cb;
-  margin-right: 30px;
+  margin-right: 0px;
 }
 
 .main-rectangle > .header > .header__about-us > a {
@@ -80,9 +79,14 @@ body {
 .main-rectangle > .content > .content__slogan {
   font-family: "Helvetica Neue";
   line-height: 55px;
-  font-size: 48px;
-  color: #30333b;
+  font-size: 31px;
+  font-weight: bolder;
+  color: #0f8deb;
   margin-bottom: 20px;
+}
+
+.main-rectangle > .content > .content__slogan > span {
+  color: red;
 }
 
 .main-rectangle > .content > .content__description {
@@ -114,4 +118,111 @@ body {
 
 #root {
   background-color: #f4f7fa;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    background: linear-gradient(
+      125deg,
+      rgb(76, 75, 99) 0%,
+      rgba(113, 194, 255, 1) 0%,
+      rgba(8, 120, 203, 1) 57%
+    );
+    padding: 0;
+  }
+  .main-rectangle {
+    margin: 50px 30px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 3px 3px 10px #405fb6;
+  }
+  .main-rectangle > .image {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .main-rectangle > .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-rectangle > .header > .header__title {
+    display: none;
+  }
+
+  .main-rectangle > .content > .content__description {
+    color: #333;
+    font-weight: 400;
+  }
+
+  .main-rectangle > .content {
+    padding: 0 !important;
+    justify-content: center !important;
+    align-items: center;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 35%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-rectangle > .content > .content__slogan {
+    font-size: 35px;
+  }
+  .main-rectangle > .content > .content__description {
+    font-size: 20px;
+  }
+  footer {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+  }
+}
+
+@media (max-width: 320px) {
+  .main-rectangle > .image {
+    width: 90px;
+    height: 90px;
+    box-shadow: 1px 2px 5px #7e8d99;
+  }
+  .main-rectangle > .content > .content__slogan {
+    font-size: 20px;
+  }
+  .main-rectangle > .content > .content__description {
+    font-size: 10px;
+    text-align: center;
+    font-weight: 500;
+  }
+  footer {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+  }
+}
+
+@media (width: 360px) {
+  footer {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+  }
+}
+
+@media (width: 375px) {
+  footer {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+  }
 }

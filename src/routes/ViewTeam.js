@@ -42,6 +42,7 @@ const ViewTeam = ({
 
   return (
     <Layout className="app-layout">
+      <OnlineUserWrapper />
       <Sidebar
         className="side-bar_view-message"
         teams={teams.map(t => ({
@@ -73,7 +74,6 @@ const ViewTeam = ({
           }}
         />
       )}
-      <OnlineUserWrapper />
       <Me username={username} />
     </Layout>
   );

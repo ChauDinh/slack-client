@@ -13,15 +13,31 @@ const Wrapper = styled.div`
   flex-direction: column;
   overflow-y: auto;
 
+  /* width */
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #f3f3f3;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: #d3e1ef;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 7px;
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
 `;
-
-// const Header = styled.h3`
-//   color: #f5f5f5;
-//   margin-top: 16px;
-// `;
 
 const List = styled.ul`
   width: 100%;
@@ -65,10 +81,6 @@ const PushLeft = styled.div`
   ${paddingLeft}
 `;
 
-// const Dark = styled.span`
-//   color: #000;
-// `;
-
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
     <ListItem>
@@ -104,7 +116,6 @@ export default ({
     <div
       style={{
         display: "flex",
-        // flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
         fontSize: "20px",
@@ -112,8 +123,6 @@ export default ({
         background: "#f4f7fa",
         height: "50px",
         position: "relative"
-        // boxShadow: "0px 4px 3px -3px #e0e4e8",
-        // borderBottom: "2px solid #e0e4e8"
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -136,9 +145,7 @@ export default ({
         </Dropdown.Menu>
       </Dropdown>
     </div>
-    {/* <Dark>
-      <Image />
-    </Dark>{" "} */}
+
     <div>
       <List>
         <ListHeader
@@ -159,7 +166,7 @@ export default ({
               <Button
                 onClick={onAddChannelClick}
                 style={{
-                  background: "#0f8deb",
+                  background: "#0f68b9",
                   color: "#fff",
                   padding: "5px 10px",
                   fontSize: "13px",
@@ -193,7 +200,7 @@ export default ({
             <Button
               onClick={onDirectMessageClick}
               style={{
-                background: "#0f8deb",
+                background: "#0f68b9",
                 color: "#fff",
                 padding: "5px 10px",
                 fontSize: "13px",

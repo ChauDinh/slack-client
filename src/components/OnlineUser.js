@@ -21,13 +21,12 @@ export default ({ name, last_seen }) => {
             ? {
                 borderRadius: "50%",
                 marginRight: "10px",
-                border: "2px solid #0f8deb",
+                border: "2px solid #0f68b9",
                 padding: "2px"
               }
             : {
                 borderRadius: "50%",
                 marginRight: "10px",
-                border: "2px solid lightgray",
                 padding: "2px"
               }
         }
@@ -59,7 +58,7 @@ export default ({ name, last_seen }) => {
               }
         }
       ></div>
-      {name}
+      <p>{name}</p>
     </div>
   );
 };

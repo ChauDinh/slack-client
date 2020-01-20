@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     border: 1px solid #ebedf2 !important;
   }
   .input > i {
-    color: #0f8deb;
+    color: #0f68b9;
     opacity: 1 !important;
     font-size: 20px;
   }
@@ -55,7 +55,7 @@ const SendMessage = ({
           <Button
             icon
             style={{
-              backgroundColor: "#0f8deb",
+              backgroundColor: "#0f68b9",
               borderRadius: "8px",
               color: "#fff"
             }}
