@@ -10,10 +10,9 @@ export default styled.div`
   overflow-y: auto;
   font-family: Helvetica Neue;
   font-size: 15px !important;
-
   /* width */
   ::-webkit-scrollbar {
-    width: 14px;
+    width: 12px;
   }
 
   /* Track */
@@ -30,5 +29,9 @@ export default styled.div`
     background-clip: padding-box;
     border: 3px solid #fff;
     border-radius: 7px;
+  }
+
+  @media (max-width: 768px) {
+    flex-grow: 1;
   }
 `;

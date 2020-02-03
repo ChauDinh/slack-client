@@ -15,7 +15,14 @@ const Wrapper = styled.div`
   overflow-y: auto;
 
   @media (max-width: 1080px) {
-    display: none;
+    h3 {
+      display: none;
+    }
+    p {
+      display: none;
+    }
+    width: inherit;
+    padding: 0 10px;
   }
 
   /* width */
@@ -40,21 +47,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: flex;
-    flex-shrink: 0;
-    width: 100%;
-    background: #0f8deb;
-    color: #fff;
-    overflow-x: auto;
-    h3 {
-      display: none;
-    }
-    div {
-      margin: 5px 0 !important;
-    }
-    p {
-      display: none;
-    }
+    display: none;
   }
 `;
 

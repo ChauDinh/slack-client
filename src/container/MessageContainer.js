@@ -24,7 +24,7 @@ const newChannelMessageSubscription = gql`
 `;
 
 const StyledImage = styled.img`
-  border-radius: 50%;
+  border-radius: 7px;
   margin-right: 16px;
 `;
 
@@ -44,7 +44,10 @@ const ImageMessage = ({ url }) => {
         borderRadius: "5px",
         marginTop: "20px",
         boxShadow: "1px 1px 6px 1px rgba(0, 0, 0, 0.1)",
-        width: "100%"
+        width: "initial",
+        height: "inherit",
+        maxWidth: "350px",
+        padding: "10px"
       }}
       width="350px"
       src={url}
@@ -228,17 +231,17 @@ class MessageContainer extends React.Component {
                 <Comment
                   key={`${m.id}-message`}
                   style={{
-                    marginBottom: "16px",
-                    padding: "5px 1rem",
-                    backgroundColor: "#fff",
+                    padding: "15px 1rem",
+                    marginTop: "10px",
+                    background: "#fff",
                     borderRadius: "5px",
-                    boxShadow: "0 1px 5px rgb(222, 222, 222)"
+                    boxShadow: "3px 3px 10px lightgray"
                   }}
                 >
                   <Comment.Content
                     style={{
-                      paddingBottom: "20px",
-                      marginTop: "20px",
+                      // paddingBottom: "20px",
+                      // marginTop: "20px",
                       display: "flex",
                       alignItems: "flex-start",
                       justifyContent: "flex-start"
@@ -247,7 +250,7 @@ class MessageContainer extends React.Component {
                     <StyledImage
                       src={`https://api.adorable.io/avatars/30/${m.user.username}@adorable.io`}
                     />
-                    <div>
+                    <div style={{ width: "100%" }}>
                       <Comment.Author as="a">
                         <span style={{ fontWeight: "600", fontSize: "15px" }}>
                           {m.user.username}

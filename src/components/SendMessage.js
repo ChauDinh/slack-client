@@ -16,7 +16,6 @@ const Wrapper = styled.div`
   .input > input {
     background: #ebedf2;
     border: 1px solid #ebedf2 !important;
-    border-radius: 8px;
   }
   .input > input:focus {
     background: #ebedf2;
@@ -30,6 +29,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 768px) {
     display: flex;
+    flex-shrink: 0;
     .input {
       flex-grow: 1;
     }
@@ -56,7 +56,6 @@ const SendMessage = ({
             icon
             style={{
               backgroundColor: "#0f68b9",
-              borderRadius: "8px",
               color: "#fff"
             }}
           >

@@ -16,20 +16,7 @@ export default ({ name, last_seen }) => {
     >
       <Image
         src={`https://api.adorable.io/avatars/40/${name}@adorable.io`}
-        style={
-          Date.now() - last_seen < 60000
-            ? {
-                borderRadius: "50%",
-                marginRight: "10px",
-                border: "2px solid #0f68b9",
-                padding: "2px"
-              }
-            : {
-                borderRadius: "50%",
-                marginRight: "10px",
-                padding: "2px"
-              }
-        }
+        style={{ borderRadius: "50%", marginRight: "10px", padding: "2px" }}
       />
       <div
         style={
@@ -43,7 +30,7 @@ export default ({ name, last_seen }) => {
                 position: "absolute",
                 left: "30px",
                 bottom: "-1px",
-                border: "2px solid #fff"
+                border: "2px solid #f5f5f5"
               }
             : {
                 zIndex: "2",

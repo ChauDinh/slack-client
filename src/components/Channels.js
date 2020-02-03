@@ -125,8 +125,26 @@ export default ({
         position: "relative"
       }}
     >
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ marginLeft: "20px" }}>{teamName}</div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          whiteSpace: "nowrap"
+        }}
+      >
+        <div
+          style={{
+            marginLeft: "20px",
+            fontWeight: "900",
+            color: "#0f68b9",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis"
+          }}
+        >
+          {teamName}
+        </div>
       </div>
       <Dropdown
         pointing="top right"

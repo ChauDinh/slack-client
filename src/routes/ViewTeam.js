@@ -42,6 +42,7 @@ const ViewTeam = ({
 
   return (
     <Layout className="app-layout">
+      <Me username={username} />
       <OnlineUserWrapper />
       <Sidebar
         className="side-bar_view-message"
@@ -74,7 +75,6 @@ const ViewTeam = ({
           }}
         />
       )}
-      <Me username={username} />
     </Layout>
   );
 };
