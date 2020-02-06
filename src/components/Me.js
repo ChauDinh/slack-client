@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Image, Icon, Transition } from "semantic-ui-react";
+import { Image, Icon, Transition, List, ListHeader } from "semantic-ui-react";
 
-import Sidebar from "../container/Sidebar";
 import { Context } from "../routes/ViewTeam";
 
 const Wrapper = styled.div`
@@ -72,16 +71,119 @@ class Me extends React.Component {
         <Transition visible={isVisible} animation="fade right" duration={500}>
           <div
             style={{
-              width: "100vw",
+              width: "300px",
               height: "100vh",
               overflow: "auto",
-              zIndex: "100"
+              zIndex: "100",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              background: "#f4f7fa",
+              display: "flex",
+              boxShadow: "0px 3px 10px rgb(219, 227, 232)",
+              padding: "0 10px"
             }}
           >
-            {/* This is the sidebar
-            <button onClick={() => this.toggleBar()}>X</button> */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                background: "rgba(202, 202, 202, 0.2)",
+                marginTop: "10px",
+                borderRadius: "5px"
+              }}
+            >
+              <p
+                style={{
+                  margin: "10px 20px",
+                  fontSize: "18px",
+                  fontWeight: "700",
+                  color: "#0878cb"
+                }}
+              >
+                SlackQL
+              </p>
+              <button
+                onClick={() => this.toggleBar()}
+                style={{
+                  color: "#f4f7fa",
+                  background: "#0878cb",
+                  borderRadius: "50px",
+                  padding: "2px 5px 2px 5px",
+                  boxShadow: "3px 3px 5px rgb(168, 196, 216)"
+                }}
+              >
+                <Icon name="arrow left" />
+              </button>
+            </div>
             <Context.Consumer className="sidebar-mobile">
-              {({ teams, team, username, currentUserId }) => <Sidebar />}
+              {({ teams, team, username, currentUserId }) => {
+                const regularChannels = [];
+                const dmChannels = [];
+
+                team.channels.forEach(channel => {
+                  if (channel.dm) {
+                    dmChannels.push(channel);
+                  } else {
+                    regularChannels.push(channel);
+                  }
+                });
+
+                return [
+                  <List key="team">
+                    <ListHeader
+                      style={{
+                        marginBottom: "15px",
+                        fontSize: "18px",
+                        color: "#0878cb",
+                        fontWeight: "900"
+                      }}
+                    >
+                      Teams
+                    </ListHeader>
+                    <div style={{}}>
+                      {teams.map(team => (
+                        <div key={team.id}>{team.name}</div>
+                      ))}
+                    </div>
+                  </List>,
+                  <List key="channel">
+                    <ListHeader
+                      style={{
+                        marginBottom: "15px",
+                        fontSize: "18px",
+                        color: "#0878cb",
+                        fontWeight: "900"
+                      }}
+                    >
+                      Channels
+                    </ListHeader>
+                    <div>
+                      {regularChannels.map(channel => (
+                        <div key={channel.id}>{channel.name}</div>
+                      ))}
+                    </div>
+                  </List>,
+                  <List key="direct-message">
+                    <ListHeader
+                      style={{
+                        marginBottom: "15px",
+                        fontSize: "18px",
+                        color: "#0878cb",
+                        fontWeight: "900"
+                      }}
+                    >
+                      Direct Messages
+                    </ListHeader>
+                    <div>
+                      {dmChannels.map(dm => (
+                        <div key={dm.id}>{dm.name}</div>
+                      ))}
+                    </div>
+                  </List>
+                ];
+              }}
             </Context.Consumer>
           </div>
         </Transition>

@@ -100,7 +100,7 @@ const Back = styled.div`
   }
 `;
 
-const team = ({ id, letter, name }) => (
+export const teamItem = ({ id, letter, name }) => (
   <div
     key={`team-${id}`}
     style={{
@@ -135,7 +135,7 @@ const team = ({ id, letter, name }) => (
 export default ({ teams }) => (
   <Wrapper>
     <List>
-      {teams.map(team)}
+      {teams.map(teamItem)}
       <Link key="add-team" to={`/create-team`}>
         <ListItem style={{ background: "#00b5ad", color: "#fff" }}>+</ListItem>
       </Link>

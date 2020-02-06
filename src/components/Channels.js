@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon, Dropdown, Button } from "semantic-ui-react";
+import { Icon, Dropdown, Button, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -39,12 +39,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const List = styled.ul`
-  width: 100%;
-  list-style: none;
-  padding-left: 0;
-  font-size: 15px;
-`;
+// const List = styled.ul`
+//   width: 100%;
+//   list-style: none;
+//   padding-left: 0;
+//   font-size: 15px;
+// `;
 
 const paddingLeft = "padding-left: 20px";
 const paddingRight = "padding-right: 20px";
@@ -165,7 +165,7 @@ export default ({
     </div>
 
     <div>
-      <List>
+      <List animated verticalAlign="middle">
         <ListHeader
           style={{
             marginTop: "1rem",
@@ -200,7 +200,7 @@ export default ({
       </List>
     </div>
     <div>
-      <List>
+      <List animated verticalAlign="middle">
         <ListHeader
           style={{
             marginTop: "2rem",
