@@ -5,6 +5,7 @@ import Teams from "../components/Teams";
 import AddChannelModal from "../components/AddChannelModal";
 import InvitePeopleModal from "../components/InvitePeopleModal";
 import DirectMessageModal from "../components/DirectMessageModal";
+import { Context } from "../routes/ViewTeam";
 
 export default class Sidebar extends React.Component {
   state = {
@@ -41,58 +42,74 @@ export default class Sidebar extends React.Component {
   };
 
   render() {
-    const { teams, team, username, currentUserId } = this.props;
+    // const { team } = this.props;
     const {
       openAddChannelModal,
       openInvitePeopleModal,
       openDirectMessageModal
     } = this.state;
 
-    const regularChannels = [];
-    const dmChannels = [];
-
-    team.channels.forEach(channel => {
-      if (channel.dm) {
-        dmChannels.push(channel);
-      } else {
-        regularChannels.push(channel);
-      }
-    });
-
     return [
-      <Teams key="team-sidebar" teams={teams} />,
-      <Channels
-        key="channel-sidebar"
-        teamName={team ? team.name : ""}
-        userName={username}
-        teamId={team ? team.id : 0}
-        channels={team ? regularChannels : ""}
-        isOwner={team.admin}
-        dmChannels={dmChannels}
-        onAddChannelClick={this.toggleAddChannelModal}
-        onInvitePeopleClick={this.toggleInvitePeopleModal}
-        onDirectMessageClick={this.toggleDirectMessageModal}
-      />,
-      <AddChannelModal
-        teamId={team ? team.id : 0}
-        open={openAddChannelModal}
-        onClose={this.toggleAddChannelModal}
-        key="sidebar-add-channel-modal"
-        currentUserId={currentUserId}
-      />,
-      <InvitePeopleModal
-        teamId={team ? team.id : 0}
-        onClose={this.toggleInvitePeopleModal}
-        open={openInvitePeopleModal}
-        key="sidebar-invite-people-modal"
-      />,
-      <DirectMessageModal
-        teamId={team ? team.id : 0}
-        open={openDirectMessageModal}
-        onClose={this.toggleDirectMessageModal}
-        key="sidebar-direct-message-modal"
-        currentUserId={currentUserId}
-      />
+      <Context.Consumer key="team-sidebar">
+        {({ teams }) => <Teams teams={teams} />}
+      </Context.Consumer>,
+      <Context.Consumer key="channel-sidebar">
+        {({ team, username }) => {
+          const regularChannels = [];
+          const dmChannels = [];
+
+          team.channels.forEach(channel => {
+            if (channel.dm) {
+              dmChannels.push(channel);
+            } else {
+              regularChannels.push(channel);
+            }
+          });
+
+          return (
+            <Channels
+              teamName={team ? team.name : ""}
+              userName={username}
+              teamId={team ? team.id : 0}
+              channels={team ? regularChannels : ""}
+              isOwner={team.admin}
+              dmChannels={dmChannels}
+              onAddChannelClick={this.toggleAddChannelModal}
+              onInvitePeopleClick={this.toggleInvitePeopleModal}
+              onDirectMessageClick={this.toggleDirectMessageModal}
+            />
+          );
+        }}
+      </Context.Consumer>,
+      <Context.Consumer key="sidebar-add-channel-modal">
+        {({ team, currentUserId }) => (
+          <AddChannelModal
+            teamId={team ? team.id : 0}
+            open={openAddChannelModal}
+            onClose={this.toggleAddChannelModal}
+            currentUserId={currentUserId}
+          />
+        )}
+      </Context.Consumer>,
+      <Context.Consumer key="sidebar-invite-people-modal">
+        {({ team }) => (
+          <InvitePeopleModal
+            teamId={team ? team.id : 0}
+            onClose={this.toggleInvitePeopleModal}
+            open={openInvitePeopleModal}
+          />
+        )}
+      </Context.Consumer>,
+      <Context.Consumer key="sidebar-direct-message-modal">
+        {({ team, currentUserId }) => (
+          <DirectMessageModal
+            teamId={team ? team.id : 0}
+            open={openDirectMessageModal}
+            onClose={this.toggleDirectMessageModal}
+            currentUserId={currentUserId}
+          />
+        )}
+      </Context.Consumer>
     ];
   }
 }

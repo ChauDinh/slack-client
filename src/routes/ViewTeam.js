@@ -13,6 +13,8 @@ import MessageContainer from "../container/MessageContainer";
 import Me from "../components/Me";
 import gql from "graphql-tag";
 
+export const Context = React.createContext();
+
 const ViewTeam = ({
   mutate,
   data: { loading, me },
@@ -42,19 +44,23 @@ const ViewTeam = ({
 
   return (
     <Layout className="app-layout">
-      <Me username={username} />
-      <OnlineUserWrapper />
-      <Sidebar
-        className="side-bar_view-message"
-        teams={teams.map(t => ({
-          id: t.id,
-          letter: t.name.charAt(0).toUpperCase(),
-          name: t.name
-        }))}
-        team={team}
-        username={username}
-        currentUserId={currentUserId}
-      />
+      <Context.Provider
+        value={{
+          teams: teams.map(t => ({
+            id: t.id,
+            letter: t.name.charAt(0).toUpperCase(),
+            name: t.name
+          })),
+          team: team,
+          username: username,
+          currentUserId: currentUserId
+        }}
+      >
+        <Me username={username} />
+        <OnlineUserWrapper />
+        <Sidebar className="side-bar_view-message" />
+      </Context.Provider>
+
       {channel && <Header channelName={channel.name} />}
       {channel && (
         <MessageContainer

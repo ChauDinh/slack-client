@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Image, Icon, Transition } from "semantic-ui-react";
 
+import Sidebar from "../container/Sidebar";
+import { Context } from "../routes/ViewTeam";
+
 const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 3 / 4;
@@ -69,19 +72,17 @@ class Me extends React.Component {
         <Transition visible={isVisible} animation="fade right" duration={500}>
           <div
             style={{
-              backgroundColor: "#f4f7fa",
-              position: "absolute",
-              top: "0",
-              left: "0",
-              width: "50vw",
+              width: "100vw",
               height: "100vh",
-              zIndex: 100,
-              display: "flex",
-              flexDirection: "row"
+              overflow: "auto",
+              zIndex: "100"
             }}
           >
-            This is the sidebar
-            <button onClick={() => this.toggleBar()}>X</button>
+            {/* This is the sidebar
+            <button onClick={() => this.toggleBar()}>X</button> */}
+            <Context.Consumer className="sidebar-mobile">
+              {({ teams, team, username, currentUserId }) => <Sidebar />}
+            </Context.Consumer>
           </div>
         </Transition>
 
