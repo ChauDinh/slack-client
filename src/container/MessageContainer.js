@@ -44,7 +44,7 @@ const ImageMessage = ({ url }) => {
         borderRadius: "5px",
         marginTop: "20px",
         boxShadow: "1px 1px 6px 1px rgba(0, 0, 0, 0.1)",
-        width: "initial",
+        width: "100%",
         height: "inherit",
         maxWidth: "350px",
         padding: "10px"

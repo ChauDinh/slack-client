@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Image, Icon, Transition, List, ListHeader } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 import { Context } from "../routes/ViewTeam";
 
@@ -136,15 +137,28 @@ class Me extends React.Component {
                       style={{
                         marginBottom: "15px",
                         fontSize: "18px",
-                        color: "#0878cb",
+                        color: "#333",
                         fontWeight: "900"
                       }}
                     >
                       Teams
                     </ListHeader>
-                    <div style={{}}>
+                    <div>
                       {teams.map(team => (
-                        <div key={team.id}>{team.name}</div>
+                        <Link
+                          key={team.id}
+                          to={`/view-team/${team.id}`}
+                          style={{
+                            background: "rgba(200, 200, 200, 0.2)",
+                            padding: "5px 10px",
+                            display: "block",
+                            borderRadius: "5px",
+                            marginBottom: "5px",
+                            fontWeight: "700"
+                          }}
+                        >
+                          {team.name}
+                        </Link>
                       ))}
                     </div>
                   </List>,
@@ -153,7 +167,7 @@ class Me extends React.Component {
                       style={{
                         marginBottom: "15px",
                         fontSize: "18px",
-                        color: "#0878cb",
+                        color: "#333",
                         fontWeight: "900"
                       }}
                     >
@@ -161,7 +175,20 @@ class Me extends React.Component {
                     </ListHeader>
                     <div>
                       {regularChannels.map(channel => (
-                        <div key={channel.id}>{channel.name}</div>
+                        <Link
+                          key={channel.id}
+                          to={`/view-team/${team.id}/${channel.id}`}
+                          style={{
+                            background: "rgba(200, 200, 200, 0.2)",
+                            padding: "5px 10px",
+                            display: "block",
+                            borderRadius: "5px",
+                            marginBottom: "5px",
+                            fontWeight: "700"
+                          }}
+                        >
+                          {channel.name}
+                        </Link>
                       ))}
                     </div>
                   </List>,
@@ -170,7 +197,7 @@ class Me extends React.Component {
                       style={{
                         marginBottom: "15px",
                         fontSize: "18px",
-                        color: "#0878cb",
+                        color: "#333",
                         fontWeight: "900"
                       }}
                     >
@@ -178,7 +205,20 @@ class Me extends React.Component {
                     </ListHeader>
                     <div>
                       {dmChannels.map(dm => (
-                        <div key={dm.id}>{dm.name}</div>
+                        <Link
+                          key={dm.id}
+                          to={`/view-team/${team.id}/${dm.id}`}
+                          style={{
+                            background: "rgba(200, 200, 200, 0.2)",
+                            padding: "5px 10px",
+                            display: "block",
+                            borderRadius: "5px",
+                            marginBottom: "5px",
+                            fontWeight: "700"
+                          }}
+                        >
+                          {dm.name}
+                        </Link>
                       ))}
                     </div>
                   </List>
