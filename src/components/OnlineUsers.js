@@ -4,6 +4,7 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 
 import UserModal from "./UserModal";
+import { CalendarWrapper } from "./Calendar";
 
 const Wrapper = styled.div`
   grid-column: 4;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   grid-row-end: 4;
   background: #f4f7fa;
   padding: 0 20px;
-  width: 240px;
+  width: inherit;
   overflow-y: auto;
 
   @media (max-width: 1080px) {
@@ -68,7 +69,7 @@ const OnlineUserWrapper = ({ data: { onlineUsers }, loading }) => {
     } else {
       return (
         <Wrapper>
-          <h3>Online Users</h3>
+          <h5 style={{ marginTop: "15px" }}>Online Users</h5>
           {onlineUsers.map((user, index) => (
             <UserModal
               key={index}
@@ -76,6 +77,7 @@ const OnlineUserWrapper = ({ data: { onlineUsers }, loading }) => {
               last_seen={user.last_seen}
             />
           ))}
+          <CalendarWrapper />
         </Wrapper>
       );
     }

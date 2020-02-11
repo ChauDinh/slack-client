@@ -127,7 +127,8 @@ export default ({
         fontWeight: "500",
         background: "#f4f7fa",
         height: "50px",
-        position: "relative"
+        position: "relative",
+        boxShadow: "0px 3px 10px rgba(200, 200, 200, 0.4)"
       }}
     >
       <div
@@ -153,7 +154,11 @@ export default ({
       </div>
       <Dropdown
         pointing="top right"
-        style={{ right: "20px", position: "absolute", zIndex: "2" }}
+        style={{
+          right: "20px",
+          position: "absolute",
+          zIndex: "2"
+        }}
       >
         <Dropdown.Menu>
           <Dropdown.Item>

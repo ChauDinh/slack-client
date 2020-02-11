@@ -13,6 +13,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
+  box-shadow: 0px 3px 10px rgba(200, 200, 200, 0.4);
+  background: #fff;
   .prompt {
     border-radius: 5px !important;
     height: 30px;
