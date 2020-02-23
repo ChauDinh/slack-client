@@ -234,7 +234,7 @@ class MessageContainer extends React.Component {
                     padding: "15px 1rem",
                     marginTop: "10px",
                     background: "#fff",
-                    borderRadius: "5px",
+                    // borderRadius: "5px",
                     boxShadow: "3px 3px 10px lightgray"
                   }}
                 >

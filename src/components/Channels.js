@@ -97,12 +97,7 @@ const dmChannel = ({ id, name }, teamId) => (
     style={{ color: "black" }}
     to={`/view-team/${teamId}/${id}`}
   >
-    <ListItem>
-      <div>
-        <Icon name="privacy" size="small" color="blue" />
-        {name}
-      </div>
-    </ListItem>
+    <ListItem>{name}</ListItem>
   </Link>
 );
 
@@ -246,12 +241,12 @@ export default ({
       <PushLeft style={{ marginTop: "2rem" }}>
         <a
           style={{
-            color: "#fff",
+            color: "#000",
             fontWeight: "700",
-            background: "#0f68b9",
+            background: "#f7f7f7",
             padding: ".5rem 1rem",
             borderRadius: "5px",
-            boxShadow: "2px 2px 10px rgba(200, 200, 200, 0.5)"
+            border: "2px solid #000"
           }}
           href="#invite-people"
           onClick={onInvitePeopleClick}

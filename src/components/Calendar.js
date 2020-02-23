@@ -37,6 +37,11 @@ const Wrapper = styled.div`
   .rc-calendar-header {
     margin-bottom: 10px;
     text-align: center;
+    background: #0f68b9;
+    border-radius: 5px;
+  }
+  .rc-calendar-header a {
+    color: #fff;
   }
   .rc-calendar-month-select {
     margin-right: 5px;

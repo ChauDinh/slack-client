@@ -33,5 +33,6 @@ export default styled.div`
 
   @media (max-width: 768px) {
     flex-grow: 1;
+    padding: 0;
   }
 `;
