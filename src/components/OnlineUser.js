@@ -7,7 +7,7 @@ export default ({ name, last_seen }) => {
       style={{
         display: "flex",
         justifyContent: "flex-start",
-        alignItems: "center",
+        alignItems: "flex-start",
         marginBottom: "20px",
         fontWeight: "600",
         fontFamily: "Helvetica Neue",

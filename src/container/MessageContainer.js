@@ -80,7 +80,7 @@ const NormalMessage = ({ text }) => {
       style={{
         fontWeight: "300",
         fontSize: "16px",
-        fontFamily: "Muli, sans-serif"
+        fontFamily: "Open Sans, sans-serif"
       }}
     >
       {text}
