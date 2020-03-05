@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   grid-column: 4;
   grid-row: 2;
   grid-row-end: 4;
-  background: #f4f7fa;
-  padding: 0 20px;
+  background: #f2f6f8;
+  padding: 20px 20px;
   width: 240px;
   overflow-y: auto;
 
@@ -68,7 +68,7 @@ const OnlineUserWrapper = ({ data: { onlineUsers }, loading }) => {
     } else {
       return (
         <Wrapper>
-          <h3>Online Users</h3>
+          <h3 style={{ marginBottom: "20px" }}>Online Users</h3>
           {onlineUsers.map((user, index) => (
             <UserModal
               key={index}

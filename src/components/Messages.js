@@ -10,9 +10,10 @@ export default styled.div`
   overflow-y: auto;
   font-family: Helvetica Neue;
   font-size: 15px !important;
+  background-color: #fff;
   /* width */
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 16px;
   }
 
   /* Track */
@@ -20,7 +21,7 @@ export default styled.div`
     background-color: #f3f3f3;
     background-clip: padding-box;
     border: 3px solid #fff;
-    border-radius: 7px;
+    border-radius: 50px;
   }
 
   /* Handle */
@@ -28,7 +29,7 @@ export default styled.div`
     background-color: #d3e1ef;
     background-clip: padding-box;
     border: 3px solid #fff;
-    border-radius: 7px;
+    border-radius: 50px;
   }
 
   @media (max-width: 768px) {

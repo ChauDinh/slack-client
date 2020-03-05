@@ -1,8 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100&display=swap");
-@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Actor&display=swap");
+@font-face {
+  src: url(../fonts/AvenirNext/AvenirNextLTPro-Regular.otf);
+  font-family: AvenirNext;
+}
+
+@font-face {
+  src: url(../fonts/AvenirNext/AvenirNextLTPro-Demi.otf);
+  font-family: AvenirNextDemi;
+}
 
 *,
 *:before,
@@ -12,23 +16,37 @@
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+  font-family: AvenirNext;
+}
+
+img {
+  pointer-events: none;
+}
+
+button:focus {
+  outline: none;
+}
+
 body {
-  font-family: "Actor", sans-serif;
+  font-family: "AvenirNext", sans-serif;
   height: 100vh;
   overscroll-behavior-y: none;
   background-color: "#fff";
+  user-select: none;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(
-    125deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(113, 194, 255, 1) 0%,
-    rgba(8, 120, 203, 1) 57%
-  );
+  background: #fff;
 }
 
 .main-rectangle {
@@ -36,18 +54,10 @@ body {
   border-radius: 24px;
   margin: 50px 57px;
   height: 100%;
-  padding: 35px 35px;
   display: flex;
   flex-direction: column;
   position: relative;
-}
-
-.main-rectangle > .image {
-  position: absolute;
-  height: calc(100% - 2 * 35px);
-  right: 35px;
-  user-select: none !important;
-  pointer-events: none;
+  padding: 20px;
 }
 
 .main-rectangle > .header {
@@ -56,71 +66,134 @@ body {
 }
 
 .main-rectangle > .header > .header__title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #0878cb;
+  font-size: 20px;
+  font-weight: 900;
+  color: #000;
   margin-right: 0px;
+  font-family: AvenirNextDemi, sans-serif;
 }
 
-.main-rectangle > .header > .header__about-us > a {
-  font-size: 28px;
-  font-weight: lighter;
-  color: #30333b;
+.main-rectangle > .header > img {
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.main-rectangle > .header > .header__menu {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding: 0 0 0 20px;
+}
+
+.main-rectangle > .header > .header__menu > .header__about-us > button,
+.header__services > button,
+.header__contact > button {
+  font-family: AvenirNext, sans-serif;
+  font-size: 20px;
+  margin: 0 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.main-rectangle > .header > .header__login-register {
+  display: flex;
+  align-items: center;
+}
+
+.main-rectangle > .header > .header__login-register > .header__login,
+.header__register {
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.main-rectangle > .header > .header__login-register > .header__register {
+  background: #000;
+  color: #fff;
+  padding: 9px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 38px;
+  text-transform: uppercase;
+}
+
+.main-rectangle > .header > .header__login-register > .header__login {
+  font-weight: 900px;
+  color: #000;
+  text-transform: uppercase;
 }
 
 .main-rectangle > .content {
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 50px 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
 }
 
-.main-rectangle > .content > .content__slogan {
-  font-family: "Helvetica Neue";
-  line-height: 55px;
-  font-size: 31px;
+.main-rectangle > .content > .content__image > .image {
+  width: 769px;
+  right: 35px;
+  bottom: 0;
+  user-select: none !important;
+  pointer-events: none;
+}
+
+.main-rectangle > .content > .content__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.main-rectangle > .content > .content__text > .content__slogan {
+  font-family: "AvenirNext", sans-serif;
+  line-height: 95px;
+  font-size: 90px;
   font-weight: bolder;
-  color: #0f8deb;
+  color: #000;
   margin-bottom: 20px;
 }
 
-.main-rectangle > .content > .content__slogan > span {
-  color: red;
+.main-rectangle > .content > .content__text > .content__slogan > span {
+  color: #0878cb;
 }
 
-.main-rectangle > .content > .content__description {
-  color: #8d8d8d;
-  font-family: "Helvetica Neue";
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 20px;
-  letter-spacing: 2px;
-}
-
-.footer > .footer__button {
-  padding: 10px 20px;
+.main-rectangle > .content > .content__text > .content__button {
+  padding: 10px 20px 7px 20px;
   border-radius: 50px;
+  font-family: AvenirNextDemi, sans-serif !important;
   font-weight: 360;
   letter-spacing: 1px;
   font-size: 18px;
   font-family: "Helvetica Neue";
   color: #fff;
-  background: #0878cb;
+  background: #000;
   cursor: pointer;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
-.footer > .footer__button:focus {
-  outline: none;
-  /* border: none; */
+footer {
+  background: #000;
+  color: #fff;
+  padding: 30px 77px 50px 77px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer h4 {
+  margin-bottom: 20px;
+}
+
+.footer ul {
+  list-style: none;
 }
 
 #root {
   background-color: #f4f7fa;
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .wrapper {
     background: linear-gradient(
       125deg,
@@ -225,4 +298,4 @@ body {
     bottom: 15%;
     left: 50%;
   }
-}
+} */

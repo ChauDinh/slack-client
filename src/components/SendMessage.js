@@ -12,9 +12,9 @@ const Wrapper = styled.div`
   padding-bottom: 25px;
   display: grid;
   grid-template-columns: 50px auto;
-  background: #f4f7fa;
+  background: #fff;
   .input > input {
-    background: #ebedf2;
+    background: #f2f6f8;
     border: 1px solid #ebedf2 !important;
   }
   .input > input:focus {
@@ -22,9 +22,17 @@ const Wrapper = styled.div`
     border: 1px solid #ebedf2 !important;
   }
   .input > i {
-    color: #0f68b9;
+    color: #bbcad9;
     opacity: 1 !important;
     font-size: 20px;
+  }
+
+  .ui.icon.input > i.icon {
+    cursor: pointer !important;
+  }
+
+  .ui.icon.input > i.icon:not(.link) {
+    pointer-events: auto;
   }
 
   @media (max-width: 768px) {
@@ -55,14 +63,14 @@ const SendMessage = ({
           <Button
             icon
             style={{
-              backgroundColor: "#0f68b9",
-              color: "#fff"
+              backgroundColor: "#F2F6F8",
+              color: "#BBCAD9"
             }}
           >
             <Icon
               name="add circle"
               style={{
-                fontSize: "16px",
+                fontSize: "18px",
                 fontWeight: "lighter",
                 display: "flex",
                 alignItems: "center",
@@ -75,12 +83,13 @@ const SendMessage = ({
       />
     </FileUpload>
     <Input
+      autoComplete="off"
       name="message"
-      icon="facebook messenger"
+      icon="smile"
       value={values.message}
       onChange={handleChange}
       onBlur={handleBlur}
-      placeholder={`Type something to send... # ${placeholder}`}
+      placeholder={`Message... # ${placeholder}`}
       onKeyDown={e => {
         if (e.keyCode === ENTER_KEY && !isSubmitting) {
           handleSubmit(e);

@@ -1,0 +1,68 @@
+.about-us {
+  width: 100vw;
+  background-color: #fff;
+  font-family: AvenirNext, sans-serif;
+  padding: 200px 77px;
+}
+
+.about-us > .about-us__title {
+  font-family: AvenirNextDemi, sans-serif;
+  font-size: 40px;
+  text-align: center;
+}
+
+.about-us > .about-us__title > span {
+  color: #0878cb;
+}
+
+.about-us > .about-us__content {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-us > .about-us__content > .about-us__image > .image {
+  user-select: none !important;
+  pointer-events: none;
+}
+
+.about-us > .about-us__content > .about-us__philosophy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 100px;
+}
+
+.about-us > .about-us__content > .about-us__philosophy > h3 {
+  font-family: AvenirNextDemi, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
+
+.about-us > .about-us__content > .about-us__philosophy > .about-us__items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 50px;
+  padding-top: 50px;
+}
+
+.about-us
+  > .about-us__content
+  > .about-us__philosophy
+  > .about-us__items
+  > .about-us__item {
+  font-size: 20px;
+}
+
+.about-us
+  > .about-us__content
+  > .about-us__philosophy
+  > .about-us__items
+  > .about-us__item
+  h5 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

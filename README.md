@@ -4,8 +4,8 @@ What the app looks like:
 
 The home page:
 
-![Prototype](./src/images/landing.png)
+![Prototype](./src/images/home.png)
 
 The chatroom:
 
-![Prototype](./src/images/view-team.png)
+![Prototype](./src/images/chat-room.png)

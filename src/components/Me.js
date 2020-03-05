@@ -9,10 +9,11 @@ const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 3 / 4;
   background-color: #f4f7fa;
+  box-shadow: 0 -3px 6px rgba(200, 200, 200, 0.2);
   color: #000;
   padding: 10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   button {
     display: none;
@@ -235,9 +236,7 @@ class Me extends React.Component {
           src={`https://api.adorable.io/avatars/40/${username}@adorable.io`}
           style={{
             borderRadius: "50%",
-            margin: "5px",
-            border: "2px solid #0f68b9",
-            padding: "3px"
+            margin: "5px"
           }}
         />
         <div
@@ -253,7 +252,7 @@ class Me extends React.Component {
             fontSize: "16px",
             fontWeight: "bolder",
             paddingLeft: "7px",
-            color: "#0f68b9",
+            color: "#000",
             zIndex: 2
           }}
         >
@@ -262,13 +261,13 @@ class Me extends React.Component {
             style={{
               fontSize: "13px",
               fontWeight: "lighter",
-              color: "#6899bd"
+              color: "#000"
             }}
           >
-            member
+            #000
           </span>
         </div>
-        <div>
+        <div style={{ marginTop: "10px" }}>
           <Icon
             name="volume up"
             style={{ marginRight: "10px" }}

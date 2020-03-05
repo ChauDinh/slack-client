@@ -12,6 +12,8 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
 
+import RegisterImage from "../images/register.png";
+
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -19,7 +21,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem 40px;
-  background: #f8f9fb;
+  background: #fff;
+
+  .container {
+    margin-right: 50px !important;
+    margin-left: 0 !important;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -78,6 +85,10 @@ export class Register extends Component {
     }
   };
 
+  goBack = () => {
+    this.props.history.push("/");
+  };
+
   render() {
     const {
       username,
@@ -111,7 +122,7 @@ export class Register extends Component {
             justifyContent: "center",
             height: "80%",
             width: "650px",
-            padding: "0 4.55rem"
+            padding: "0 0 0 200px"
           }}
         >
           <Header
@@ -119,9 +130,9 @@ export class Register extends Component {
             style={{
               fontWeight: "500",
               fontSize: "3.5rem",
-              color: "#0878CB",
-              fontFamily: "Helvetica Neue",
-              marginBottom: "50px"
+              color: "#000",
+              fontFamily: "AvenirNextDemi, sans-serif",
+              marginBottom: "20px"
             }}
           >
             Register
@@ -133,12 +144,15 @@ export class Register extends Component {
               list={errorList}
             />
           ) : null}
-          <Form style={{ width: "100%", marginBottom: "1rem" }}>
+          <Form
+            autoComplete="off"
+            style={{ width: "100%", marginBottom: "1rem" }}
+          >
             <FormField error={!!usernameError}>
               <label
                 style={{
                   color: "#474e5d",
-                  fontFamily: "Helvetica Neue",
+                  fontFamily: "AvenirNext, sans-serif",
                   fontSize: "15px",
                   fontWeight: "700"
                 }}
@@ -152,7 +166,8 @@ export class Register extends Component {
                 transparent
                 size="small"
                 style={{
-                  borderBottom: "1px solid #ddd"
+                  borderBottom: "1px solid #ddd",
+                  width: "80%"
                 }}
               />
             </FormField>
@@ -160,7 +175,7 @@ export class Register extends Component {
               <label
                 style={{
                   color: "#474e5d",
-                  fontFamily: "Helvetica Neue",
+                  fontFamily: "AvenirNext, sans-serif",
                   fontSize: "15px",
                   fontWeight: "700"
                 }}
@@ -174,7 +189,8 @@ export class Register extends Component {
                 transparent
                 size="small"
                 style={{
-                  borderBottom: "1px solid #ddd"
+                  borderBottom: "1px solid #ddd",
+                  width: "80%"
                 }}
               />
             </FormField>
@@ -182,7 +198,7 @@ export class Register extends Component {
               <label
                 style={{
                   color: "#474e5d",
-                  fontFamily: "Helvetica Neue",
+                  fontFamily: "AvenirNext, sans-serif",
                   fontSize: "15px",
                   fontWeight: "700"
                 }}
@@ -197,10 +213,26 @@ export class Register extends Component {
                 transparent
                 size="small"
                 style={{
-                  borderBottom: "1px solid #ddd"
+                  borderBottom: "1px solid #ddd",
+                  width: "80%"
                 }}
               />
             </FormField>
+            <div style={{ display: "block" }}>
+              Do have account?
+              <a
+                href="/login"
+                style={{
+                  borderRadius: "50px",
+                  fontWeight: "200",
+                  color: "#0878CB",
+                  padding: "0.785714em 1.5em 0 0",
+                  marginLeft: "10px"
+                }}
+              >
+                Login
+              </a>
+            </div>
             <Button
               primary
               onClick={this.handleSubmit}
@@ -209,25 +241,38 @@ export class Register extends Component {
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
-                marginTop: "2rem"
+                marginTop: "2rem",
+                marginRight: "20px"
               }}
             >
               Register
             </Button>
-            <a
-              href="/"
+            <Button
+              secondary
               style={{
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
-                color: "#0878CB",
-                paddingLeft: "1rem"
+                marginTop: "2rem"
               }}
+              onClick={this.goBack}
             >
-              Go to Homepage
-            </a>
+              Cancel
+            </Button>
           </Form>
         </Container>
+        <div
+          className="register__image"
+          style={{
+            height: "100%",
+            width: "50%",
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+          <img alt="" src={RegisterImage} style={{ height: "100%" }} />
+        </div>
       </Wrapper>
     );
   }

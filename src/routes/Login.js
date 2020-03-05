@@ -15,16 +15,22 @@ import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
 import { wsLink } from "../apollo";
+import LoginImage from "../images/login.png";
 
 const Wrapper = styled.div`
   padding: auto, 0;
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background: #f8f9fb;
+  background: #fff;
+
+  .container {
+    margin-right: 0 !important;
+    margin-left: 50px !important;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -108,6 +114,13 @@ class Login extends Component {
 
     return (
       <Wrapper>
+        <div style={{ height: "100%", overflow: "hidden" }}>
+          <img
+            alt=""
+            src={LoginImage}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </div>
         <Container
           text
           style={{
@@ -115,9 +128,7 @@ class Login extends Component {
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "center",
-            height: "80%",
-            width: "100% !important",
-            padding: "0 4.55rem"
+            width: "100% !important"
           }}
         >
           <div style={{ width: "100%" }}>
@@ -126,8 +137,8 @@ class Login extends Component {
               style={{
                 fontWeight: "500",
                 fontSize: "3.5rem",
-                color: "#0878CB",
-                fontFamily: "Helvetica Neue",
+                color: "#000",
+                fontFamily: "AvenirNextDemi",
                 marginBottom: "50px"
               }}
             >
@@ -140,12 +151,12 @@ class Login extends Component {
                 list={errorList}
               />
             ) : null}
-            <Form style={{ width: "100%" }}>
+            <Form autoComplete="off" style={{ width: "100%" }}>
               <FormField error={!!emailError}>
                 <label
                   style={{
                     color: "#474e5d",
-                    fontFamily: "Helvetica Neue",
+                    fontFamily: "AvenirNext",
                     fontSize: "15px",
                     fontWeight: "700"
                   }}
@@ -159,7 +170,8 @@ class Login extends Component {
                   transparent
                   size="small"
                   style={{
-                    borderBottom: "1px solid #ddd"
+                    borderBottom: "1px solid #ddd",
+                    width: "50%"
                   }}
                 />
               </FormField>
@@ -167,7 +179,7 @@ class Login extends Component {
                 <label
                   style={{
                     color: "#474e5d",
-                    fontFamily: "Helvetica Neue",
+                    fontFamily: "AvenirNext",
                     fontSize: "15px",
                     fontWeight: "700"
                   }}
@@ -182,23 +194,26 @@ class Login extends Component {
                   transparent
                   size="small"
                   style={{
-                    borderBottom: "1px solid #ddd"
+                    borderBottom: "1px solid #ddd",
+                    width: "50%"
                   }}
                 />
               </FormField>
-              <a
-                href="/register"
-                style={{
-                  borderRadius: "50px",
-                  fontSize: "1.2rem",
-                  fontWeight: "200",
-                  color: "#0878CB",
-                  padding: "0.785714em 1.5em 0 0",
-                  display: "block"
-                }}
-              >
+              <div style={{ display: "block" }}>
                 Do not have account?
-              </a>
+                <a
+                  href="/register"
+                  style={{
+                    borderRadius: "50px",
+                    fontWeight: "200",
+                    color: "#0878CB",
+                    padding: "0.785714em 1.5em 0 0",
+                    marginLeft: "10px"
+                  }}
+                >
+                  Register
+                </a>
+              </div>
               <Button
                 primary
                 onClick={this.handleSubmit}

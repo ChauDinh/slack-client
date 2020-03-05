@@ -6,9 +6,10 @@ import { Icon, Popup } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 1 / 4;
-  background-color: #0f68b9;
+  background-color: #f8fbff;
   color: #d9cfd9;
   padding-top: 20px;
+  box-shadow: 3px 0 6px rgba(200, 200, 200, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -66,8 +67,8 @@ const List = styled.ul`
 const ListItem = styled.li`
   height: 36px;
   width: 36px;
-  background-color: #fff;
-  color: #0f8deb;
+  background-color: #000;
+  color: #fff;
   margin: auto;
   margin-bottom: 20px;
   display: flex;
@@ -147,7 +148,7 @@ export default ({ teams }) => (
       style={{ marginTop: "50px", marginBottom: "20px", display: "block" }}
     >
       <Back>
-        <Icon style={{ color: "#fff" }} name="home" />
+        <Icon style={{ color: "#000" }} name="home" />
       </Back>
     </Link>
   </Wrapper>

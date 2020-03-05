@@ -1,0 +1,69 @@
+.services {
+  width: 100vw;
+  background-color: #fff;
+  font-family: AvenirNext, sans-serif;
+  padding: 20px 77px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.services > .services__title {
+  font-family: AvenirNextDemi, sans-serif;
+  font-size: 40px;
+  text-align: center;
+}
+
+.services > .services__title > span {
+  color: #0878cb;
+}
+
+.services > .services__items {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+.services > .services__items > .services__item {
+  font-size: 20px;
+  padding: 20px 80px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.services > .services__items > .services__item:hover {
+  background: #9abfda;
+  color: #fff;
+}
+
+.services > .services__items > .services__item > h5 {
+  font-family: AvenirNextDemi, sans-serif;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.services > .services__items > .services__item > h5 > img {
+  margin-left: 10px;
+  height: 16px;
+}
+
+.services > button {
+  font-family: AvenirNextDemi, sans-serif;
+  font-size: 20px;
+  margin-top: 80px;
+  padding: 15px 20px 12px 20px;
+  border-radius: 50px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.services > button:focus {
+  outline: none;
+}

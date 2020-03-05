@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { Icon, Dropdown, Button, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
+import AddCircleImage from "../images/small__icons/add_cycle.png";
+
 const Wrapper = styled.div`
   width: inherit;
   grid-column: 2;
   grid-row: 1 / 4;
-  background-color: #f4f7fa;
+  background-color: #f2f6f8;
   font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -69,9 +71,10 @@ const ListItem = styled.li`
 const ListHeader = styled.li`
   display: flex;
   justify-content: space-between;
+  font-family: AvenirNextDemi, sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #79868c;
+  color: #000;
   text-transform: uppercase;
   ${paddingLeft};
   ${paddingRight};
@@ -84,10 +87,9 @@ const PushLeft = styled.div`
 const channel = ({ id, name }, teamId) => (
   <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
     <ListItem>
-      <div>
-        <Icon name="globe" size="small" color="blue" />
-        {`${name}`}
-      </div>
+      <div
+        style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}
+      >{`#${name}`}</div>
     </ListItem>
   </Link>
 );
@@ -97,7 +99,11 @@ const dmChannel = ({ id, name }, teamId) => (
     style={{ color: "black" }}
     to={`/view-team/${teamId}/${id}`}
   >
-    <ListItem>{name}</ListItem>
+    <ListItem>
+      <div style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}>
+        {name}
+      </div>
+    </ListItem>
   </Link>
 );
 
@@ -120,7 +126,8 @@ export default ({
         alignItems: "center",
         fontSize: "20px",
         fontWeight: "500",
-        background: "#f4f7fa",
+        background: "#f2f6f8",
+        boxShadow: "0px 3px 6px rgba(200, 200, 200, 0.2)",
         height: "50px",
         position: "relative"
       }}
@@ -136,8 +143,9 @@ export default ({
         <div
           style={{
             marginLeft: "20px",
+            fontFamily: "AvenirNextDemi, sans-serif",
             fontWeight: "900",
-            color: "#0f68b9",
+            color: "#000",
             overflow: "hidden",
             whiteSpace: "nowrap",
             textOverflow: "ellipsis"
@@ -179,19 +187,13 @@ export default ({
               width: "100%"
             }}
           >
-            Channels{" "}
+            All Channels{" "}
             {isOwner && (
               <Button
                 onClick={onAddChannelClick}
-                style={{
-                  background: "#0f68b9",
-                  color: "#fff",
-                  padding: "5px 10px",
-                  fontSize: "13px",
-                  fontWeight: "700"
-                }}
+                style={{ padding: 0, background: "none" }}
               >
-                create new
+                <img alt="" src={AddCircleImage} width="15px" />
               </Button>
             )}
           </div>
@@ -218,14 +220,11 @@ export default ({
             <Button
               onClick={onDirectMessageClick}
               style={{
-                background: "#0f68b9",
-                color: "#fff",
-                padding: "5px 10px",
-                fontSize: "13px",
-                fontWeight: "700"
+                padding: 0,
+                background: "none"
               }}
             >
-              invite
+              <img alt="" src={AddCircleImage} width="15px" />
             </Button>
           </div>
         </ListHeader>

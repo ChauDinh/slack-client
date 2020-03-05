@@ -24,8 +24,8 @@ const newChannelMessageSubscription = gql`
 `;
 
 const StyledImage = styled.img`
-  border-radius: 7px;
-  margin-right: 16px;
+  border-radius: 50%;
+  margin-right: 10px;
 `;
 
 const StyledDate = styled.span`
@@ -80,7 +80,7 @@ const NormalMessage = ({ text }) => {
       style={{
         fontWeight: "300",
         fontSize: "16px",
-        fontFamily: "Open Sans, sans-serif"
+        fontFamily: "AvenirNext, sans-serif"
       }}
     >
       {text}
@@ -234,8 +234,9 @@ class MessageContainer extends React.Component {
                     padding: "15px 1rem",
                     marginTop: "10px",
                     background: "#fff",
+                    fontFamily: "AvenirNext, sans-serif",
+                    fontSize: "16px"
                     // borderRadius: "5px",
-                    boxShadow: "3px 3px 10px lightgray"
                   }}
                 >
                   <Comment.Content
@@ -252,7 +253,12 @@ class MessageContainer extends React.Component {
                     />
                     <div style={{ width: "100%" }}>
                       <Comment.Author as="a">
-                        <span style={{ fontWeight: "600", fontSize: "15px" }}>
+                        <span
+                          style={{
+                            fontFamily: "AvenirNextDemi, sans-serif",
+                            fontSize: "15px"
+                          }}
+                        >
                           {m.user.username}
                         </span>
                       </Comment.Author>
