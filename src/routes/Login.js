@@ -114,7 +114,7 @@ class Login extends Component {
 
     return (
       <Wrapper>
-        <div style={{ height: "100%", overflow: "hidden" }}>
+        <div style={{ height: "100%", width: "inherit", overflow: "hidden" }}>
           <img
             alt=""
             src={LoginImage}

@@ -2,6 +2,11 @@ import React from "react";
 import { Image } from "semantic-ui-react";
 
 export default ({ name, last_seen }) => {
+  const differenceMiliseconds = Date.now() - last_seen;
+  const getMinutes = Math.floor(differenceMiliseconds / 60000);
+  const getHours = Math.floor(getMinutes % 60);
+  const getDays = Math.floor(getHours % 24);
+
   return (
     <div
       style={{
@@ -20,7 +25,7 @@ export default ({ name, last_seen }) => {
       />
       <div
         style={
-          Date.now() - last_seen < 60000
+          differenceMiliseconds < 60000
             ? {
                 zIndex: "2",
                 background: "#24d424",
@@ -45,7 +50,18 @@ export default ({ name, last_seen }) => {
               }
         }
       ></div>
-      <p>{name}</p>
+      <div style={{ textAlign: "left" }}>
+        <h4>{name}</h4>
+        <p style={{ color: "#000" }}>
+          {differenceMiliseconds < 60000
+            ? " 1 minute ago"
+            : getMinutes < 61
+            ? `${getMinutes} minutes ago`
+            : getHours < 24
+            ? `${getHours} hours ago`
+            : `${getDays} day ago`}
+        </p>
+      </div>
     </div>
   );
 };
