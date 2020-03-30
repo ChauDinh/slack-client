@@ -23,7 +23,7 @@ export const Contact = () => {
           </div>
           <div className="contact-us__address">
             <h3>
-              SlacClone Inc. <br /> XXX The Green St, NY, 444 <br />
+              SlackQL Inc. <br /> XXX The Green St, NY, 444 <br />
               United State
             </h3>
           </div>

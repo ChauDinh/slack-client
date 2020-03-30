@@ -25,7 +25,7 @@ const UserModal = ({ name, last_seen }) => (
       maxWidth: "450px"
     }}
   >
-    <Modal.Header style={{ backgroundColor: "#0f8deb", color: "#fff" }}>
+    <Modal.Header style={{ backgroundColor: "#000", color: "#fff" }}>
       User info
     </Modal.Header>
     <Modal.Content

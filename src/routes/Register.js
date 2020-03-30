@@ -6,27 +6,21 @@ import {
   Input,
   Button,
   Message,
-  FormField
+  FormField,
+  Icon
 } from "semantic-ui-react";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import { graphql } from "react-apollo";
 
-import RegisterImage from "../images/register.png";
-
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem 40px;
   background: #fff;
-
-  .container {
-    margin-right: 50px !important;
-    margin-left: 0 !important;
-  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -113,16 +107,36 @@ export class Register extends Component {
 
     return (
       <Wrapper>
+        <header
+          className="header"
+          style={{
+            display: "block",
+            width: "100vw",
+            padding: "20px",
+            boxShadow: "0px 3px 6px rgba(200, 200, 200, 0.2)"
+          }}
+        >
+          <div
+            className="header__title"
+            style={{
+              fontSize: "20px",
+              fontWeight: "900",
+              fontFamily: "AvenirNextDemi"
+            }}
+          >
+            SlackQL
+          </div>
+        </header>
         <Container
           text
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
-            height: "80%",
-            width: "650px",
-            padding: "0 0 0 200px"
+            height: "100%",
+            width: "100%",
+            flexGrow: 1
           }}
         >
           <Header
@@ -132,10 +146,10 @@ export class Register extends Component {
               fontSize: "3.5rem",
               color: "#000",
               fontFamily: "AvenirNextDemi, sans-serif",
-              marginBottom: "20px"
+              marginBottom: "10px"
             }}
           >
-            Register
+            Sign Up, It's Free!
           </Header>
           {errorList.length ? (
             <Message
@@ -146,7 +160,12 @@ export class Register extends Component {
           ) : null}
           <Form
             autoComplete="off"
-            style={{ width: "100%", marginBottom: "1rem" }}
+            style={{
+              width: "500px",
+              marginBottom: "1rem",
+              display: "flex",
+              flexDirection: "column"
+            }}
           >
             <FormField error={!!usernameError}>
               <label
@@ -167,7 +186,7 @@ export class Register extends Component {
                 size="small"
                 style={{
                   borderBottom: "1px solid #ddd",
-                  width: "80%"
+                  width: "100%"
                 }}
               />
             </FormField>
@@ -190,7 +209,7 @@ export class Register extends Component {
                 size="small"
                 style={{
                   borderBottom: "1px solid #ddd",
-                  width: "80%"
+                  width: "100%"
                 }}
               />
             </FormField>
@@ -214,7 +233,7 @@ export class Register extends Component {
                 size="small"
                 style={{
                   borderBottom: "1px solid #ddd",
-                  width: "80%"
+                  width: "100%"
                 }}
               />
             </FormField>
@@ -230,7 +249,7 @@ export class Register extends Component {
                   marginLeft: "10px"
                 }}
               >
-                Login
+                Sign In
               </a>
             </div>
             <Button
@@ -242,10 +261,11 @@ export class Register extends Component {
                 fontSize: "1.2rem",
                 fontWeight: "200",
                 marginTop: "2rem",
-                marginRight: "20px"
+                marginRight: "20px",
+                width: "100%"
               }}
             >
-              Register
+              Sign Up
             </Button>
             <Button
               secondary
@@ -253,7 +273,8 @@ export class Register extends Component {
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
-                marginTop: "2rem"
+                marginTop: "2rem",
+                width: "100%"
               }}
               onClick={this.goBack}
             >
@@ -261,18 +282,37 @@ export class Register extends Component {
             </Button>
           </Form>
         </Container>
-        <div
-          className="register__image"
-          style={{
-            height: "100%",
-            width: "50%",
-            overflow: "hidden",
-            display: "flex",
-            justifyContent: "center"
-          }}
-        >
-          <img alt="" src={RegisterImage} style={{ height: "100%" }} />
-        </div>
+        <footer style={{ width: "100vw", flexShrink: 0 }}>
+          <div className="footer__branding">
+            <h4>SlackQL Inc</h4>
+            <p>@2020</p>
+          </div>
+          <div className="footer__services">
+            <h4>Serivces</h4>
+            <ul>
+              <li>Purchase</li>
+              <li>Down payment</li>
+              <li>Refinane</li>
+              <li>How it works</li>
+            </ul>
+          </div>
+          <div className="footer__about">
+            <h4>About</h4>
+            <ul>
+              <li>Who we are</li>
+              <li>Contact us</li>
+              <li>FAQs</li>
+              <li>Privacy policy</li>
+              <li>Terms of use</li>
+            </ul>
+          </div>
+          <div className="footer__social">
+            <h4>Find us on</h4>
+            <Icon name="instagram" />
+            <Icon name="dribbble" />
+            <Icon name="github" />
+          </div>
+        </footer>
       </Wrapper>
     );
   }

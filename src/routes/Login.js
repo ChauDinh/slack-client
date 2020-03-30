@@ -8,29 +8,25 @@ import {
   Header,
   Form,
   FormField,
-  Message
+  Message,
+  Icon
 } from "semantic-ui-react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
 import { wsLink } from "../apollo";
-import LoginImage from "../images/login.png";
 
 const Wrapper = styled.div`
   padding: auto, 0;
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 0 20px;
   background: #fff;
-
-  .container {
-    margin-right: 0 !important;
-    margin-left: 50px !important;
-  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -114,136 +110,189 @@ class Login extends Component {
 
     return (
       <Wrapper>
-        <div style={{ height: "100%", width: "inherit", overflow: "hidden" }}>
-          <img
-            alt=""
-            src={LoginImage}
-            style={{ width: "100%", height: "100%" }}
-          />
-        </div>
+        <header
+          className="header"
+          style={{
+            display: "block",
+            width: "100vw",
+            padding: "20px",
+            boxShadow: "0px 3px 6px rgba(200, 200, 200, 0.2)"
+          }}
+        >
+          <div
+            className="header__title"
+            style={{
+              fontSize: "20px",
+              fontWeight: "900",
+              fontFamily: "AvenirNextDemi"
+            }}
+          >
+            SlackQL
+          </div>
+        </header>
         <Container
           text
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
-            width: "100% !important"
+            width: "100%",
+            height: "100%",
+            flexGrow: 1
           }}
         >
-          <div style={{ width: "100%" }}>
-            <Header
-              as="h2"
+          <Header
+            as="h2"
+            style={{
+              fontWeight: "500",
+              fontSize: "3.5rem",
+              color: "#000",
+              fontFamily: "AvenirNextDemi",
+              marginBottom: "10px"
+            }}
+          >
+            Login
+          </Header>
+          {errorList.length ? (
+            <Message
+              error
+              header="There was some errors with your submission"
+              list={errorList}
+            />
+          ) : null}
+          <Form
+            autoComplete="off"
+            style={{
+              width: "500px",
+              marginBottom: "1rem",
+              display: "flex",
+              flexDirection: "column"
+            }}
+          >
+            <FormField error={!!emailError}>
+              <label
+                style={{
+                  color: "#474e5d",
+                  fontFamily: "AvenirNext",
+                  fontSize: "15px",
+                  fontWeight: "700"
+                }}
+              >
+                Email
+              </label>
+              <Input
+                name="email"
+                onChange={this.handleChange}
+                value={email}
+                transparent
+                size="small"
+                style={{
+                  borderBottom: "1px solid #ddd",
+                  width: "100%"
+                }}
+              />
+            </FormField>
+            <FormField error={!!passwordError}>
+              <label
+                style={{
+                  color: "#474e5d",
+                  fontFamily: "AvenirNext",
+                  fontSize: "15px",
+                  fontWeight: "700"
+                }}
+              >
+                Password
+              </label>
+              <Input
+                name="password"
+                onChange={this.handleChange}
+                value={password}
+                type="password"
+                transparent
+                size="small"
+                style={{
+                  borderBottom: "1px solid #ddd",
+                  width: "100%"
+                }}
+              />
+            </FormField>
+            <div style={{ display: "block" }}>
+              Do not have account?
+              <a
+                href="/register"
+                style={{
+                  borderRadius: "50px",
+                  fontWeight: "200",
+                  color: "#0878CB",
+                  padding: "0.785714em 1.5em 0 0",
+                  marginLeft: "10px"
+                }}
+              >
+                Register
+              </a>
+            </div>
+            <Button
+              primary
+              onClick={this.handleSubmit}
               style={{
-                fontWeight: "500",
-                fontSize: "3.5rem",
-                color: "#000",
-                fontFamily: "AvenirNextDemi",
-                marginBottom: "50px"
+                background: "#0f68b9",
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "200",
+                marginTop: "2rem",
+                marginRight: "20px",
+                width: "100%"
               }}
             >
               Login
-            </Header>
-            {errorList.length ? (
-              <Message
-                error
-                header="There was some errors with your submission"
-                list={errorList}
-              />
-            ) : null}
-            <Form autoComplete="off" style={{ width: "100%" }}>
-              <FormField error={!!emailError}>
-                <label
-                  style={{
-                    color: "#474e5d",
-                    fontFamily: "AvenirNext",
-                    fontSize: "15px",
-                    fontWeight: "700"
-                  }}
-                >
-                  Email
-                </label>
-                <Input
-                  name="email"
-                  onChange={this.handleChange}
-                  value={email}
-                  transparent
-                  size="small"
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    width: "50%"
-                  }}
-                />
-              </FormField>
-              <FormField error={!!passwordError}>
-                <label
-                  style={{
-                    color: "#474e5d",
-                    fontFamily: "AvenirNext",
-                    fontSize: "15px",
-                    fontWeight: "700"
-                  }}
-                >
-                  Password
-                </label>
-                <Input
-                  name="password"
-                  onChange={this.handleChange}
-                  value={password}
-                  type="password"
-                  transparent
-                  size="small"
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    width: "50%"
-                  }}
-                />
-              </FormField>
-              <div style={{ display: "block" }}>
-                Do not have account?
-                <a
-                  href="/register"
-                  style={{
-                    borderRadius: "50px",
-                    fontWeight: "200",
-                    color: "#0878CB",
-                    padding: "0.785714em 1.5em 0 0",
-                    marginLeft: "10px"
-                  }}
-                >
-                  Register
-                </a>
-              </div>
-              <Button
-                primary
-                onClick={this.handleSubmit}
-                style={{
-                  background: "#0f68b9",
-                  borderRadius: "50px",
-                  fontSize: "1.2rem",
-                  fontWeight: "200",
-                  marginTop: "2rem",
-                  marginRight: "20px"
-                }}
-              >
-                Login
-              </Button>
-              <Button
-                secondary
-                style={{
-                  borderRadius: "50px",
-                  fontSize: "1.2rem",
-                  fontWeight: "200",
-                  marginTop: "2rem"
-                }}
-                onClick={this.goBack}
-              >
-                Go Back
-              </Button>
-            </Form>
-          </div>
+            </Button>
+            <Button
+              secondary
+              style={{
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "200",
+                marginTop: "2rem",
+                width: "100%"
+              }}
+              onClick={this.goBack}
+            >
+              Go Back
+            </Button>
+          </Form>
         </Container>
-        {/* <Image src={LoginImage} width="50%" alt="login" /> */}
+        <footer style={{ width: "100vw", flexShrink: 0 }}>
+          <div className="footer__branding">
+            <h4>SlackQL Inc</h4>
+            <p>@2020</p>
+          </div>
+          <div className="footer__services">
+            <h4>Serivces</h4>
+            <ul>
+              <li>Purchase</li>
+              <li>Down payment</li>
+              <li>Refinane</li>
+              <li>How it works</li>
+            </ul>
+          </div>
+          <div className="footer__about">
+            <h4>About</h4>
+            <ul>
+              <li>Who we are</li>
+              <li>Contact us</li>
+              <li>FAQs</li>
+              <li>Privacy policy</li>
+              <li>Terms of use</li>
+            </ul>
+          </div>
+          <div className="footer__social">
+            <h4>Find us on</h4>
+            <Icon name="instagram" />
+            <Icon name="dribbble" />
+            <Icon name="github" />
+          </div>
+        </footer>
       </Wrapper>
     );
   }

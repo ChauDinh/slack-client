@@ -7,6 +7,7 @@ import styled from "styled-components";
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
 import Message from "../components/Messages";
+import dateDisplay from "../dateDisplay";
 
 const newChannelMessageSubscription = gql`
   subscription($channelId: Int!) {
@@ -263,7 +264,11 @@ class MessageContainer extends React.Component {
                         </span>
                       </Comment.Author>
                       <Comment.Metadata>
-                        <StyledDate className="date">{m.created_at}</StyledDate>
+                        <StyledDate className="date">
+                          {dateDisplay(m.created_at)[0]} at{" "}
+                          {dateDisplay(m.created_at)[4]}
+                        </StyledDate>
+                        {console.log(dateDisplay(m.created_at))}
                       </Comment.Metadata>
                       <br />
                       <DisplayMessage message={m} />

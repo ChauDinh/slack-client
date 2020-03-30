@@ -29,23 +29,23 @@ export default ({ name, last_seen }) => {
             ? {
                 zIndex: "2",
                 background: "#24d424",
-                width: "12px",
-                height: "12px",
+                width: "16px",
+                height: "16px",
                 borderRadius: "50%",
                 position: "absolute",
-                left: "30px",
-                bottom: "-1px",
+                left: "28px",
+                bottom: "0px",
                 border: "2px solid #f5f5f5"
               }
             : {
                 zIndex: "2",
                 background: "lightgray",
-                width: "12px",
-                height: "12px",
+                width: "16px",
+                height: "16px",
                 borderRadius: "50%",
                 position: "absolute",
-                left: "30px",
-                bottom: "-1px",
+                left: "28px",
+                bottom: "0px",
                 border: "2px solid #fff"
               }
         }
@@ -54,7 +54,7 @@ export default ({ name, last_seen }) => {
         <h4>{name}</h4>
         <p style={{ color: "#000" }}>
           {differenceMiliseconds < 60000
-            ? " 1 minute ago"
+            ? null
             : getMinutes < 61
             ? `${getMinutes} minutes ago`
             : getHours < 24
