@@ -61,10 +61,10 @@ const Home = () => {
             </div>
             <div className="header__login-register">
               <a href="/login" className="header__login">
-                <p>Login</p>
+                <p>Sign In</p>
               </a>
               <a href="/register" className="header__register">
-                <p>Register</p>
+                <p>Sign Up</p>
               </a>
             </div>
           </header>

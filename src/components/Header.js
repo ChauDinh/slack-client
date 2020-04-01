@@ -7,7 +7,7 @@ import ImageShareImg from "../images/small__icons/image_share.png";
 
 const Wrapper = styled.div`
   z-index: 2;
-  background: #fff;
+  background: #3f9fff;
   grid-column-start: 3;
   grid-column-end: 5;
   grid-row: 1;
@@ -17,7 +17,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding-left: 20px;
   padding-right: 20px;
-  box-shadow: 0px 3px 6px rgba(200, 200, 200, 0.2);
   .prompt {
     border-radius: 5px !important;
     height: 30px;
@@ -36,7 +35,7 @@ export default ({ channelName }) => (
       style={{
         padding: "0",
         margin: "0",
-        color: "#333"
+        color: "#fff"
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -51,14 +50,14 @@ export default ({ channelName }) => (
       <Icon
         name="user"
         className="user__semantic-icon"
-        style={{ color: "#000", marginRight: "20px", fontSize: "16px" }}
+        style={{ color: "#fff", marginRight: "20px", fontSize: "16px" }}
       />
       <Icon
         className="phone__semantic-icon"
         name="phone"
-        style={{ color: "#000", marginRight: "20px", fontSize: "16px" }}
+        style={{ color: "#fff", marginRight: "20px", fontSize: "16px" }}
       />
-      <img
+      {/* <img
         alt=""
         src={ImageShareImg}
         height="16px"
@@ -69,6 +68,16 @@ export default ({ channelName }) => (
         src={FileImage}
         height="16px"
         style={{ marginRight: "20px" }}
+      /> */}
+      <Icon
+        className="image-sharing__semantic-icon"
+        name="file image"
+        style={{ color: "#fff", marginRight: "20px", fontSize: "16px" }}
+      />
+      <Icon
+        className="file-sharing__semantic-icon"
+        name="file"
+        style={{ color: "#fff", marginRight: "20px", fontSize: "16px" }}
       />
       <Search />
     </div>

@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   width: inherit;
   grid-column: 2;
   grid-row: 1 / 4;
-  background-color: #f2f6f8;
+  background-color: #fff;
   font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -126,8 +126,7 @@ export default ({
         alignItems: "center",
         fontSize: "20px",
         fontWeight: "500",
-        background: "#f2f6f8",
-        boxShadow: "0px 3px 6px rgba(200, 200, 200, 0.2)",
+        background: "#69b4ff",
         height: "50px",
         position: "relative"
       }}
@@ -145,7 +144,7 @@ export default ({
             marginLeft: "20px",
             fontFamily: "AvenirNextDemi, sans-serif",
             fontWeight: "900",
-            color: "#000",
+            color: "#fff",
             overflow: "hidden",
             whiteSpace: "nowrap",
             textOverflow: "ellipsis"
@@ -156,7 +155,12 @@ export default ({
       </div>
       <Dropdown
         pointing="top right"
-        style={{ right: "20px", position: "absolute", zIndex: "2" }}
+        style={{
+          right: "20px",
+          position: "absolute",
+          zIndex: "2",
+          color: "#fff"
+        }}
       >
         <Dropdown.Menu>
           <Dropdown.Item>

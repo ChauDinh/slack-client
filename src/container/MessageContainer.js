@@ -7,7 +7,6 @@ import styled from "styled-components";
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
 import Message from "../components/Messages";
-import dateDisplay from "../dateDisplay";
 
 const newChannelMessageSubscription = gql`
   subscription($channelId: Int!) {
@@ -203,7 +202,8 @@ class MessageContainer extends React.Component {
   render() {
     const {
       data: { loading, messages },
-      channelId
+      channelId,
+      username
     } = this.props;
 
     if (!messages) {
@@ -234,25 +234,29 @@ class MessageContainer extends React.Component {
                   style={{
                     padding: "15px 1rem",
                     marginTop: "10px",
-                    background: "#fff",
                     fontFamily: "AvenirNext, sans-serif",
                     fontSize: "16px"
-                    // borderRadius: "5px",
                   }}
                 >
                   <Comment.Content
-                    style={{
-                      // paddingBottom: "20px",
-                      // marginTop: "20px",
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "flex-start"
-                    }}
+                    style={
+                      m.user.username === username
+                        ? {
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "flex-end"
+                          }
+                        : {
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "flex-start"
+                          }
+                    }
                   >
                     <StyledImage
                       src={`https://api.adorable.io/avatars/30/${m.user.username}@adorable.io`}
                     />
-                    <div style={{ width: "100%" }}>
+                    <div>
                       <Comment.Author as="a">
                         <span
                           style={{
@@ -265,10 +269,11 @@ class MessageContainer extends React.Component {
                       </Comment.Author>
                       <Comment.Metadata>
                         <StyledDate className="date">
-                          {dateDisplay(m.created_at)[0]} at{" "}
-                          {dateDisplay(m.created_at)[4]}
+                          at {m.created_at.split(" ")[4]},{" "}
+                          {m.created_at.split(" ")[0]},{" "}
+                          {m.created_at.split(" ")[1]},{" "}
+                          {m.created_at.split(" ")[2]}
                         </StyledDate>
-                        {console.log(dateDisplay(m.created_at))}
                       </Comment.Metadata>
                       <br />
                       <DisplayMessage message={m} />

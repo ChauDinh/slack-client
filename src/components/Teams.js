@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   background-color: #f8fbff;
   color: #d9cfd9;
   padding-top: 20px;
-  box-shadow: 3px 0 6px rgba(200, 200, 200, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -81,7 +80,7 @@ const ListItem = styled.li`
   transition: all 0.3s ease-out;
   &:hover {
     border-radius: 10px;
-    background: #00b5ad;
+    background: #3f9fff;
     color: #fff;
     cursor: pointer;
   }
@@ -138,7 +137,7 @@ export default ({ teams }) => (
     <List>
       {teams.map(teamItem)}
       <Link key="add-team" to={`/create-team`}>
-        <ListItem style={{ background: "#00b5ad", color: "#fff" }}>+</ListItem>
+        <ListItem style={{ background: "#3f9fff", color: "#fff" }}>+</ListItem>
       </Link>
     </List>
 

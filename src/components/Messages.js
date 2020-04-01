@@ -13,23 +13,19 @@ export default styled.div`
   background-color: #fff;
   /* width */
   ::-webkit-scrollbar {
-    width: 16px;
+    width: 5px;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
     background-color: #f3f3f3;
     background-clip: padding-box;
-    border: 3px solid #fff;
-    border-radius: 50px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background-color: #d3e1ef;
     background-clip: padding-box;
-    border: 3px solid #fff;
-    border-radius: 50px;
   }
 
   @media (max-width: 768px) {

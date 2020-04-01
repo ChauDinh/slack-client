@@ -132,8 +132,8 @@ body {
 }
 
 .main-rectangle > .content > .content__image > .image {
-  width: 769px;
-  right: 35px;
+  width: 80rem;
+  right: initial;
   bottom: 0;
   user-select: none !important;
   pointer-events: none;
@@ -150,13 +150,13 @@ body {
   font-family: "AvenirNext", sans-serif;
   line-height: 95px;
   font-size: 90px;
-  font-weight: bolder;
+  font-weight: 900;
   color: #000;
   margin-bottom: 20px;
 }
 
 .main-rectangle > .content > .content__text > .content__slogan > span {
-  color: #0878cb;
+  color: #3f9fff;
 }
 
 .main-rectangle > .content > .content__text > .content__button {

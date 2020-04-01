@@ -265,7 +265,7 @@ export class Register extends Component {
                 width: "100%"
               }}
             >
-              Sign Up
+              Create accout
             </Button>
             <Button
               secondary

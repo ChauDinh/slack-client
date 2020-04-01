@@ -14,12 +14,11 @@ const Wrapper = styled.div`
   grid-template-columns: 50px auto;
   background: #fff;
   .input > input {
-    background: #f2f6f8;
-    border: 1px solid #ebedf2 !important;
+    background: #f8f8f8;
+    border: 1px solid #bbcad9 !important;
   }
   .input > input:focus {
-    background: #ebedf2;
-    border: 1px solid #ebedf2 !important;
+    background: #fff;
   }
   .input > i {
     color: #bbcad9;
@@ -63,7 +62,8 @@ const SendMessage = ({
           <Button
             icon
             style={{
-              backgroundColor: "#F2F6F8",
+              backgroundColor: "#f8f8f8",
+              border: "1px solid #BBCAD9",
               color: "#BBCAD9"
             }}
           >

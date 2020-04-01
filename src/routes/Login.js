@@ -152,7 +152,7 @@ class Login extends Component {
               marginBottom: "10px"
             }}
           >
-            Login
+            Sign In
           </Header>
           {errorList.length ? (
             <Message
@@ -229,14 +229,14 @@ class Login extends Component {
                   marginLeft: "10px"
                 }}
               >
-                Register
+                Create account
               </a>
             </div>
             <Button
               primary
               onClick={this.handleSubmit}
               style={{
-                background: "#0f68b9",
+                background: "#3f9fff",
                 borderRadius: "50px",
                 fontSize: "1.2rem",
                 fontWeight: "200",
@@ -245,7 +245,7 @@ class Login extends Component {
                 width: "100%"
               }}
             >
-              Login
+              Sign In
             </Button>
             <Button
               secondary

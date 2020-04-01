@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   grid-column: 4;
   grid-row: 2;
   grid-row-end: 4;
-  background: #f2f6f8;
+  background: #fff;
   padding: 20px 20px;
   width: 240px;
   overflow-y: auto;
