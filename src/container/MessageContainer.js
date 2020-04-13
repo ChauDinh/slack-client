@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Comment } from "semantic-ui-react";
 import styled from "styled-components";
+import socketIOClient from "socket.io-client";
 
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
@@ -19,6 +20,7 @@ const newChannelMessageSubscription = gql`
       url
       filetype
       created_at
+      when
     }
   }
 `;
@@ -47,11 +49,11 @@ const ImageMessage = ({ url }) => {
         width: "100%",
         height: "inherit",
         maxWidth: "350px",
-        padding: "10px"
+        padding: "10px",
       }}
       width="350px"
       src={url}
-      alt="sdfghjk5678"
+      alt={url}
     />
   );
 };
@@ -80,7 +82,7 @@ const NormalMessage = ({ text }) => {
       style={{
         fontWeight: "300",
         fontSize: "16px",
-        fontFamily: "AvenirNext, sans-serif"
+        fontFamily: "AvenirNext, sans-serif",
       }}
     >
       {text}
@@ -105,8 +107,16 @@ const DisplayMessage = ({ message: { url, text, filetype } }) => {
 
 class MessageContainer extends React.Component {
   state = {
-    hasMoreItems: true
+    hasMoreItems: true,
+    endpoint: `ws://localhost:8080`,
   };
+
+  componentDidMount() {
+    const { endpoint } = this.state;
+    const socket = socketIOClient(endpoint);
+    socket.emit("joinRoom", { username: this.props.username });
+    socket.on("currentUser", (msg) => console.log(msg));
+  }
 
   componentWillMount() {
     this.unsubscribe = this.subscribe(this.props.channelId);
@@ -145,7 +155,7 @@ class MessageContainer extends React.Component {
     }
   }
 
-  subscribe = channelId => {
+  subscribe = (channelId) => {
     return this.props.data.subscribeToMore({
       document: newChannelMessageSubscription,
       variables: { channelId },
@@ -153,16 +163,16 @@ class MessageContainer extends React.Component {
         if (!subscriptionData) return { prev };
         return {
           ...prev,
-          messages: [subscriptionData.data.newChannelMessage, ...prev.messages]
+          messages: [subscriptionData.data.newChannelMessage, ...prev.messages],
         };
-      }
+      },
     });
   };
 
   handleScroll = () => {
     const {
       data: { messages, fetchMore },
-      channelId
+      channelId,
     } = this.props;
     if (
       this.scroller &&
@@ -173,20 +183,22 @@ class MessageContainer extends React.Component {
       fetchMore({
         variables: {
           channelId,
-          cursor: messages[messages.length - 1].created_at
+          cursor: messages[messages.length - 1].created_at,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
 
           if (fetchMoreResult.messages.length < 35) {
-            this.setState({ hasMoreItems: false });
+            this.setState({
+              hasMoreItems: false,
+            });
           }
 
           return {
             ...prev,
-            messages: [...prev.messages, ...fetchMoreResult.messages]
+            messages: [...prev.messages, ...fetchMoreResult.messages],
           };
-        }
+        },
       });
     }
   };
@@ -203,7 +215,7 @@ class MessageContainer extends React.Component {
     const {
       data: { loading, messages },
       channelId,
-      username
+      username,
     } = this.props;
 
     if (!messages) {
@@ -212,14 +224,14 @@ class MessageContainer extends React.Component {
     return loading ? null : (
       <Message
         onScroll={this.handleScroll}
-        ref={scroller => {
+        ref={(scroller) => {
           this.scroller = scroller;
         }}
       >
         <FileUpload
           style={{
             display: "flex",
-            flexDirection: "column-reverse"
+            flexDirection: "column-reverse",
           }}
           channelId={channelId}
           disableClick
@@ -228,30 +240,22 @@ class MessageContainer extends React.Component {
             {messages
               .slice()
               .reverse()
-              .map(m => (
+              .map((m) => (
                 <Comment
                   key={`${m.id}-message`}
                   style={{
                     padding: "15px 1rem",
                     marginTop: "10px",
                     fontFamily: "AvenirNext, sans-serif",
-                    fontSize: "16px"
+                    fontSize: "16px",
                   }}
                 >
                   <Comment.Content
-                    style={
-                      m.user.username === username
-                        ? {
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "flex-end"
-                          }
-                        : {
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "flex-start"
-                          }
-                    }
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "flex-start",
+                    }}
                   >
                     <StyledImage
                       src={`https://api.adorable.io/avatars/30/${m.user.username}@adorable.io`}
@@ -261,19 +265,15 @@ class MessageContainer extends React.Component {
                         <span
                           style={{
                             fontFamily: "AvenirNextDemi, sans-serif",
-                            fontSize: "15px"
+                            fontSize: "15px",
                           }}
                         >
                           {m.user.username}
                         </span>
                       </Comment.Author>
                       <Comment.Metadata>
-                        <StyledDate className="date">
-                          at {m.created_at.split(" ")[4]},{" "}
-                          {m.created_at.split(" ")[0]},{" "}
-                          {m.created_at.split(" ")[1]},{" "}
-                          {m.created_at.split(" ")[2]}
-                        </StyledDate>
+                        {console.log(m.when)}
+                        <StyledDate className="date">{m.when}</StyledDate>
                       </Comment.Metadata>
                       <br />
                       <DisplayMessage message={m} />
@@ -299,15 +299,16 @@ const messagesQuery = gql`
       url
       filetype
       created_at
+      when
     }
   }
 `;
 
 export default graphql(messagesQuery, {
-  options: props => ({
+  options: (props) => ({
     fetchPolicy: "network-only",
     variables: {
-      channelId: props.channelId
-    }
-  })
+      channelId: props.channelId,
+    },
+  }),
 })(MessageContainer);

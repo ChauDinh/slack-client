@@ -39,7 +39,6 @@ body {
   height: 100vh;
   overscroll-behavior-y: none;
   background-color: "#fff";
-  user-select: none;
 }
 
 .wrapper {

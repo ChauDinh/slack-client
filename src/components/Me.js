@@ -8,13 +8,15 @@ import { Context } from "../routes/ViewTeam";
 const Wrapper = styled.div`
   grid-column: 2;
   grid-row: 3 / 4;
-  background-color: #f4f7fa;
-  box-shadow: 0 -3px 6px rgba(200, 200, 200, 0.2);
+  background-color: #fff;
   color: #000;
   padding: 10px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  border-top: 1px solid rgba(200, 200, 200, 0.5);
+  border-right: 1px solid rgba(200, 200, 200, 0.5);
+  z-index: 1;
   button {
     display: none;
   }
@@ -53,7 +55,7 @@ class Me extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
 
     this.toggleBar = this.toggleBar.bind(this);
@@ -61,7 +63,7 @@ class Me extends React.Component {
 
   toggleBar() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
   }
 
@@ -83,7 +85,7 @@ class Me extends React.Component {
               background: "#f4f7fa",
               display: "flex",
               boxShadow: "0px 3px 10px rgb(219, 227, 232)",
-              padding: "0 10px"
+              padding: "0 10px",
             }}
           >
             <div
@@ -93,7 +95,7 @@ class Me extends React.Component {
                 justifyContent: "space-between",
                 background: "rgba(202, 202, 202, 0.2)",
                 marginTop: "10px",
-                borderRadius: "5px"
+                borderRadius: "5px",
               }}
             >
               <p
@@ -101,7 +103,7 @@ class Me extends React.Component {
                   margin: "10px 20px",
                   fontSize: "18px",
                   fontWeight: "700",
-                  color: "#0878cb"
+                  color: "#0878cb",
                 }}
               >
                 SlackQL
@@ -113,7 +115,7 @@ class Me extends React.Component {
                   background: "#0878cb",
                   borderRadius: "50px",
                   padding: "2px 5px 2px 5px",
-                  boxShadow: "3px 3px 5px rgb(168, 196, 216)"
+                  boxShadow: "3px 3px 5px rgb(168, 196, 216)",
                 }}
               >
                 <Icon name="arrow left" />
@@ -124,7 +126,7 @@ class Me extends React.Component {
                 const regularChannels = [];
                 const dmChannels = [];
 
-                team.channels.forEach(channel => {
+                team.channels.forEach((channel) => {
                   if (channel.dm) {
                     dmChannels.push(channel);
                   } else {
@@ -139,13 +141,13 @@ class Me extends React.Component {
                         marginBottom: "15px",
                         fontSize: "18px",
                         color: "#333",
-                        fontWeight: "900"
+                        fontWeight: "900",
                       }}
                     >
                       Teams
                     </ListHeader>
                     <div>
-                      {teams.map(team => (
+                      {teams.map((team) => (
                         <Link
                           key={team.id}
                           to={`/view-team/${team.id}`}
@@ -155,7 +157,7 @@ class Me extends React.Component {
                             display: "block",
                             borderRadius: "5px",
                             marginBottom: "5px",
-                            fontWeight: "700"
+                            fontWeight: "700",
                           }}
                         >
                           {team.name}
@@ -169,13 +171,13 @@ class Me extends React.Component {
                         marginBottom: "15px",
                         fontSize: "18px",
                         color: "#333",
-                        fontWeight: "900"
+                        fontWeight: "900",
                       }}
                     >
                       Channels
                     </ListHeader>
                     <div>
-                      {regularChannels.map(channel => (
+                      {regularChannels.map((channel) => (
                         <Link
                           key={channel.id}
                           to={`/view-team/${team.id}/${channel.id}`}
@@ -185,7 +187,7 @@ class Me extends React.Component {
                             display: "block",
                             borderRadius: "5px",
                             marginBottom: "5px",
-                            fontWeight: "700"
+                            fontWeight: "700",
                           }}
                         >
                           {channel.name}
@@ -199,13 +201,13 @@ class Me extends React.Component {
                         marginBottom: "15px",
                         fontSize: "18px",
                         color: "#333",
-                        fontWeight: "900"
+                        fontWeight: "900",
                       }}
                     >
                       Direct Messages
                     </ListHeader>
                     <div>
-                      {dmChannels.map(dm => (
+                      {dmChannels.map((dm) => (
                         <Link
                           key={dm.id}
                           to={`/view-team/${team.id}/${dm.id}`}
@@ -215,14 +217,14 @@ class Me extends React.Component {
                             display: "block",
                             borderRadius: "5px",
                             marginBottom: "5px",
-                            fontWeight: "700"
+                            fontWeight: "700",
                           }}
                         >
                           {dm.name}
                         </Link>
                       ))}
                     </div>
-                  </List>
+                  </List>,
                 ];
               }}
             </Context.Consumer>
@@ -236,7 +238,7 @@ class Me extends React.Component {
           src={`https://api.adorable.io/avatars/40/${username}@adorable.io`}
           style={{
             borderRadius: "50%",
-            margin: "5px"
+            margin: "5px",
           }}
         />
         <div
@@ -253,7 +255,7 @@ class Me extends React.Component {
             fontWeight: "bolder",
             paddingLeft: "7px",
             color: "#000",
-            zIndex: 2
+            zIndex: 2,
           }}
         >
           {username}
@@ -261,7 +263,7 @@ class Me extends React.Component {
             style={{
               fontSize: "13px",
               fontWeight: "lighter",
-              color: "#000"
+              color: "#000",
             }}
           >
             #000

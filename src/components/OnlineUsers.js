@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   padding: 20px 20px;
   width: 240px;
   overflow-y: auto;
-
+  border-left: 1px solid rgba(200, 200, 200, 0.5);
   @media (max-width: 1080px) {
     h3 {
       display: none;

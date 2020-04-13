@@ -9,7 +9,7 @@ import {
   Form,
   FormField,
   Message,
-  Icon
+  Icon,
 } from "semantic-ui-react";
 import styled from "styled-components";
 import gql from "graphql-tag";
@@ -54,13 +54,13 @@ class Login extends Component {
       // we use email and password for the login action
       email: "",
       password: "",
-      errors: {}
+      errors: {},
     });
 
     this.goBack = this.goBack.bind(this);
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     this[name] = value;
   };
@@ -72,7 +72,7 @@ class Login extends Component {
   handleSubmit = async () => {
     const { email, password } = this;
     const response = await this.props.mutate({
-      variables: { email, password }
+      variables: { email, password },
     });
     console.log(response);
 
@@ -80,7 +80,7 @@ class Login extends Component {
     if (ok) {
       localStorage.setItem("token", token);
       localStorage.setItem("refreshToken", refreshToken);
-      wsLink.subscriptionClient.tryReconnect();
+      wsLink.tryReconnect();
       this.props.history.push("/view-team");
     } else {
       const err = {};
@@ -96,7 +96,7 @@ class Login extends Component {
     const {
       email,
       password,
-      errors: { emailError, passwordError }
+      errors: { emailError, passwordError },
     } = this;
 
     let errorList = [];
@@ -116,7 +116,7 @@ class Login extends Component {
             display: "block",
             width: "100vw",
             padding: "20px",
-            boxShadow: "0px 3px 6px rgba(200, 200, 200, 0.2)"
+            boxShadow: "0px 3px 6px rgba(200, 200, 200, 0.2)",
           }}
         >
           <div
@@ -124,7 +124,7 @@ class Login extends Component {
             style={{
               fontSize: "20px",
               fontWeight: "900",
-              fontFamily: "AvenirNextDemi"
+              fontFamily: "AvenirNextDemi",
             }}
           >
             SlackQL
@@ -139,7 +139,7 @@ class Login extends Component {
             justifyContent: "center",
             width: "100%",
             height: "100%",
-            flexGrow: 1
+            flexGrow: 1,
           }}
         >
           <Header
@@ -149,7 +149,7 @@ class Login extends Component {
               fontSize: "3.5rem",
               color: "#000",
               fontFamily: "AvenirNextDemi",
-              marginBottom: "10px"
+              marginBottom: "10px",
             }}
           >
             Sign In
@@ -167,7 +167,7 @@ class Login extends Component {
               width: "500px",
               marginBottom: "1rem",
               display: "flex",
-              flexDirection: "column"
+              flexDirection: "column",
             }}
           >
             <FormField error={!!emailError}>
@@ -176,7 +176,7 @@ class Login extends Component {
                   color: "#474e5d",
                   fontFamily: "AvenirNext",
                   fontSize: "15px",
-                  fontWeight: "700"
+                  fontWeight: "700",
                 }}
               >
                 Email
@@ -189,7 +189,7 @@ class Login extends Component {
                 size="small"
                 style={{
                   borderBottom: "1px solid #ddd",
-                  width: "100%"
+                  width: "100%",
                 }}
               />
             </FormField>
@@ -199,7 +199,7 @@ class Login extends Component {
                   color: "#474e5d",
                   fontFamily: "AvenirNext",
                   fontSize: "15px",
-                  fontWeight: "700"
+                  fontWeight: "700",
                 }}
               >
                 Password
@@ -213,7 +213,7 @@ class Login extends Component {
                 size="small"
                 style={{
                   borderBottom: "1px solid #ddd",
-                  width: "100%"
+                  width: "100%",
                 }}
               />
             </FormField>
@@ -226,7 +226,7 @@ class Login extends Component {
                   fontWeight: "200",
                   color: "#0878CB",
                   padding: "0.785714em 1.5em 0 0",
-                  marginLeft: "10px"
+                  marginLeft: "10px",
                 }}
               >
                 Create account
@@ -242,7 +242,7 @@ class Login extends Component {
                 fontWeight: "200",
                 marginTop: "2rem",
                 marginRight: "20px",
-                width: "100%"
+                width: "100%",
               }}
             >
               Sign In
@@ -254,7 +254,7 @@ class Login extends Component {
                 fontSize: "1.2rem",
                 fontWeight: "200",
                 marginTop: "2rem",
-                width: "100%"
+                width: "100%",
               }}
               onClick={this.goBack}
             >

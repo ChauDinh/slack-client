@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  border-right: 1px solid rgba(200, 200, 200, 0.5);
 
   /* width */
   ::-webkit-scrollbar {
@@ -116,7 +117,7 @@ export default ({
   teamId,
   onInvitePeopleClick,
   onDirectMessageClick,
-  isOwner
+  isOwner,
 }) => (
   <Wrapper>
     <div
@@ -128,7 +129,7 @@ export default ({
         fontWeight: "500",
         background: "#69b4ff",
         height: "50px",
-        position: "relative"
+        position: "relative",
       }}
     >
       <div
@@ -136,7 +137,7 @@ export default ({
           display: "flex",
           alignItems: "center",
           overflow: "hidden",
-          whiteSpace: "nowrap"
+          whiteSpace: "nowrap",
         }}
       >
         <div
@@ -147,7 +148,7 @@ export default ({
             color: "#fff",
             overflow: "hidden",
             whiteSpace: "nowrap",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
           }}
         >
           {teamName}
@@ -159,7 +160,7 @@ export default ({
           right: "20px",
           position: "absolute",
           zIndex: "2",
-          color: "#fff"
+          color: "#fff",
         }}
       >
         <Dropdown.Menu>
@@ -181,14 +182,14 @@ export default ({
         <ListHeader
           style={{
             marginTop: "1rem",
-            marginBottom: ".4rem"
+            marginBottom: ".4rem",
           }}
         >
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              width: "100%"
+              width: "100%",
             }}
           >
             All Channels{" "}
@@ -202,7 +203,7 @@ export default ({
             )}
           </div>
         </ListHeader>
-        {channels ? channels.map(c => channel(c, teamId)) : null}
+        {channels ? channels.map((c) => channel(c, teamId)) : null}
       </List>
     </div>
     <div>
@@ -210,14 +211,14 @@ export default ({
         <ListHeader
           style={{
             marginTop: "2rem",
-            marginBottom: "1rem"
+            marginBottom: "1rem",
           }}
         >
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              width: "100%"
+              width: "100%",
             }}
           >
             Direct Messages{" "}
@@ -225,14 +226,14 @@ export default ({
               onClick={onDirectMessageClick}
               style={{
                 padding: 0,
-                background: "none"
+                background: "none",
               }}
             >
               <img alt="" src={AddCircleImage} width="15px" />
             </Button>
           </div>
         </ListHeader>
-        {dmChannels.map(dmc => dmChannel(dmc, teamId))}
+        {dmChannels.map((dmc) => dmChannel(dmc, teamId))}
       </List>
     </div>
     {isOwner && (
@@ -244,7 +245,7 @@ export default ({
             background: "#f7f7f7",
             padding: ".5rem 1rem",
             borderRadius: "5px",
-            border: "2px solid #000"
+            border: "2px solid #000",
           }}
           href="#invite-people"
           onClick={onInvitePeopleClick}

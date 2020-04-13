@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Header, Icon, Search } from "semantic-ui-react";
 
-import FileImage from "../images/small__icons/file.png";
-import ImageShareImg from "../images/small__icons/image_share.png";
-
 const Wrapper = styled.div`
   z-index: 2;
   background: #3f9fff;
@@ -35,7 +32,7 @@ export default ({ channelName }) => (
       style={{
         padding: "0",
         margin: "0",
-        color: "#fff"
+        color: "#fff",
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -57,18 +54,7 @@ export default ({ channelName }) => (
         name="phone"
         style={{ color: "#fff", marginRight: "20px", fontSize: "16px" }}
       />
-      {/* <img
-        alt=""
-        src={ImageShareImg}
-        height="16px"
-        style={{ marginRight: "20px" }}
-      />
-      <img
-        alt=""
-        src={FileImage}
-        height="16px"
-        style={{ marginRight: "20px" }}
-      /> */}
+
       <Icon
         className="image-sharing__semantic-icon"
         name="file image"
