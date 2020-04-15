@@ -7,7 +7,7 @@ const size = {
   tablet: "768px",
   laptop: "1024px",
   laptopL: "1440px",
-  desktop: "2560px"
+  desktop: "2560px",
 };
 
 const devices = {
@@ -18,10 +18,11 @@ const devices = {
   laptop: `(max-width: ${size.laptop})`,
   laptopL: `(max-width: ${size.laptopL})`,
   desktop: `(max-width: ${size.desktop})`,
-  desktopL: `(max-width: ${size.desktop})`
+  desktopL: `(max-width: ${size.desktop})`,
 };
 
 export default styled.div`
+  background: #3f9fff
   display: grid;
   height: 100vh;
   grid-template-columns: 72px 250px 1fr;

@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   overflow-y: auto;
   border-right: 1px solid rgba(200, 200, 200, 0.5);
+  border-left: 1px solid rgba(200, 200, 200, 0.5);
 
   /* width */
   ::-webkit-scrollbar {
@@ -110,7 +111,6 @@ const dmChannel = ({ id, name }, teamId) => (
 
 export default ({
   teamName,
-  userName,
   channels,
   dmChannels,
   onAddChannelClick,
@@ -127,7 +127,7 @@ export default ({
         alignItems: "center",
         fontSize: "20px",
         fontWeight: "500",
-        background: "#69b4ff",
+        background: "#3f9fff",
         height: "50px",
         position: "relative",
       }}

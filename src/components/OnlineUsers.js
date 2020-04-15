@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import UserModal from "./UserModal";
+import { socket } from "../routes/ViewTeam";
 
 const Wrapper = styled.div`
   grid-column: 4;
@@ -49,19 +50,40 @@ const Wrapper = styled.div`
   }
 `;
 
-const OnlineUserWrapper = ({ onlineUsers, count }) => {
-  try {
+class OnlineUserWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      onlineUsers: [],
+    };
+  }
+  componentDidMount() {
+    const { username } = this.props;
+    socket.emit("joinRoom", { username: username });
+    socket.on("getOnlineUsers", ({ onlineUsers }) => {
+      this.setState({
+        onlineUsers: onlineUsers,
+      });
+    });
+    socket.on("updateOnlineUsers", ({ onlineUsers }) => {
+      this.setState({
+        onlineUsers: onlineUsers,
+      });
+    });
+  }
+  render() {
+    const { onlineUsers } = this.state;
     return (
       <Wrapper>
-        <h3 style={{ marginBottom: "20px" }}>Online Users ({count})</h3>
-        {onlineUsers.map((user, index) => (
-          <UserModal key={index} name={user} />
+        <h3 style={{ marginBottom: "20px" }}>
+          Online Users ({onlineUsers.length})
+        </h3>
+        {onlineUsers.map((onlineUser) => (
+          <UserModal key={onlineUser.id} name={onlineUser.username} />
         ))}
       </Wrapper>
     );
-  } catch (error) {
-    console.error(error);
   }
-};
+}
 
 export default OnlineUserWrapper;

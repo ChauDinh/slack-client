@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   border-top: 1px solid rgba(200, 200, 200, 0.5);
   border-right: 1px solid rgba(200, 200, 200, 0.5);
+  border-left: 1px solid rgba(200, 200, 200, 0.5);
   z-index: 1;
   button {
     display: none;

@@ -5,7 +5,7 @@ import { Icon, Popup } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   grid-column: 1;
-  grid-row: 1 / 4;
+  grid-row: 2 / 4;
   background-color: #f8fbff;
   color: #d9cfd9;
   padding-top: 20px;
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 const popStyle = {
   marginLeft: "4rem",
   height: "36px",
-  display: "flex"
+  display: "flex",
   // justifyContent: "center",
   // alignItems: "center"
 };
@@ -106,7 +106,7 @@ export const teamItem = ({ id, letter, name }) => (
     style={{
       width: "36px",
       height: "36px",
-      marginBottom: "20px"
+      marginBottom: "20px",
     }}
   >
     <Link to={`/view-team/${id}`}>
@@ -118,7 +118,7 @@ export const teamItem = ({ id, letter, name }) => (
             style={{
               fontSize: "14px",
               fontWeight: "500",
-              fontFamily: "Helvetica, sans-serif"
+              fontFamily: "Helvetica, sans-serif",
             }}
           >
             {name}

@@ -15,14 +15,15 @@ import Me from "../components/Me";
 import gql from "graphql-tag";
 
 export const Context = React.createContext();
+var socket;
 
 class ViewTeam extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       endpoint: `http://localhost:8080`,
-      onlineUsers: [],
     };
+    socket = socketIOClient(this.state.endpoint);
   }
 
   render() {
@@ -33,8 +34,6 @@ class ViewTeam extends React.Component {
         params: { teamId, channelId },
       },
     } = this.props;
-    const { endpoint } = this.state;
-    const { onlineUsers } = this.state;
 
     if (loading || !me) {
       return null;
@@ -44,18 +43,6 @@ class ViewTeam extends React.Component {
     if (!teams.length) {
       return <Redirect to="/create-team" />;
     }
-
-    // Connect to Socket.IO
-    const socket = socketIOClient(endpoint);
-    socket.emit("joinRoom", { username: me.username });
-    socket.on("getOnlineUsers", ({ onlineUsers }) => {
-      console.log(onlineUsers);
-      return onlineUsers.length > 0
-        ? this.setState({
-            onlineUsers: onlineUsers,
-          })
-        : null;
-    });
 
     const teamIndex = teamId
       ? findIndex(teams, ["id", parseInt(teamId, 10)])
@@ -83,10 +70,7 @@ class ViewTeam extends React.Component {
           }}
         >
           <Me username={username} />
-          <OnlineUserWrapper
-            onlineUsers={onlineUsers}
-            count={onlineUsers.length}
-          />
+          <OnlineUserWrapper username={username} />
           <Sidebar className="side-bar_view-message" />
         </Context.Provider>
 
@@ -114,6 +98,8 @@ class ViewTeam extends React.Component {
     );
   }
 }
+
+export { socket };
 
 const createMessageMutation = gql`
   mutation($channelId: Int!, $text: String!) {
