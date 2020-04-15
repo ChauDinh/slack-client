@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
 
 import UserModal from "./UserModal";
 
@@ -51,37 +49,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const GET_ONLINE_USERS = gql`
-  {
-    onlineUsers {
-      username
-      last_seen
-    }
-  }
-`;
-
-const OnlineUserWrapper = ({ data: { onlineUsers }, loading }) => {
+const OnlineUserWrapper = ({ onlineUsers, count }) => {
   try {
-    // const { onlineUsers } = data;
-    if (loading || !onlineUsers) {
-      return <div>loading...</div>;
-    } else {
-      return (
-        <Wrapper>
-          <h3 style={{ marginBottom: "20px" }}>Online Users</h3>
-          {onlineUsers.map((user, index) => (
-            <UserModal
-              key={index}
-              name={user.username}
-              last_seen={user.last_seen}
-            />
-          ))}
-        </Wrapper>
-      );
-    }
+    return (
+      <Wrapper>
+        <h3 style={{ marginBottom: "20px" }}>Online Users ({count})</h3>
+        {onlineUsers.map((user, index) => (
+          <UserModal key={index} name={user} />
+        ))}
+      </Wrapper>
+    );
   } catch (error) {
     console.error(error);
   }
 };
 
-export default graphql(GET_ONLINE_USERS)(OnlineUserWrapper);
+export default OnlineUserWrapper;

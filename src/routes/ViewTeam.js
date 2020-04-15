@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { compose, graphql } from "react-apollo";
 import { meQuery } from "../graphql/team";
 import findIndex from "lodash/findIndex";
+import socketIOClient from "socket.io-client";
 
 import Header from "../components/Header";
 import Layout from "../components/Layout";
@@ -15,75 +16,104 @@ import gql from "graphql-tag";
 
 export const Context = React.createContext();
 
-const ViewTeam = ({
-  mutate,
-  data: { loading, me },
-  match: {
-    params: { teamId, channelId }
-  }
-}) => {
-  if (loading || !me) {
-    return null;
-  }
-  const { id: currentUserId, username, teams } = me;
-
-  if (!teams.length) {
-    return <Redirect to="/create-team" />;
+class ViewTeam extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      endpoint: `http://localhost:8080`,
+      onlineUsers: [],
+    };
   }
 
-  // const teamIdInteger = parseInt(teamId, 10);
-  const teamIndex = teamId ? findIndex(teams, ["id", parseInt(teamId, 10)]) : 0;
-  const team = teamIndex === -1 ? teams[0] : teams[teamIndex];
+  render() {
+    const {
+      mutate,
+      data: { loading, me },
+      match: {
+        params: { teamId, channelId },
+      },
+    } = this.props;
+    const { endpoint } = this.state;
+    const { onlineUsers } = this.state;
 
-  // const channelIdInteger = parseInt(channelId, 10);
-  const channelIndex = channelId
-    ? findIndex(team.channels, ["id", parseInt(channelId, 10)])
-    : 0;
-  const channel =
-    channelIndex === -1 ? team.channels[0] : team.channels[channelIndex];
+    if (loading || !me) {
+      return null;
+    }
+    const { id: currentUserId, username, teams } = me;
 
-  return (
-    <Layout className="app-layout">
-      <Context.Provider
-        value={{
-          teams: teams.map(t => ({
-            id: t.id,
-            letter: t.name.charAt(0).toUpperCase(),
-            name: t.name
-          })),
-          team: team,
-          username: username,
-          currentUserId: currentUserId
-        }}
-      >
-        <Me username={username} />
-        <OnlineUserWrapper />
-        <Sidebar className="side-bar_view-message" />
-      </Context.Provider>
+    if (!teams.length) {
+      return <Redirect to="/create-team" />;
+    }
 
-      {channel && <Header channelName={channel.name} />}
-      {channel && (
-        <MessageContainer
-          className="message-container_view-message"
-          channelId={channel.id}
-          username={username}
-        />
-      )}
-      {channel && (
-        <SendMessage
-          className="send-message_view-message"
-          channelId={channel.id}
-          placeholder={channel.name}
-          onSubmit={async text => {
-            return mutate({
-              variables: { text, channelId: channel.id }
-            });
+    // Connect to Socket.IO
+    const socket = socketIOClient(endpoint);
+    socket.emit("joinRoom", { username: me.username });
+    socket.on("getOnlineUsers", ({ onlineUsers }) => {
+      console.log(onlineUsers);
+      return onlineUsers.length > 0
+        ? this.setState({
+            onlineUsers: onlineUsers,
+          })
+        : null;
+    });
+
+    const teamIndex = teamId
+      ? findIndex(teams, ["id", parseInt(teamId, 10)])
+      : 0;
+    const team = teamIndex === -1 ? teams[0] : teams[teamIndex];
+
+    const channelIndex = channelId
+      ? findIndex(team.channels, ["id", parseInt(channelId, 10)])
+      : 0;
+    const channel =
+      channelIndex === -1 ? team.channels[0] : team.channels[channelIndex];
+
+    return (
+      <Layout className="app-layout">
+        <Context.Provider
+          value={{
+            teams: teams.map((t) => ({
+              id: t.id,
+              letter: t.name.charAt(0).toUpperCase(),
+              name: t.name,
+            })),
+            team: team,
+            username: username,
+            currentUserId: currentUserId,
           }}
-        />
-      )}
-    </Layout>
-  );
-};
+        >
+          <Me username={username} />
+          <OnlineUserWrapper
+            onlineUsers={onlineUsers}
+            count={onlineUsers.length}
+          />
+          <Sidebar className="side-bar_view-message" />
+        </Context.Provider>
+
+        {channel && <Header channelName={channel.name} />}
+        {channel && (
+          <MessageContainer
+            className="message-container_view-message"
+            channelId={channel.id}
+            username={username}
+          />
+        )}
+        {channel && (
+          <SendMessage
+            className="send-message_view-message"
+            channelId={channel.id}
+            placeholder={channel.name}
+            onSubmit={async (text) => {
+              return mutate({
+                variables: { text, channelId: channel.id },
+              });
+            }}
+          />
+        )}
+      </Layout>
+    );
+  }
+}
 
 const createMessageMutation = gql`
   mutation($channelId: Int!, $text: String!) {

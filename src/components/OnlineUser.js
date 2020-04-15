@@ -1,12 +1,7 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
 
-export default ({ name, last_seen }) => {
-  const differenceMiliseconds = Date.now() - last_seen;
-  const getMinutes = Math.floor(differenceMiliseconds / 60000);
-  const getHours = Math.floor(getMinutes % 60);
-  const getDays = Math.floor(getHours % 24);
-
+export default ({ name }) => {
   return (
     <div
       style={{
@@ -16,51 +11,16 @@ export default ({ name, last_seen }) => {
         marginBottom: "20px",
         fontWeight: "600",
         fontFamily: "Helvetica Neue",
-        position: "relative"
+        position: "relative",
       }}
     >
       <Image
         src={`https://api.adorable.io/avatars/40/${name}@adorable.io`}
         style={{ borderRadius: "50%", marginRight: "10px", padding: "2px" }}
       />
-      <div
-        style={
-          differenceMiliseconds < 60000
-            ? {
-                zIndex: "2",
-                background: "#24d424",
-                width: "16px",
-                height: "16px",
-                borderRadius: "50%",
-                position: "absolute",
-                left: "28px",
-                bottom: "0px",
-                border: "2px solid #f5f5f5"
-              }
-            : {
-                zIndex: "2",
-                background: "lightgray",
-                width: "16px",
-                height: "16px",
-                borderRadius: "50%",
-                position: "absolute",
-                left: "28px",
-                bottom: "0px",
-                border: "2px solid #fff"
-              }
-        }
-      ></div>
-      <div style={{ textAlign: "left" }}>
+
+      <div style={{ textAlign: "left", marginTop: "5px" }}>
         <h4>{name}</h4>
-        <p style={{ color: "#000" }}>
-          {differenceMiliseconds < 60000
-            ? null
-            : getMinutes < 61
-            ? `${getMinutes} minutes ago`
-            : getHours < 24
-            ? `${getHours} hours ago`
-            : `${getDays} day ago`}
-        </p>
       </div>
     </div>
   );

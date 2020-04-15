@@ -3,7 +3,6 @@ import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Comment } from "semantic-ui-react";
 import styled from "styled-components";
-import socketIOClient from "socket.io-client";
 
 import FileUpload from "../components/FileUpload";
 import RenderText from "../components/RenderText";
@@ -108,15 +107,7 @@ const DisplayMessage = ({ message: { url, text, filetype } }) => {
 class MessageContainer extends React.Component {
   state = {
     hasMoreItems: true,
-    endpoint: `ws://localhost:8080`,
   };
-
-  componentDidMount() {
-    const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
-    socket.emit("joinRoom", { username: this.props.username });
-    socket.on("currentUser", (msg) => console.log(msg));
-  }
 
   componentWillMount() {
     this.unsubscribe = this.subscribe(this.props.channelId);
@@ -215,7 +206,6 @@ class MessageContainer extends React.Component {
     const {
       data: { loading, messages },
       channelId,
-      username,
     } = this.props;
 
     if (!messages) {

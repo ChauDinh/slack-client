@@ -12,7 +12,7 @@ const UserModal = ({ name, last_seen }) => (
           backgroundColor: "transparent",
           padding: "0",
           margin: "0",
-          display: "block"
+          display: "block",
         }}
       >
         {" "}
@@ -22,10 +22,10 @@ const UserModal = ({ name, last_seen }) => (
     centered={false}
     closeIcon
     style={{
-      maxWidth: "450px"
+      maxWidth: "450px",
     }}
   >
-    <Modal.Header style={{ backgroundColor: "#000", color: "#fff" }}>
+    <Modal.Header style={{ backgroundColor: "#3f9fff", color: "#fff" }}>
       User info
     </Modal.Header>
     <Modal.Content
@@ -33,7 +33,7 @@ const UserModal = ({ name, last_seen }) => (
       style={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#f4f7fa"
+        backgroundColor: "#f4f7fa",
       }}
     >
       <Image
@@ -45,7 +45,7 @@ const UserModal = ({ name, last_seen }) => (
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       />
       <Modal.Description style={{ paddingLeft: "0", fontFamily: "sans-serif" }}>
