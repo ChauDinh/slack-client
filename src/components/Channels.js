@@ -43,13 +43,6 @@ const Wrapper = styled.div`
   }
 `;
 
-// const List = styled.ul`
-//   width: 100%;
-//   list-style: none;
-//   padding-left: 0;
-//   font-size: 15px;
-// `;
-
 const paddingLeft = "padding-left: 20px";
 const paddingRight = "padding-right: 20px";
 
@@ -109,150 +102,161 @@ const dmChannel = ({ id, name }, teamId) => (
   </Link>
 );
 
-export default ({
-  teamName,
-  channels,
-  dmChannels,
-  onAddChannelClick,
-  teamId,
-  onInvitePeopleClick,
-  onDirectMessageClick,
-  isOwner,
-}) => (
-  <Wrapper>
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        fontSize: "20px",
-        fontWeight: "500",
-        background: "#3f9fff",
-        height: "50px",
-        position: "relative",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-        }}
-      >
+export default class Channels extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const {
+      teamName,
+      channels,
+      dmChannels,
+      onAddChannelClick,
+      teamId,
+      onInvitePeopleClick,
+      onDirectMessageClick,
+      isOwner,
+    } = this.props;
+
+    return (
+      <Wrapper>
         <div
           style={{
-            marginLeft: "20px",
-            fontFamily: "AvenirNextDemi, sans-serif",
-            fontWeight: "900",
-            color: "#fff",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {teamName}
-        </div>
-      </div>
-      <Dropdown
-        pointing="top right"
-        style={{
-          right: "20px",
-          position: "absolute",
-          zIndex: "2",
-          color: "#fff",
-        }}
-      >
-        <Dropdown.Menu>
-          <Dropdown.Item>
-            <h4>name: {teamName}</h4>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Icon name="connectdevelop" /> Connect with others
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Icon name="add user" /> Invite others
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
-
-    <div>
-      <List animated verticalAlign="middle">
-        <ListHeader
-          style={{
-            marginTop: "1rem",
-            marginBottom: ".4rem",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontSize: "20px",
+            fontWeight: "500",
+            background: "#3f9fff",
+            height: "50px",
+            position: "relative",
           }}
         >
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
+              alignItems: "center",
+              overflow: "hidden",
+              whiteSpace: "nowrap",
             }}
           >
-            All Channels{" "}
-            {isOwner && (
-              <Button
-                onClick={onAddChannelClick}
-                style={{ padding: 0, background: "none" }}
-              >
-                <img alt="" src={AddCircleImage} width="15px" />
-              </Button>
-            )}
-          </div>
-        </ListHeader>
-        {channels ? channels.map((c) => channel(c, teamId)) : null}
-      </List>
-    </div>
-    <div>
-      <List animated verticalAlign="middle">
-        <ListHeader
-          style={{
-            marginTop: "2rem",
-            marginBottom: "1rem",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            Direct Messages{" "}
-            <Button
-              onClick={onDirectMessageClick}
+            <div
               style={{
-                padding: 0,
-                background: "none",
+                marginLeft: "20px",
+                fontFamily: "AvenirNextDemi, sans-serif",
+                fontWeight: "900",
+                color: "#fff",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
               }}
             >
-              <img alt="" src={AddCircleImage} width="15px" />
-            </Button>
+              {teamName}
+            </div>
           </div>
-        </ListHeader>
-        {dmChannels.map((dmc) => dmChannel(dmc, teamId))}
-      </List>
-    </div>
-    {isOwner && (
-      <PushLeft style={{ marginTop: "2rem" }}>
-        <a
-          style={{
-            color: "#000",
-            fontWeight: "700",
-            background: "#f7f7f7",
-            padding: ".5rem 1rem",
-            borderRadius: "5px",
-            border: "2px solid #000",
-          }}
-          href="#invite-people"
-          onClick={onInvitePeopleClick}
-        >
-          + Invite People
-        </a>
-      </PushLeft>
-    )}
-  </Wrapper>
-);
+          <Dropdown
+            pointing="top right"
+            style={{
+              right: "20px",
+              position: "absolute",
+              zIndex: "2",
+              color: "#fff",
+            }}
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <h4>name: {teamName}</h4>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Icon name="connectdevelop" /> Connect with others
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Icon name="add user" /> Invite others
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+        <div>
+          <List animated verticalAlign="middle">
+            <ListHeader
+              style={{
+                marginTop: "1rem",
+                marginBottom: ".4rem",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                All Channels{" "}
+                {isOwner && (
+                  <Button
+                    onClick={onAddChannelClick}
+                    style={{ padding: 0, background: "none" }}
+                  >
+                    <img alt="" src={AddCircleImage} width="15px" />
+                  </Button>
+                )}
+              </div>
+            </ListHeader>
+            {channels ? channels.map((c) => channel(c, teamId)) : null}
+          </List>
+        </div>
+        <div>
+          <List animated verticalAlign="middle">
+            <ListHeader
+              style={{
+                marginTop: "2rem",
+                marginBottom: "1rem",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                Direct Messages{" "}
+                <Button
+                  onClick={onDirectMessageClick}
+                  style={{
+                    padding: 0,
+                    background: "none",
+                  }}
+                >
+                  <img alt="" src={AddCircleImage} width="15px" />
+                </Button>
+              </div>
+            </ListHeader>
+            {dmChannels.map((dmc) => dmChannel(dmc, teamId))}
+          </List>
+        </div>
+        {isOwner && (
+          <PushLeft style={{ marginTop: "2rem" }}>
+            <a
+              style={{
+                color: "#000",
+                fontWeight: "700",
+                background: "#f7f7f7",
+                padding: ".5rem 1rem",
+                borderRadius: "5px",
+                border: "2px solid #000",
+              }}
+              href="#invite-people"
+              onClick={onInvitePeopleClick}
+            >
+              + Invite People
+            </a>
+          </PushLeft>
+        )}
+      </Wrapper>
+    );
+  }
+}

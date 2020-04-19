@@ -105,6 +105,11 @@ const DisplayMessage = ({ message: { url, text, filetype } }) => {
 };
 
 class MessageContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.scroller = React.createRef();
+  }
+
   state = {
     hasMoreItems: true,
   };
@@ -122,21 +127,21 @@ class MessageContainer extends React.Component {
     }
 
     if (
-      this.scroller &&
-      this.scroller.scrollTop < 20 &&
+      this.scroller.current &&
+      this.scroller.current.scrollTop < 20 &&
       this.props.data.messages &&
       messages &&
       this.props.data.messages.length !== messages.length
     ) {
       // 35 items
-      const heightBeforeRender = this.scroller.scrollHeight;
+      const heightBeforeRender = this.scroller.current.scrollHeight;
       setTimeout(() => {
         // wait for 70 items to render
-        if (this.scroller) {
-          this.scroller.scrollTop =
-            this.scroller.scrollHeight - heightBeforeRender;
+        if (this.scroller.current) {
+          this.scroller.current.scrollTop =
+            this.scroller.current.scrollHeight - heightBeforeRender;
         }
-      }, 120);
+      }, 100);
     }
   }
 
@@ -167,7 +172,7 @@ class MessageContainer extends React.Component {
     } = this.props;
     if (
       this.scroller &&
-      this.scroller.scrollTop < 100 &&
+      this.scroller.current.scrollTop < 100 &&
       this.state.hasMoreItems &&
       messages.length >= 35
     ) {
@@ -212,12 +217,7 @@ class MessageContainer extends React.Component {
       return <div>No message!</div>;
     }
     return loading ? null : (
-      <Message
-        onScroll={this.handleScroll}
-        ref={(scroller) => {
-          this.scroller = scroller;
-        }}
-      >
+      <Message onScroll={this.handleScroll} ref={this.scroller}>
         <FileUpload
           style={{
             display: "flex",

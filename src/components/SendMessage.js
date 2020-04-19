@@ -52,7 +52,7 @@ const SendMessage = ({
   handleBlur,
   handleSubmit,
   isSubmitting,
-  channelId
+  channelId,
 }) => (
   <Wrapper>
     <FileUpload channelId={channelId}>
@@ -64,7 +64,7 @@ const SendMessage = ({
             style={{
               backgroundColor: "#f8f8f8",
               border: "1px solid #BBCAD9",
-              color: "#BBCAD9"
+              color: "#BBCAD9",
             }}
           >
             <Icon
@@ -74,7 +74,7 @@ const SendMessage = ({
                 fontWeight: "lighter",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
               }}
             />
           </Button>
@@ -90,7 +90,7 @@ const SendMessage = ({
       onChange={handleChange}
       onBlur={handleBlur}
       placeholder={`Message... # ${placeholder}`}
-      onKeyDown={e => {
+      onKeyDown={(e) => {
         if (e.keyCode === ENTER_KEY && !isSubmitting) {
           handleSubmit(e);
         }
@@ -111,6 +111,7 @@ export default withFormik({
     }
 
     await onSubmit(values.message);
+
     resetForm(false);
-  }
+  },
 })(SendMessage);

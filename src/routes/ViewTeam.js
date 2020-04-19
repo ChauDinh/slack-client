@@ -21,7 +21,7 @@ class ViewTeam extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      endpoint: `http://localhost:8080`,
+      endpoint: `http://localhost:9090`,
     };
     socket = socketIOClient(this.state.endpoint);
   }

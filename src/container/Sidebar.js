@@ -6,38 +6,39 @@ import AddChannelModal from "../components/AddChannelModal";
 import InvitePeopleModal from "../components/InvitePeopleModal";
 import DirectMessageModal from "../components/DirectMessageModal";
 import { Context } from "../routes/ViewTeam";
+import Notification from "../components/Notification";
 
 export default class Sidebar extends React.Component {
   state = {
     openAddChannelModal: false,
     openInvitePeopleModal: false,
-    openDirectMessageModal: false
+    openDirectMessageModal: false,
   };
 
-  toggleAddChannelModal = e => {
+  toggleAddChannelModal = (e) => {
     if (e) {
       e.preventDefault();
     }
-    this.setState(state => ({
-      openAddChannelModal: !state.openAddChannelModal
+    this.setState((state) => ({
+      openAddChannelModal: !state.openAddChannelModal,
     }));
   };
 
-  toggleInvitePeopleModal = e => {
+  toggleInvitePeopleModal = (e) => {
     if (e) {
       e.preventDefault();
     }
-    this.setState(state => ({
-      openInvitePeopleModal: !state.openInvitePeopleModal
+    this.setState((state) => ({
+      openInvitePeopleModal: !state.openInvitePeopleModal,
     }));
   };
 
-  toggleDirectMessageModal = e => {
+  toggleDirectMessageModal = (e) => {
     if (e) {
       e.preventDefault();
     }
-    this.setState(state => ({
-      openDirectMessageModal: !state.openDirectMessageModal
+    this.setState((state) => ({
+      openDirectMessageModal: !state.openDirectMessageModal,
     }));
   };
 
@@ -46,7 +47,7 @@ export default class Sidebar extends React.Component {
     const {
       openAddChannelModal,
       openInvitePeopleModal,
-      openDirectMessageModal
+      openDirectMessageModal,
     } = this.state;
 
     return [
@@ -58,7 +59,7 @@ export default class Sidebar extends React.Component {
           const regularChannels = [];
           const dmChannels = [];
 
-          team.channels.forEach(channel => {
+          team.channels.forEach((channel) => {
             if (channel.dm) {
               dmChannels.push(channel);
             } else {
@@ -109,7 +110,8 @@ export default class Sidebar extends React.Component {
             currentUserId={currentUserId}
           />
         )}
-      </Context.Consumer>
+      </Context.Consumer>,
+      <Notification key="sidebar-notification" />,
     ];
   }
 }
