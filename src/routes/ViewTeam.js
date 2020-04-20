@@ -23,7 +23,14 @@ class ViewTeam extends React.Component {
     this.state = {
       endpoint: `http://localhost:9090`,
     };
+  }
+
+  componentDidMount() {
     socket = socketIOClient(this.state.endpoint);
+  }
+
+  componentWillUnmount() {
+    socketIOClient(this.state.endpoint).disconnect();
   }
 
   render() {
