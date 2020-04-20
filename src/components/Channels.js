@@ -4,6 +4,7 @@ import { Icon, Dropdown, Button, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 import AddCircleImage from "../images/small__icons/add_cycle.png";
+import { socket } from "../routes/ViewTeam";
 
 const Wrapper = styled.div`
   width: inherit;
@@ -79,15 +80,48 @@ const PushLeft = styled.div`
   ${paddingLeft}
 `;
 
-const channel = ({ id, name }, teamId) => (
-  <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
-    <ListItem>
-      <div
-        style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}
-      >{`#${name}`}</div>
-    </ListItem>
-  </Link>
-);
+const channel = (
+  { id, name },
+  teamId,
+  notifications,
+  { handleClickChannel },
+  currentChannelId
+) => {
+  if (notifications.indexOf(id) >= 0 && id !== currentChannelId) {
+    return (
+      <Link
+        key={`channel-${id}`}
+        to={`/view-team/${teamId}/${id}`}
+        onClick={() => handleClickChannel(id)}
+      >
+        <ListItem>
+          <div
+            style={{
+              fontFamily: "AvenirNext, sans-serif",
+              fontSize: "16px",
+              fontWeight: "900",
+            }}
+          >
+            {`#${name}`} <span style={{ color: "#3f9fff" }}>●</span>
+          </div>
+        </ListItem>
+      </Link>
+    );
+  }
+  return (
+    <Link
+      key={`channel-${id}`}
+      to={`/view-team/${teamId}/${id}`}
+      onClick={() => handleClickChannel(id)}
+    >
+      <ListItem>
+        <div
+          style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}
+        >{`#${name}`}</div>
+      </ListItem>
+    </Link>
+  );
+};
 const dmChannel = ({ id, name }, teamId) => (
   <Link
     key={`user-${id}`}
@@ -105,8 +139,37 @@ const dmChannel = ({ id, name }, teamId) => (
 export default class Channels extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      notifications: [],
+      currentChannelId: this.props.channels[0].id,
+    };
   }
+
+  componentDidMount() {
+    const { notifications } = this.state;
+    socket.on("notification", (notification) => {
+      if (notifications.indexOf(parseInt(notification)) < 0) {
+        const newNotifications = notifications.push(parseInt(notification));
+        this.setState({ newNotifications });
+      }
+    });
+  }
+
+  componentDidUpdate() {
+    const { notifications } = this.state;
+    socket.on("notification", (notification) => {
+      if (notifications.indexOf(parseInt(notification)) < 0) {
+        const newNotifications = notifications.push(parseInt(notification));
+        this.setState({ newNotifications });
+      }
+    });
+  }
+
+  handleClickChannel = (id) => {
+    this.setState({
+      currentChannelId: id,
+    });
+  };
 
   render() {
     const {
@@ -119,6 +182,8 @@ export default class Channels extends React.Component {
       onDirectMessageClick,
       isOwner,
     } = this.props;
+
+    const { notifications, currentChannelId } = this.state;
 
     return (
       <Wrapper>
@@ -205,7 +270,19 @@ export default class Channels extends React.Component {
                 )}
               </div>
             </ListHeader>
-            {channels ? channels.map((c) => channel(c, teamId)) : null}
+            {channels
+              ? channels.map((c) =>
+                  channel(
+                    c,
+                    teamId,
+                    notifications,
+                    {
+                      handleClickChannel: this.handleClickChannel,
+                    },
+                    currentChannelId
+                  )
+                )
+              : null}
           </List>
         </div>
         <div>

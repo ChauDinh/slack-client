@@ -114,6 +114,10 @@ class MessageContainer extends React.Component {
     hasMoreItems: true,
   };
 
+  // componentDidUpdate() {
+  //   socket.on("notification", (notification) => console.log(notification));
+  // }
+
   componentWillMount() {
     this.unsubscribe = this.subscribe(this.props.channelId);
   }
@@ -262,7 +266,6 @@ class MessageContainer extends React.Component {
                         </span>
                       </Comment.Author>
                       <Comment.Metadata>
-                        {console.log(m.when)}
                         <StyledDate className="date">{m.when}</StyledDate>
                       </Comment.Metadata>
                       <br />

@@ -57,28 +57,28 @@ class OnlineUserWrapper extends React.Component {
       onlineUsers: [],
     };
   }
+
   componentDidMount() {
     const { username } = this.props;
     socket.emit("joinRoom", { username: username });
+
+    socket.on("getOnlineUsers", ({ onlineUsers }) => {
+      this.setState({
+        onlineUsers: onlineUsers,
+      });
+    });
   }
 
   componentDidUpdate() {
-    socket.on("updateOnlineUsers", ({ updatedOnlineUsers }) => {
+    socket.on("getOnlineUsers", ({ onlineUsers }) => {
       this.setState({
-        onlineUsers: updatedOnlineUsers,
+        onlineUsers: onlineUsers,
       });
-      console.log(updatedOnlineUsers);
     });
   }
 
   render() {
     const { onlineUsers } = this.state;
-    socket.on("getOnlineUsers", ({ onlineUsers }) => {
-      this.setState({
-        onlineUsers: onlineUsers,
-      });
-      console.log(onlineUsers);
-    });
 
     return (
       <Wrapper>

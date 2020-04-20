@@ -4,6 +4,7 @@ import { Button, Icon, Input, Popup } from "semantic-ui-react";
 import { withFormik } from "formik";
 
 import FileUpload from "./FileUpload";
+import { socket } from "../routes/ViewTeam";
 
 const Wrapper = styled.div`
   grid-column: 3;
@@ -93,6 +94,7 @@ const SendMessage = ({
       onKeyDown={(e) => {
         if (e.keyCode === ENTER_KEY && !isSubmitting) {
           handleSubmit(e);
+          socket.emit("newMessage", { channelId });
         }
       }}
     />
