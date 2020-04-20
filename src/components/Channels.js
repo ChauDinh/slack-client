@@ -109,11 +109,7 @@ const channel = (
     );
   }
   return (
-    <Link
-      key={`channel-${id}`}
-      to={`/view-team/${teamId}/${id}`}
-      onClick={() => handleClickChannel(id)}
-    >
+    <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
       <ListItem>
         <div
           style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}
@@ -122,19 +118,46 @@ const channel = (
     </Link>
   );
 };
-const dmChannel = ({ id, name }, teamId) => (
-  <Link
-    key={`user-${id}`}
-    style={{ color: "black" }}
-    to={`/view-team/${teamId}/${id}`}
-  >
-    <ListItem>
-      <div style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}>
-        {name}
-      </div>
-    </ListItem>
-  </Link>
-);
+const dmChannel = (
+  { id, name },
+  teamId,
+  notifications,
+  { handleClickChannel },
+  currentChannelId
+) => {
+  if (notifications.indexOf(id) >= 0 && id !== currentChannelId) {
+    return (
+      <Link
+        key={`user-${id}`}
+        style={{ color: "black" }}
+        to={`/view-team/${teamId}/${id}`}
+        onClick={() => handleClickChannel(id)}
+      >
+        <ListItem>
+          <div
+            style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}
+          >
+            {name} <span style={{ color: "#3f9fff" }}>●</span>
+          </div>
+        </ListItem>
+      </Link>
+    );
+  }
+  return (
+    <Link
+      key={`user-${id}`}
+      style={{ color: "black" }}
+      to={`/view-team/${teamId}/${id}`}
+      onClick={() => handleClickChannel(id)}
+    >
+      <ListItem>
+        <div style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}>
+          {name}
+        </div>
+      </ListItem>
+    </Link>
+  );
+};
 
 export default class Channels extends React.Component {
   constructor(props) {
@@ -166,7 +189,12 @@ export default class Channels extends React.Component {
   }
 
   handleClickChannel = (id) => {
+    const { notifications } = this.state;
+    const newNotifications = notifications.filter(
+      (notification) => notification !== id
+    );
     this.setState({
+      notifications: newNotifications,
       currentChannelId: id,
     });
   };
@@ -312,7 +340,15 @@ export default class Channels extends React.Component {
                 </Button>
               </div>
             </ListHeader>
-            {dmChannels.map((dmc) => dmChannel(dmc, teamId))}
+            {dmChannels.map((dmc) =>
+              dmChannel(
+                dmc,
+                teamId,
+                notifications,
+                { handleClickChannel: this.handleClickChannel },
+                currentChannelId
+              )
+            )}
           </List>
         </div>
         {isOwner && (
