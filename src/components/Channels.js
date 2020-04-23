@@ -109,7 +109,11 @@ const channel = (
     );
   }
   return (
-    <Link key={`channel-${id}`} to={`/view-team/${teamId}/${id}`}>
+    <Link
+      key={`channel-${id}`}
+      to={`/view-team/${teamId}/${id}`}
+      onClick={() => handleClickChannel(id)}
+    >
       <ListItem>
         <div
           style={{ fontFamily: "AvenirNext, sans-serif", fontSize: "16px" }}
@@ -212,6 +216,8 @@ export default class Channels extends React.Component {
     } = this.props;
 
     const { notifications, currentChannelId } = this.state;
+
+    console.log(`[Current Channel ID] >> ${currentChannelId}`);
 
     return (
       <Wrapper>
