@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Comment } from "semantic-ui-react";
+import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 
 import FileUpload from "../components/FileUpload";
@@ -112,6 +113,7 @@ class MessageContainer extends React.Component {
 
   state = {
     hasMoreItems: true,
+    scrollTop: null,
   };
 
   // componentDidUpdate() {
@@ -128,24 +130,6 @@ class MessageContainer extends React.Component {
         this.unsubscribe();
       }
       this.unsubscribe = this.subscribe(channelId);
-    }
-
-    if (
-      this.scroller.current &&
-      this.scroller.current.scrollTop < 20 &&
-      this.props.data.messages &&
-      messages &&
-      this.props.data.messages.length !== messages.length
-    ) {
-      // 35 items
-      const heightBeforeRender = this.scroller.current.scrollHeight;
-      setTimeout(() => {
-        // wait for 70 items to render
-        if (this.scroller.current) {
-          this.scroller.current.scrollTop =
-            this.scroller.current.scrollHeight - heightBeforeRender;
-        }
-      }, 100);
     }
   }
 
@@ -169,40 +153,6 @@ class MessageContainer extends React.Component {
     });
   };
 
-  handleScroll = () => {
-    const {
-      data: { messages, fetchMore },
-      channelId,
-    } = this.props;
-    if (
-      this.scroller &&
-      this.scroller.current.scrollTop < 100 &&
-      this.state.hasMoreItems &&
-      messages.length >= 35
-    ) {
-      fetchMore({
-        variables: {
-          channelId,
-          cursor: messages[messages.length - 1].created_at,
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prev;
-
-          if (fetchMoreResult.messages.length < 35) {
-            this.setState({
-              hasMoreItems: false,
-            });
-          }
-
-          return {
-            ...prev,
-            messages: [...prev.messages, ...fetchMoreResult.messages],
-          };
-        },
-      });
-    }
-  };
-
   getRandomHex() {
     let length = 3;
     let chars = "0123456789ABCDEF";
@@ -210,6 +160,49 @@ class MessageContainer extends React.Component {
     while (length--) hex += chars[(Math.random() * 16) | 0];
     return hex;
   }
+
+  handleScroll = () => {
+    if (this.scroller) {
+      if (this.scroller.scrollTop === 0) {
+        const {
+          data: { loading, messages, fetchMore },
+          channelId,
+        } = this.props;
+        if (loading) {
+          return <div>loading...</div>;
+        }
+        setTimeout(() => {
+          fetchMore({
+            variables: {
+              channelId,
+              cursor: messages[messages.length - 1].created_at,
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              if (!fetchMoreResult) {
+                return previousResult;
+              }
+              if (fetchMoreResult.messages.length < 35) {
+                this.setState({
+                  hasMoreItems: false,
+                });
+              }
+
+              return {
+                ...previousResult,
+                messages: [
+                  ...previousResult.messages,
+                  ...fetchMoreResult.messages,
+                ],
+              };
+            },
+          });
+        }, 200);
+      }
+      this.setState({
+        scrollTop: this.scroller.scrollTop,
+      });
+    }
+  };
 
   render() {
     const {
@@ -220,8 +213,12 @@ class MessageContainer extends React.Component {
     if (!messages) {
       return <div>No message!</div>;
     }
+
     return loading ? null : (
-      <Message onScroll={this.handleScroll} ref={this.scroller}>
+      <Message
+        ref={(scroller) => (this.scroller = scroller)}
+        onScroll={this.handleScroll}
+      >
         <FileUpload
           style={{
             display: "flex",
@@ -231,6 +228,19 @@ class MessageContainer extends React.Component {
           disableClick
         >
           <Comment.Group size="large" style={{ maxWidth: "100%" }}>
+            {this.state.hasMoreItems && messages.length >= 35 && (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "5px 0",
+                }}
+              >
+                <ClipLoader size={15} color={"#3f9fff"} loading={true} />
+              </div>
+            )}
             {messages
               .slice()
               .reverse()
@@ -282,8 +292,8 @@ class MessageContainer extends React.Component {
 }
 
 const messagesQuery = gql`
-  query($channelId: Int!, $cursor: String) {
-    messages(channelId: $channelId, cursor: $cursor) {
+  query($cursor: String, $channelId: Int!) {
+    messages(cursor: $cursor, channelId: $channelId) {
       id
       text
       user {
