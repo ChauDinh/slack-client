@@ -200,6 +200,7 @@ class MessageContainer extends React.Component {
       }
       this.setState({
         scrollTop: this.scroller.scrollTop,
+        hasMoreItems: true,
       });
     }
   };
