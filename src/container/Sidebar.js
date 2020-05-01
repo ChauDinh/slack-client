@@ -6,7 +6,6 @@ import AddChannelModal from "../components/AddChannelModal";
 import InvitePeopleModal from "../components/InvitePeopleModal";
 import DirectMessageModal from "../components/DirectMessageModal";
 import { Context } from "../routes/ViewTeam";
-import Notification from "../components/Notification";
 
 export default class Sidebar extends React.Component {
   state = {
@@ -111,7 +110,6 @@ export default class Sidebar extends React.Component {
           />
         )}
       </Context.Consumer>,
-      <Notification key="sidebar-notification" />,
     ];
   }
 }

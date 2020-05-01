@@ -22,7 +22,7 @@ const devices = {
 };
 
 export default styled.div`
-  background: #3f9fff
+  background: #fff;
   display: grid;
   height: 100vh;
   grid-template-columns: 72px 250px 1fr;

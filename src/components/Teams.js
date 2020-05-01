@@ -6,7 +6,7 @@ import { Icon, Popup } from "semantic-ui-react";
 const Wrapper = styled.div`
   grid-column: 1;
   grid-row: 2 / 4;
-  background-color: #f8fbff;
+  background-color: #fff;
   color: #d9cfd9;
   padding-top: 20px;
   display: flex;

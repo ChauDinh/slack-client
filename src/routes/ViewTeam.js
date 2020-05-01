@@ -42,10 +42,14 @@ class ViewTeam extends React.Component {
       },
     } = this.props;
 
-    if (loading || !me) {
+    if (loading) {
       return null;
     }
     const { id: currentUserId, username, teams } = me;
+
+    if (!me) {
+      return <Redirect to="/login" />;
+    }
 
     if (!teams.length) {
       return <Redirect to="/create-team" />;
@@ -96,7 +100,10 @@ class ViewTeam extends React.Component {
             placeholder={channel.name}
             onSubmit={async (text) => {
               return mutate({
-                variables: { text, channelId: channel.id },
+                variables: {
+                  text,
+                  channelId: channel.id,
+                },
               });
             }}
           />
