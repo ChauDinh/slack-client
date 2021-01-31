@@ -106,14 +106,8 @@ const DisplayMessage = ({ message: { url, text, filetype } }) => {
 };
 
 class MessageContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.scroller = React.createRef();
-  }
-
   state = {
     hasMoreItems: true,
-    scrollTop: null,
   };
 
   // componentDidUpdate() {
@@ -163,7 +157,10 @@ class MessageContainer extends React.Component {
 
   handleScroll = () => {
     if (this.scroller) {
-      if (this.scroller.scrollTop === 0) {
+      if (
+        this.scroller.scrollHeight - Math.abs(this.scroller.scrollTop) ===
+        this.scroller.clientHeight
+      ) {
         const {
           data: { loading, messages, fetchMore },
           channelId,
@@ -196,8 +193,14 @@ class MessageContainer extends React.Component {
               };
             },
           });
-        }, 200);
+        }, 2000);
       }
+      console.log(
+        this.scroller.scrollHeight - Math.abs(this.scroller.scrollTop) ===
+          this.scroller.clientHeight
+          ? "hit the top"
+          : "scrolling..."
+      );
       this.setState({
         scrollTop: this.scroller.scrollTop,
         hasMoreItems: true,
@@ -217,7 +220,9 @@ class MessageContainer extends React.Component {
 
     return loading ? null : (
       <Message
-        ref={(scroller) => (this.scroller = scroller)}
+        ref={(scroller) => {
+          this.scroller = scroller;
+        }}
         onScroll={this.handleScroll}
       >
         <FileUpload
@@ -229,7 +234,7 @@ class MessageContainer extends React.Component {
           disableClick
         >
           <Comment.Group size="large" style={{ maxWidth: "100%" }}>
-            {this.state.hasMoreItems && messages.length >= 35 && (
+            {this.state.hasMoreItems && (
               <div
                 style={{
                   width: "100%",
